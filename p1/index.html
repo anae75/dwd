@@ -20,13 +20,18 @@
      }
 
    .cloud .inner_cloud {
-     //border: 1px solid black;
      padding: 55px 90px 15px 85px;
      height: 155px;
      width: 350px;
      text-align: center;
      display:table-cell;
      vertical-align:middle;
+   }
+
+   .smaller {
+     left: -400px;
+     background-size: 85%;
+     background-repeat: no-repeat;
    }
 
  </STYLE>
@@ -37,7 +42,6 @@
   
   function drift(id, step, delay)
   {
-    var count = 2000;
     var direction = 1;
     var hdirection = 1;
 
@@ -70,28 +74,40 @@
 
       obj.offset(pos);
 
-      /*
-      if(count-- <=0) {
-        clearInterval(cbid);
-      }
-      */
-
     }, delay)
 
   }
 
-  $(document).ready(function(){
-    drift("#d_name", 1, 30);
-    drift("#d_bio", 1, 33);
+  function start() {
+    drift("#d_name", 1, 20);
+    drift("#d_bio", 1, 43);
+    drift("#d_host", 1, 31);
     drift("#d_editor", 1, 25);
     drift("#d_git", 1, 45);
-    drift("#d_host", 1, 31);
+
+    for(var i = 1; i <= 1; i++) {
+      var id = "#cloud" + i;
+      var cloud = $(id);
+      var pos = cloud.offset();
+      pos.left = -1 * cloud.offsetParent().width()/2 + Math.random()*200; 
+      cloud.offset(pos);
+      drift(id, 1, 21+i);
+    }
+  }
+
+  $(document).ready(function(){
+    start();
   });
 </script>
 </head>
 <body>
 
-  <div id=d_name class="cloud" style="top: 25px; left: 100px;">
+  <div id=cloud1 class="cloud smaller" style="top: 30px;">
+  </div> 
+  <div id=cloud2 class="cloud smaller" style="top: 340px;">
+  </div> 
+
+  <div id=d_name class="cloud" style="top: 25px; left: 200px;">
     <div class="inner_cloud">
     Ana
     </div>
@@ -115,7 +131,7 @@
     </div>
   </div>
 
-  <div id=d_git class="cloud" style="top: 370px; left: 45px">
+  <div id=d_git class="cloud smaller" style="top: 400px; left: 45px">
     <div class="inner_cloud">
     <a href="https://github.com/anae75/dwd">github</a>
     </div>
