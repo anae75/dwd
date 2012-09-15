@@ -1,0 +1,134 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/dwd/favicon.ico">
+  <title>
+  Monster StopLight
+  </title>
+
+  <STYLE type="text/css">
+
+     * {
+       box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       -webkit-box-sizing: border-box;
+     }
+
+     html{
+       overflow: hidden;
+     }
+
+     body {
+       background-color: #75B5FA;
+     }
+
+     #draw-target {
+         width:100%;
+         min-height:600px;
+         //background-color:#ccf;
+         position:relative;
+     }
+
+   </STYLE>
+
+  <script src="jquery-1.8.1.js" type="text/javascript"></script>
+  <script type="text/javascript">
+
+
+    var DHTMLSprite = function (params) {
+      var width = params.width,
+                      height = params.height,
+                      imagesWidth = params.imagesWidth,
+                      $element = params.$drawTarget.append('<div/>').children().last(),
+                      elemStyle = $element[0].style,
+                      mathFloor = Math.floor;
+      //var elemStyle = $element.style;
+      $element.css({
+                      position: 'absolute',
+                      width: width,
+                      height: height,
+                      backgroundImage: 'url(' + params.images + ')'
+      });
+      var that = {
+        draw: function (x, y) {
+                        elemStyle.left = x + 'px';
+                        elemStyle.top = y + 'px';
+        },
+        changeImage: function (index) {
+                        index *= width;
+                        var vOffset = -mathFloor(index / imagesWidth) * height;
+                        var hOffset = -index % imagesWidth;
+                        elemStyle.backgroundPosition = hOffset + 'px ' + vOffset + 'px';
+        },
+        show: function () {
+                        elemStyle.display = 'block';
+        },
+        hide: function () {
+                        elemStyle.display = 'none';
+        },
+        destroy: function () {
+                        $element.remove();
+        }
+      };
+      return that;
+    };
+
+    function step(seq, i, seqlen) {
+      $sprite1.changeImage(seq[i][0]);
+      if(i+1 < seqlen) {
+        setTimeout(function(){
+          step(seq, i + 1, seqlen);  
+        }, seq[i][1]);
+      } 
+    }
+
+    function blink() {
+      var seq1 = [[2,100], [1,50], [0,25], [1,25], [2,50], [3,100]];
+      var seq2 = [[2,75], [1,50], [0,25], [1,25], [2,50], [3,75],
+                  [2,75], [1,50],         [1,25], [2,50], [3,75]];
+
+      if(Math.random() > 0.75) {
+        step(seq2, 0, seq2.length);
+      }
+      else {
+        step(seq1, 0, seq1.length);
+      }
+    }
+
+    function blink_continuous() {
+      blink();
+      setTimeout(function() {
+        blink_continuous();
+      }, (600 + Math.random() * 5000));
+    }
+
+    var $sprite1; // global hook
+    
+    function start()
+    {
+       var params = {
+           images: 'light03c-v5-lineup.png',
+           imagesWidth: 660,
+           width: 165,
+           height: 485,
+           $drawTarget: $('#draw-target')
+       };
+       $sprite1 = DHTMLSprite(params)
+       $sprite1.changeImage(3);
+       $sprite1.draw($(document).width()/2 - 83, 100);
+       blink_continuous();
+    }
+
+    $(document).ready(function(){
+      start();
+    });
+  </script>
+</head>
+<body>
+
+<div id="draw-target">
+</div>
+
+</body>
+</html>
