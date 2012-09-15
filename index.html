@@ -223,8 +223,10 @@
        position("#loop1", $(document).width()/2-75, -300);
        position("#loop2", $(document).width()/2-75, -500);
 
-       animate_cable("#loop1", -450, -100);
-       animate_cable("#loop2", -450, -100);
+       setTimeout(function() {
+         animate_cable("#loop1", -450, -100);
+         animate_cable("#loop2", -450, -100);
+      }, 2000);
     }
 
     $(document).ready(function(){
