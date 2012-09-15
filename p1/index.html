@@ -14,6 +14,8 @@
        box-sizing: border-box;
        -moz-box-sizing: border-box;
        -webkit-box-sizing: border-box;
+       margin:0;
+       padding: 0;
      }
 
      html{
@@ -21,7 +23,16 @@
      }
 
      body {
-       background-color: #75B5FA;
+       height: 100%;
+     }
+
+     #container {
+       min-height: 100%;
+       background: #75B5FA url('grass-v0.png') scroll repeat-x bottom;
+       position:absolute;
+       top: 0px;
+       left: 0px;
+       width: 100%;
      }
 
      div.cloud {
@@ -125,6 +136,8 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 </head>
 <body>
 
+<div id=container>
+
   <div id=cloud1 class="cloud smaller" style="top: 70px;">
   </div> 
   <div id=cloud2 class="cloud smaller" style="top: 340px;">
@@ -159,6 +172,10 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
     <a href="https://github.com/anae75/dwd">github</a>
     </div>
   </div>
+
+&nbsp;
+
+</div>
 
 </body>
 </html>
