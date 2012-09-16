@@ -36,14 +36,17 @@
        width: 100%;
      }
 
+     div.sprite {
+       border: 0;
+       position: absolute;
+       text-align: center;
+     }
+
      div.cloud {
        width: 351px;
        height: 155px;
-       border: 0;
-       position: absolute;
        background-image: url('cloud01-01.png');
        opacity: 0.90;
-       text-align: center;
        }
 
      .cloud .inner_cloud {
@@ -65,8 +68,6 @@
      }
 
      div.alien {
-       border: 0;
-       position: absolute;
        background-image: url('alien.png');
        width: 72px;
        height: 101px;
@@ -74,8 +75,6 @@
      }
 
      div.ufo{
-       border: 0;
-       position: absolute;
        background-image: url('ufo.png');
        width: 190px;
        height: 68px;
@@ -103,7 +102,7 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
       var vmin = pos.top + 5;
 
       var hmin = 0;
-      var hmax = $(id).offsetParent().width();
+      var hmax = $(id).offsetParent().width() - $(id).width();
 
       var cbid = setInterval(function() {
 
@@ -121,7 +120,6 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 
         // float left to right
         if(pos.left > hmax ) {
-          //hdirection = -1*hdirection;
           pos.left = -400;
         }
 
@@ -180,49 +178,49 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 </head>
 <body>
 
-  <div id=visitor2 class="ufo">
-  </div>
-
-  <div id=visitor1 class="alien">
-  </div>
-
-<div id=container>
-
-  <div id=cloud1 class="cloud smaller" style="top: 70px;">
+  <div id=cloud1 class="sprite cloud smaller" style="top: 70px;">
   </div> 
-  <div id=cloud2 class="cloud smaller" style="top: 340px;">
+  <div id=cloud2 class="sprite cloud smaller" style="top: 340px;">
   </div> 
 
-  <div id=d_name class="cloud" style="top: 25px; left: 200px;">
+  <div id=d_name class="sprite cloud" style="top: 25px; left: 200px;">
     <div class="inner_cloud">
     Ana
     </div>
   </div>
 
-  <div id=d_bio class="cloud" style="top: 150px; left: -100px;">
+  <div id=d_bio class="sprite cloud" style="top: 150px; left: -100px;">
     <div class="inner_cloud">
     I am a degree candidate in Digital Media.
     </div>
   </div>
 
-  <div id=d_host class="cloud" style="top: 220px; left: 400px">
+  <div id=d_host class="sprite cloud" style="top: 220px; left: 400px">
     <div class="inner_cloud">
     This page is hosted on a Slicehost shared virtual host.
     </div>
   </div>
 
-  <div id=d_editor class="cloud" style="top: 300px; left: 150px">
+  <div id=d_editor class="sprite cloud" style="top: 300px; left: 150px">
     <div class="inner_cloud">
     It was edited with vim.
     </div>
   </div>
 
-  <div id=d_git class="cloud smaller" style="top: 400px; left: 45px">
+  <div id=d_git class="sprite cloud smaller" style="top: 400px; left: 45px">
     <div class="inner_cloud">
     <a href="https://github.com/anae75/dwd">github</a>
     </div>
   </div>
 
+
+  <div id=visitor2 class="sprite ufo">
+  </div>
+
+  <div id=visitor1 class="sprite alien">
+  </div>
+
+<div id=container>
 &nbsp;
 
 </div>
