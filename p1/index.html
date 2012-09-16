@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <link rel="shortcut icon" type="image/x-icon" href="/dwd/favicon.ico">
-  <link rel="icon" type="image/x-icon" href="/dwd/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="/dwd/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/dwd/favicon.png">
   <title>
   Project1
   </title>
@@ -34,6 +34,7 @@
        top: 0px;
        left: 0px;
        width: 100%;
+       pointer-events:none;
      }
 
      div.sprite {
@@ -42,7 +43,7 @@
        text-align: center;
      }
 
-     div.cloud {
+     .cloud {
        width: 351px;
        height: 155px;
        background-image: url('cloud01-01.png');
@@ -67,11 +68,24 @@
        background-repeat: no-repeat;
      }
 
+     div.larger {
+       left: -400px;
+       background-repeat: no-repeat;
+       height: 195px; 
+       width: 440px; 
+       background-size: 440px auto;
+     }
+
+     div.larger .inner_cloud {
+       height: 195px; 
+     }
+
      div.alien {
        background-image: url('alien.png');
        width: 72px;
        height: 101px;
        display: none;
+       cursor: pointer;
      }
 
      div.ufo{
@@ -79,6 +93,7 @@
        width: 190px;
        height: 68px;
        display: none;
+       cursor: pointer;
      }
 
    </STYLE>
@@ -169,6 +184,7 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
       pos.top = $(document).height() - 100;
       alien.offset(pos);
       pop_up($("#visitor2"), 5000, 40000);
+
     }
 
     $(document).ready(function(){
@@ -189,9 +205,9 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
     </div>
   </div>
 
-  <div id=d_bio class="sprite cloud" style="top: 150px; left: -100px;">
+  <div id=d_bio class="sprite cloud larger" style="top: 150px; left: -100px;">
     <div class="inner_cloud">
-    I am a degree candidate in Digital Media.
+    I am a degree candidate in Digital Media.  I like flashlights, cameras, and drawing things.
     </div>
   </div>
 
@@ -203,7 +219,7 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 
   <div id=d_editor class="sprite cloud" style="top: 300px; left: 150px">
     <div class="inner_cloud">
-    It was edited with vim.
+    I edit everything with vim.
     </div>
   </div>
 
@@ -214,10 +230,10 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
   </div>
 
 
-  <div id=visitor2 class="sprite ufo">
+  <div id=visitor2 class="sprite ufo" onclick="location.href='/dwd'">
   </div>
 
-  <div id=visitor1 class="sprite alien">
+  <div id=visitor1 class="sprite alien" onclick="location.href='/dwd'">
   </div>
 
 <div id=container>
