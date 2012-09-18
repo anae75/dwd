@@ -1,0 +1,193 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/dwd/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/dwd/favicon.png">
+  <title>
+  TCL helper
+  </title>
+
+  <STYLE type="text/css">
+
+     * {
+       box-sizing: border-box;
+       -moz-box-sizing: border-box;
+       -webkit-box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+     }
+
+     html{
+     }
+
+     body {
+       background-color: #E3DDD3;
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+     }
+
+     .led {
+       width: 50px;
+       height: 50px;
+       text-align: center;
+     }
+
+     .led canvas {
+     }
+
+     .led .label {
+     }
+
+     #diagram {
+       top: 100px;
+       left: 100px;
+       background-color: white;
+       width: 300px;
+       height: 300px;
+       border: 1px solid black;
+       position: absolute;
+     }
+
+     canvas#wiring_canvas {
+     }
+
+     div.color {
+       width: 50px;
+       height: 30px;
+     }
+
+   </STYLE>
+
+  <script src="../jquery-1.8.1.js" type="text/javascript"></script>
+  <script src="../jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js"></script>
+  <script type="text/javascript">
+
+    function draw_circle(led_id) 
+    {
+      var canvas_id = led_id + "_canvas";
+      var canvas = document.getElementById(led_id + "_canvas").getContext("2d");
+      canvas.fillStyle = "blue";
+      //canvas.strokeStyle = "#555555";
+      canvas.beginPath();
+      //draw arc: arc(x, y, radius, startAngle, endAngle, anticlockwise)
+      canvas.arc(25, 25, 20, Math.PI*2, 0, true);
+      canvas.closePath();
+      //fill it so you could see it
+      canvas.fill();
+      //canvas.stroke();
+    }
+
+    function change_color(led_id, color)
+    {
+      var canvas_id = led_id + "_canvas";
+      var canvas = document.getElementById(led_id + "_canvas").getContext("2d");
+      canvas.fillStyle = color;
+      canvas.fill();
+    }
+
+    function start()
+    {
+      var options ={ 
+        containment: "parent", 
+        drag: function() {
+          clear_canvas("wiring_canvas");
+          connect_leds("#led1", "#led2");
+        }
+      };
+      draw_circle("led1");
+      draw_circle("led2");
+      $("#led1").draggable(options);
+      $("#led2").draggable(options);
+
+      // make the palette colors draggable
+      $("#pot1").draggable({ revert: false,
+        helper: function() { 
+          //return $("<span >Drop me on an LED</span>")[0];
+          var obj = $("<span >Drop me on an LED</span>");
+          obj.attr("id", "red");
+          return obj[0];
+          },
+        start: function() {
+          // correct for the text offset when dragging
+          $(this).data('draggable').offset.click.top += 5;
+          $(this).data('draggable').offset.click.left += 40;
+        }
+        //helper: "clone"
+      });
+      $("#pot1")[0].style.backgroundColor = "#dd93e3";
+
+      // make the leds droppable
+      $("div.led").droppable ({ 
+          drop: function(event, ui) {
+            //alert( ui.draggable[0].style.backgroundColor );
+            //alert( ui.draggable.attr("id") );
+            //alert( $(this)[0].id );
+            //alert(ui.draggable.attr("id"));
+            change_color($(this)[0].id, ui.draggable[0].style.backgroundColor);
+          }
+        });
+    }
+
+    $(document).ready(function()
+    {
+      start();
+    });
+
+    function clear_canvas(canvas_id)
+    {
+      var canvas = document.getElementById(canvas_id);
+      var context = canvas.getContext("2d");
+      context.save();
+      context.setTransform(1, 0, 0, 1, 0, 0);
+      // Will always clear the right space
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.restore();
+    }
+
+    function connect_leds(id1, id2)
+    {
+      var canvas_id = "wiring_canvas";
+      var canvas = document.getElementById(canvas_id);
+      var context = canvas.getContext("2d");
+      var canvas_pos = $("#"+canvas_id).offset();
+
+      var pos = $(id1).offset();
+      var x1 = pos.left + $(id1).width()/2 - canvas_pos.left;
+      var y1 = pos.top + $(id1).height()/2 - canvas_pos.top;
+
+      var pos = $(id2).offset();
+      var x2 = pos.left + $(id2).width()/2 - canvas_pos.left;
+      var y2 = pos.top + $(id2).height()/2 - canvas_pos.top;
+
+      context.beginPath();
+      context.moveTo(x1,y1);
+      context.lineTo(x2,y2);
+      context.stroke();
+    }
+
+  </script>
+</head>
+<body>
+
+  <div id="diagram" class="led_frame">
+    <canvas id="wiring_canvas" width="300px" height="300px"></canvas>
+    <div id="led1" class=led onclick="">
+      <canvas id="led1_canvas" height="50px" width="50px"> </canvas>
+      <div class="label">1</div>
+    </div>
+
+    <div id="led2" class=led onclick="">
+      <canvas id="led2_canvas" height="50px" width="50px"> </canvas>
+      <div class="label">2</div>
+    </div>
+  </div>
+
+  <div id="pot1" class="color"></div>
+
+  <div id="message">
+    Message.
+  </div>
+
+</body>
+</html>
