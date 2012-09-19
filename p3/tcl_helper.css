@@ -92,3 +92,8 @@
     font-color: #white;
     font-size: larger;
   }
+
+  .frameset .selected {
+    background-color: #ffa81e;
+  }
+

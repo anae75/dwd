@@ -112,7 +112,7 @@ function diagram(dom_id, frameset_dom_id)
   this.clear_frames =
   function ()
   {
-    this.frames_target.find("li.frame").remove()
+    this.frames_target.find("li.frame").remove();
     this.frames = new Array();
     this.frames.push(new frame(this, this.frames_target, 1));
     this.current_frame = 0;
@@ -167,6 +167,19 @@ function diagram(dom_id, frameset_dom_id)
     return this.frames[this.current_frame]; 
   }
 
+  this.move_to_frame =
+  function(id)
+  {
+    for(i = 0; i< this.frames.length; i++) {
+      if(this.frames[i].id == id) {
+        break;
+      }
+    }
+    this.current_frame = i;
+    $("#" + this.frames_target.attr("id") + " li.frame div").removeClass("selected");
+    this.frames[i].obj.find("div").addClass("selected");
+  };
+
 } // end diagram
 
 
@@ -198,6 +211,7 @@ function diagram(dom_id, frameset_dom_id)
       for(i = 0; i < this.diagram.leds.length; i++) {
         this.diagram.leds[i].change_color(this.colors[i]); 
       }
+      this.diagram.move_to_frame(id);
     };
     
     this.change_color =
@@ -212,6 +226,7 @@ function diagram(dom_id, frameset_dom_id)
     var li = $('<li class="frame"/>');
     button.before(li);
     var div = $('<div class="frame">' + id + '</frame>').appendTo(li);
+    this.obj = li;
 
     // click
     var f = this;
