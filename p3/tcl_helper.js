@@ -199,11 +199,13 @@ function diagram(dom_id)
   function add_palette_pot(target, i, color)
   {
 
+    var li = $('<li />').appendTo(target);
+
     var pot = $('<div class="pot"/>').attr({
         id: "pot"+i,
         style: "background-color:"+color+";",
         title: "Drag to Color an LED."
-    }).appendTo(target);
+    }).appendTo(li);
 
     var picker = $('<span class="pot"/>').attr({
         id: "pot"+i+"_picker"
