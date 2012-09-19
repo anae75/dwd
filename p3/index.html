@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="shortcut icon" type="image/x-icon" href="/dwd/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/dwd/favicon.png">
+  <title>
+  Project3 - A Total Control Lighting Helper
+  </title>
+
+  <script src="../jquery-1.8.1.js" type="text/javascript"></script>
+  <script src="../jquery-ui-1.8.23.custom/js/jquery-ui-1.8.23.custom.min.js"></script>
+
+  <link rel="Stylesheet" type="text/css" href="../jpicker/css/jpicker-1.1.6.min.css" />
+  <link rel="Stylesheet" type="text/css" href="../jpicker/jPicker.css" />
+  <script src="../jpicker/jpicker-1.1.6.js" type="text/javascript"></script>
+
+
+  <link rel="Stylesheet" type="text/css" href="tcl_helper.css" />
+  <script src="tcl_helper.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+
+    var $diagram;
+
+    function init() 
+    {
+      $diagram = new diagram("diagram1");
+      $diagram.initialize(5);
+    }
+
+    $(document).ready(function()
+    {
+      init ();
+    });
+
+  </script>
+
+</head>
+<body>
+
+  <div >
+    <p>Some content!</p> <p>Some content!</p> <p>Some content!</p> 
+  </div>
+
+  <div id="diagram1" class="diagram" width="600px" height="400px">
+    <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
+  </div>
+
+
+</body>
+</html>
