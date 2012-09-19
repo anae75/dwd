@@ -49,6 +49,14 @@ function led(diagram, id, top, left)
   context.fill();
   context.stroke();
 
+  this.change_color =
+  function(color)
+  {
+    var context = this.canvas.getContext("2d");
+    context.fillStyle = color;
+    context.fill();
+  };
+
 }
 
 
@@ -123,6 +131,36 @@ function diagram(dom_id)
   }
 
 }
+
+
+//------------------------------
+// Frame
+// belongs_to diagram
+// has_many colors
+
+  function frame(diagram)
+  {
+    this.diagram = diagram;
+    this.colors = new Array();
+    for(i = 0; i < diagram.leds.length; i++) {
+      this.colors[i] = "#ffffff";  // initialize to white
+    }
+    
+    this.update_color = 
+    function (i, color)
+    {
+      this.colors[i] = color;
+    };
+
+    this.display =
+    function() 
+    {
+      for(i = 0; i < this.diagram.leds.length; i++) {
+        this.diagram.leds[i].change_color(this.colors[i]); 
+      }
+    };
+    
+  }
 
 //------------------------------
 // Palette
