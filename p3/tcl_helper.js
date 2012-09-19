@@ -114,9 +114,7 @@ function diagram(dom_id, frameset_dom_id)
   {
     this.frames_target.find("li.frame").remove();
     this.frames = new Array();
-    this.frames.push(new frame(this, this.frames_target, 1));
-    this.current_frame = 0;
-    this.frames[this.current_frame].display();
+    this.append_frame();
   };
 
   this.append_frame =
@@ -125,6 +123,7 @@ function diagram(dom_id, frameset_dom_id)
     this.frames.push(new frame(this, this.frames_target, this.frames.length+1));
     this.current_frame = this.frames.length - 1;
     this.frames[this.current_frame].display();
+    this.update_selected(); 
   };
 
   this.initialize = 
@@ -176,9 +175,16 @@ function diagram(dom_id, frameset_dom_id)
       }
     }
     this.current_frame = i;
-    $("#" + this.frames_target.attr("id") + " li.frame div").removeClass("selected");
-    this.frames[i].obj.find("div").addClass("selected");
+    this.update_selected();
   };
+
+  this.update_selected =
+  function()
+  {
+    $("#" + this.frames_target.attr("id") + " li.frame div").removeClass("selected");
+    this.frames[this.current_frame].obj.find("div").addClass("selected");
+    this.frames[this.current_frame].display();
+  }
 
 } // end diagram
 
@@ -194,10 +200,14 @@ function diagram(dom_id, frameset_dom_id)
     this.target = target;
     this.id = id;
 
-    this.colors = new Array();
-    for(i = 0; i < diagram.leds.length; i++) {
-      this.colors[i] = "#ffffff";  // initialize to white
-    }
+    this.initialize =
+    function(color) {
+      this.colors = new Array();
+      for(i = 0; i < this.diagram.leds.length; i++) {
+        this.colors[i] = color;  
+      }
+    };
+    this.initialize("#ffffff"); // initialize to white
 
     this.update_color = 
     function (i, color)
@@ -211,7 +221,6 @@ function diagram(dom_id, frameset_dom_id)
       for(i = 0; i < this.diagram.leds.length; i++) {
         this.diagram.leds[i].change_color(this.colors[i]); 
       }
-      this.diagram.move_to_frame(id);
     };
     
     this.change_color =
@@ -226,11 +235,13 @@ function diagram(dom_id, frameset_dom_id)
     var li = $('<li class="frame"/>');
     button.before(li);
     var div = $('<div class="frame">' + id + '</frame>').appendTo(li);
+    div.attr({ frame_id: id });
     this.obj = li;
 
     // click
     var f = this;
-    div.click(function() { f.display(); } );
+    //div.click(function() { f.display(); } );
+    div.click(function() { f.diagram.move_to_frame(f.id); } );
   }
 
 //------------------------------

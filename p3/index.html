@@ -57,6 +57,27 @@
       init ();
     });
 
+    function clear_current_frame()
+    {
+      $diagram.frame().initialize("#fff");
+      $diagram.frame().display();
+    }
+
+    function play_frame(i, fids, delay)
+    {
+      $diagram.move_to_frame(fids[i]);
+      if(i+1 < fids.length) {
+        setTimeout(function() {
+          play_frame(i+1, fids, delay);
+        }, delay);
+      }
+    }
+    function play(delay)
+    {
+      var frame_ids = $("div.frame").map(function() { return $(this).attr("frame_id"); } );
+      play_frame(0, frame_ids, delay);
+    }
+
   </script>
 
 </head>
@@ -77,6 +98,13 @@
     <div id="diagram1" class="diagram" width="600px" height="400px">
       <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
     </div>
+
+    <div class="buttons" >
+      <button onclick='clear_current_frame();'>Clear Current Frame</button>
+      <button onclick='play(500);'>Play</button>
+      <button onclick='export();'>Export</button>
+    </div>
+
     <div id="frames1" class="frameset">
       <ul> 
         <li class="button_item"><button onclick='$diagram.append_frame();'>New frame</button></li>
