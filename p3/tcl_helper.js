@@ -21,7 +21,7 @@ function led(diagram, id, top, left)
       style: "position: absolute;" +
               "top: "+ top +"px;" +
               "left: " + left +"px;",
-      index: i
+      led_id: id
   }).appendTo("#" + diagram.dom_id);
   //alert(this.obj[0].id);
 
@@ -108,12 +108,6 @@ function diagram(dom_id)
     }
   };
 
-  this.add_led =
-  function ()
-  {
-    this.leds.push(new led(this, 1, 10, 10));
-  };
-
   this.clear_frames =
   function ()
   {
@@ -136,6 +130,7 @@ function diagram(dom_id)
   {
     var top = 0, left = 0;
     var width = this.obj.width();
+    // XXX remove existing leds
     for(i = 0; i < n_leds; i++) {
       this.leds.push(new led(this, i, top, left));
       if(left+50 > width) {
@@ -149,7 +144,13 @@ function diagram(dom_id)
     this.draw();
   }
 
-}
+  this.frame =
+  function()
+  {
+    return this.frames[this.current_frame]; 
+  }
+
+} // end diagram
 
 
 //------------------------------
@@ -179,6 +180,12 @@ function diagram(dom_id)
       }
     };
     
+    this.change_color =
+    function (i, color)
+    {
+      this.colors[i] = color;
+      this.diagram.leds[i].change_color(this.colors[i]); 
+    };
   }
 
 //------------------------------
@@ -190,8 +197,7 @@ function diagram(dom_id)
     var pot = $('<div class="pot"/>').attr({
         id: "pot"+i,
         style: "background-color:"+color+";",
-        title: "Drag to Color an LED.",
-        index: i
+        title: "Drag to Color an LED."
     }).appendTo(target);
 
     var picker = $('<span class="pot"/>').attr({

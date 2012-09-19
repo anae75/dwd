@@ -51,9 +51,11 @@
       // make the leds droppable
       $("div.led").droppable ({ 
           drop: function(event, ui) {
-          $foo = ui.draggable;
+          //$foo = ui.draggable;
+          $foo = $(this);
             //change_color($(this), ui.draggable[0].style.backgroundColor);
-            change_color($(this), ui.draggable.css("background-color"));
+            //change_color($(this), ui.draggable.css("background-color"));
+            $diagram.frame().change_color($(this).attr("led_id"), ui.draggable.css("background-color"));
           }
         });
 
