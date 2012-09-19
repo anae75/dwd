@@ -36,43 +36,25 @@
       $diagram = new diagram("diagram1");
       $diagram.initialize(5);
 
-      // initialize color picker
-      $('span.pot').jPicker(
-        {
-          window:
-          {
-            expandable: true
-          },
-          images: {
-            clientPath: '../jPicker/images/'
-          }
-        },
-        // commit callback
-        function(color, context)
-          {
-            var all = color.val('all');
-            //alert('Color chosen - hex: ' + (all && '#' + all.hex || 'none') + ' - alpha: ' + (all && all.a + '%' || 'none'));
-            $("#" + this.parentNode.id).css(
-              {
-                backgroundColor: all && '#' + all.hex || 'transparent'
-              }); // prevent IE from throwing exception if hex is empty
-          }
-        );
+      // initialize the palette
+      var colors = [ "#000000", "#ffffff", 
+        "#ff0000", "#bf00bf",
+        "#0000ff", "#007fff",
+        "#ffff00", "#ff7f00", "#bfbf00",
+        "#00ff00", "#2a562a" ];
+      for(i = 0; i < colors.length; i++) {
+        add_palette_pot("#palette1", i, colors[i]);
+      }
+      
 
-        // make palette pots draggable
-        $("div.pot").draggable( {
-          revert: false,
-          helper: function() { return $("<span class='color_drag'>Drop me</span>")[0]; }
-        } );
-
-        // make the leds droppable
-        $("div.led").droppable ({ 
-            drop: function(event, ui) {
-            $foo = ui.draggable;
-              //change_color($(this), ui.draggable[0].style.backgroundColor);
-              change_color($(this), ui.draggable.css("background-color"));
-            }
-          });
+      // make the leds droppable
+      $("div.led").droppable ({ 
+          drop: function(event, ui) {
+          $foo = ui.draggable;
+            //change_color($(this), ui.draggable[0].style.backgroundColor);
+            change_color($(this), ui.draggable.css("background-color"));
+          }
+        });
 
     }
 
@@ -91,12 +73,6 @@
   </div>
 
   <div id="palette1" class="palette">
-    <div id="pot1" class="pot" title="Drag to Color an LED">
-      <span id="pot1_picker" class="pot"></span>
-    </div>
-    <div id="pot2" class="pot" title="Drag to Color an LED">
-      <span id="pot2_picker" class="pot"></span>
-    </div>
   </div>
 
 

@@ -124,4 +124,53 @@ function diagram(dom_id)
 
 }
 
+//------------------------------
+// Palette
+
+  function add_palette_pot(target, i, color)
+  {
+
+    var pot = $('<div class="pot"/>').attr({
+        id: "pot"+i,
+        style: "background-color:"+color+";",
+        title: "Drag to Color an LED.",
+        index: i
+    }).appendTo(target);
+
+    var picker = $('<span class="pot"/>').attr({
+        id: "pot"+i+"_picker"
+    }).appendTo(pot);
+
+    picker.jPicker(
+      {
+        window:
+        {
+          expandable: true
+        },
+        images: {
+          clientPath: '../jPicker/images/'
+        },
+        color:
+        {
+          active: new $.jPicker.Color({ hex: color })
+        }
+      },
+      // commit callback
+      function(color, context)
+        {
+          var all = color.val('all');
+          $("#" + this.parentNode.id).css(
+            {
+              backgroundColor: all && '#' + all.hex || 'transparent'
+            }); // prevent IE from throwing exception if hex is empty
+        }
+      );
+
+      // make palette pots draggable
+      pot.draggable( {
+        revert: false,
+        helper: function() { return $("<span class='color_drag'>Drop me</span>")[0]; }
+      } );
+
+  }
 
