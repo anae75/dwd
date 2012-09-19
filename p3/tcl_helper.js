@@ -1,3 +1,22 @@
+  function rgb2hex(rgb) {
+      rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+      function hex(x) {
+          return ("0" + parseInt(x).toString(16)).slice(-2);
+      }
+      return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+  }
+
+  function hexToRgb(hex) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16)
+      } : null;
+  }
+
+//
+//
 //------------------------------
 // Led
 /*
@@ -186,8 +205,40 @@ function diagram(dom_id, frameset_dom_id)
     this.frames[this.current_frame].display();
   }
 
+  // return frames in user order
+  this.ordered_frames =
+  function ()
+  {
+    return this.frames;
+    //$("div.frame").map(function() { return $(this).attr("frame_id"); } );
+  }
+
+  this.export =
+  function()
+  {
+    var formatted_frames = new Array();
+    var formatted_colors = new Array();
+
+    var frames = this.ordered_frames();
+    for(i = 0; i < frames.length; i ++) {
+      var colors = frames[i].colors;
+      for(j = 0; j < colors.length; j ++) {
+        formatted_colors[j] = format_color(colors[j]);
+      } 
+      formatted_frames[i] = "[ " + formatted_colors.join(",") + " ]";
+    } 
+    var output = "[ " + formatted_frames.join(" ,") + " ]";
+    return output;
+  };
+
 } // end diagram
 
+function format_color(color) 
+{
+  var c = hexToRgb(color);
+  $foo = color;
+  return "[" + c.r + ", " + c.g + ", " + c.b + "]";
+}
 
 //------------------------------
 // Frame
@@ -226,7 +277,8 @@ function diagram(dom_id, frameset_dom_id)
     this.change_color =
     function (i, color)
     {
-      this.colors[i] = color;
+      $foo = color;
+      this.colors[i] = rgb2hex(color);
       this.diagram.leds[i].change_color(this.colors[i]); 
     };
 
@@ -242,7 +294,8 @@ function diagram(dom_id, frameset_dom_id)
     var f = this;
     //div.click(function() { f.display(); } );
     div.click(function() { f.diagram.move_to_frame(f.id); } );
-  }
+
+  } // end frame
 
 //------------------------------
 // Palette

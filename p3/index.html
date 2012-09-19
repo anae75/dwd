@@ -59,7 +59,7 @@
 
     function clear_current_frame()
     {
-      $diagram.frame().initialize("#fff");
+      $diagram.frame().initialize("#ffffff");
       $diagram.frame().display();
     }
 
@@ -74,8 +74,14 @@
     }
     function play(delay)
     {
+      // XXX - $diagram.ordered_frames();
       var frame_ids = $("div.frame").map(function() { return $(this).attr("frame_id"); } );
       play_frame(0, frame_ids, delay);
+    }
+
+    function export_colors()
+    {
+      $("#output").text($diagram.export());
     }
 
   </script>
@@ -102,7 +108,7 @@
     <div class="buttons" >
       <button onclick='clear_current_frame();'>Clear Current Frame</button>
       <button onclick='play(500);'>Play</button>
-      <button onclick='export();'>Export</button>
+      <button onclick='export_colors();'>Export</button>
     </div>
 
     <div id="frames1" class="frameset">
@@ -111,7 +117,13 @@
       </ul>
     </div>
 
+    <div class="colordata" rows=20 cols=90>
+      <textarea id="output">
+      </textarea>
+    </div>
+
   </div>
+
 
 </body>
 </html>

@@ -97,3 +97,17 @@
     background-color: #ffa81e;
   }
 
+/******************************/
+/* text output */
+
+  .colordata {
+    width: 600px;
+    height: 400px;
+  }
+
+  .colordata textarea {
+    height: 100%;
+    width: 100%;
+  }
+
+
