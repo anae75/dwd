@@ -23,10 +23,57 @@
 
     var $diagram;
 
+    function change_color(led, color)
+    {
+      var context = led.find("canvas")[0].getContext("2d");
+      context.fillStyle = color;
+      context.fill();
+    }
+
     function init() 
     {
+      // initialize the diagram
       $diagram = new diagram("diagram1");
       $diagram.initialize(5);
+
+      // initialize color picker
+      $('span.pot').jPicker(
+        {
+          window:
+          {
+            expandable: true
+          },
+          images: {
+            clientPath: '../jPicker/images/'
+          }
+        },
+        // commit callback
+        function(color, context)
+          {
+            var all = color.val('all');
+            //alert('Color chosen - hex: ' + (all && '#' + all.hex || 'none') + ' - alpha: ' + (all && all.a + '%' || 'none'));
+            $("#" + this.parentNode.id).css(
+              {
+                backgroundColor: all && '#' + all.hex || 'transparent'
+              }); // prevent IE from throwing exception if hex is empty
+          }
+        );
+
+        // make palette pots draggable
+        $("div.pot").draggable( {
+          revert: false,
+          helper: function() { return $("<span class='color_drag'>Drop me</span>")[0]; }
+        } );
+
+        // make the leds droppable
+        $("div.led").droppable ({ 
+            drop: function(event, ui) {
+            $foo = ui.draggable;
+              //change_color($(this), ui.draggable[0].style.backgroundColor);
+              change_color($(this), ui.draggable.css("background-color"));
+            }
+          });
+
     }
 
     $(document).ready(function()
@@ -39,12 +86,17 @@
 </head>
 <body>
 
-  <div >
-    <p>Some content!</p> <p>Some content!</p> <p>Some content!</p> 
-  </div>
-
   <div id="diagram1" class="diagram" width="600px" height="400px">
     <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
+  </div>
+
+  <div id="palette1" class="palette">
+    <div id="pot1" class="pot" title="Drag to Color an LED">
+      <span id="pot1_picker" class="pot"></span>
+    </div>
+    <div id="pot2" class="pot" title="Drag to Color an LED">
+      <span id="pot2_picker" class="pot"></span>
+    </div>
   </div>
 
 

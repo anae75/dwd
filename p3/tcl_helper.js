@@ -21,6 +21,7 @@ function led(diagram, id, top, left)
       style: "position: absolute;" +
               "top: "+ top +"px;" +
               "left: " + left +"px;",
+      index: i
   }).appendTo("#" + diagram.dom_id);
   //alert(this.obj[0].id);
 

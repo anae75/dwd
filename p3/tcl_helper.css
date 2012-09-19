@@ -1,5 +1,4 @@
 
-// reset
   * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -13,6 +12,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
+
 
   .diagram {
     display: table-cell;
@@ -33,5 +33,33 @@
   .led canvas {
   }
 
+/******************************/
+/* palette */
+
+  div.palette {
+    border: 1px solid black;
+    width: 600px; 
+    height: 50px;
+  }
+
+  div.pot {
+    width: 50px;
+    height: 50px;
+    display: table-cell;
+    text-align: right;
+    vertical-align: bottom;
+    position: relative;
+    border: 2px solid #cccccc;
+    background-color: #ffcc00;
+  }
+  div.pot:hover {
+    cursor: pointer;
+  }
+
+  span.color_drag {
+    background-color: #f7ecc0;
+    font-size: smaller;
+    padding: 2px 2px 1px 2px;
+  }
 
 
