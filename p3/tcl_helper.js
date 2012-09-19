@@ -64,12 +64,13 @@ function led(diagram, id, top, left)
 // Diagram
 // has_many leds
 
-function diagram(dom_id)
+function diagram(dom_id, frameset_dom_id)
 {
   this.dom_id = dom_id;
   this.obj = $("#"+dom_id);
   this.leds = new Array();
   this.frames = new Array();
+  this.frames_target = $("#"+frameset_dom_id);
 
   this.canvas = this.obj.find("canvas")[0]; 
 
@@ -111,8 +112,9 @@ function diagram(dom_id)
   this.clear_frames =
   function ()
   {
+    this.frames_target.find("li.frame").remove()
     this.frames = new Array();
-    this.frames.push(new frame(this));
+    this.frames.push(new frame(this, this.frames_target, 1));
     this.current_frame = 0;
     this.frames[this.current_frame].display();
   };
@@ -120,7 +122,7 @@ function diagram(dom_id)
   this.append_frame =
   function()
   {
-    this.frames.push(new frame(this));
+    this.frames.push(new frame(this, this.frames_target, this.frames.length+1));
     this.current_frame = this.frames.length - 1;
     this.frames[this.current_frame].display();
   };
@@ -145,6 +147,16 @@ function diagram(dom_id)
         left += 50;
       }
     }
+
+    // make the leds droppable
+    $("div.led").droppable ({ 
+        drop: function(event, ui) {
+          //change_color($(this), ui.draggable[0].style.backgroundColor);
+          //change_color($(this), ui.draggable.css("background-color"));
+          $diagram.frame().change_color($(this).attr("led_id"), ui.draggable.css("background-color"));
+        }
+      });
+
     this.clear_frames();
     this.draw();
   }
@@ -163,14 +175,17 @@ function diagram(dom_id)
 // belongs_to diagram
 // has_many colors
 
-  function frame(diagram)
+  function frame(diagram, target, id)
   {
     this.diagram = diagram;
+    this.target = target;
+    this.id = id;
+
     this.colors = new Array();
     for(i = 0; i < diagram.leds.length; i++) {
       this.colors[i] = "#ffffff";  // initialize to white
     }
-    
+
     this.update_color = 
     function (i, color)
     {
@@ -191,6 +206,16 @@ function diagram(dom_id)
       this.colors[i] = color;
       this.diagram.leds[i].change_color(this.colors[i]); 
     };
+
+    // create a dom element in the target 
+    var button = target.find(".button_item"); 
+    var li = $('<li class="frame"/>');
+    button.before(li);
+    var div = $('<div class="frame">' + id + '</frame>').appendTo(li);
+
+    // click
+    var f = this;
+    div.click(function() { f.display(); } );
   }
 
 //------------------------------

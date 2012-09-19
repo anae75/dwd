@@ -34,7 +34,7 @@
     function init() 
     {
       // initialize the diagram
-      $diagram = new diagram("diagram1");
+      $diagram = new diagram("diagram1", "frames1");
       $diagram.initialize(5);
 
       // initialize the palette
@@ -48,16 +48,6 @@
       }
       
 
-      // make the leds droppable
-      $("div.led").droppable ({ 
-          drop: function(event, ui) {
-          //$foo = ui.draggable;
-          $foo = $(this);
-            //change_color($(this), ui.draggable[0].style.backgroundColor);
-            //change_color($(this), ui.draggable.css("background-color"));
-            $diagram.frame().change_color($(this).attr("led_id"), ui.draggable.css("background-color"));
-          }
-        });
 
     }
 
@@ -78,15 +68,20 @@
   </div>
 
   <div id="palette1" class="palette">
-  Drag to color your LEDs.
-    <ul>
-    </ul>
+    Drag to color your LEDs.
+    <ul> </ul>
   </div>
 
-  <div id="diagram1" class="diagram" width="600px" height="400px">
-    <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
+  <div class="diagram_holder">
+    <div id="diagram1" class="diagram" width="600px" height="400px">
+      <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
+    </div>
+    <div id="frames1" class="frameset">
+      <ul> 
+        <li class="button_item"><button onclick='$diagram.append_frame();'>New frame</button></li>
+      </ul>
+    </div>
   </div>
-
 
 </body>
 </html>

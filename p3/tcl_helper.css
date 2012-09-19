@@ -13,11 +13,14 @@
     background-attachment: fixed;
   }
 
+  .diagram_holder {
+    float: left;
+  }
 
   .diagram {
     display: table-cell;
     border: 1px solid black;
-    background-color: white;
+    color: white;
   }
 
   .diagram canvas {
@@ -66,4 +69,26 @@
     z-index:100;
   }
 
+/******************************/
+/* frames */
+  .frameset {
+    width: 600px;
+    padding: 5px;
+  }
 
+  .frameset li {
+    float: left;
+    margin: 2px;
+    list-style: none;
+  }
+
+  div.frame {
+    width: 30px;
+    height: 30px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: bottom;
+    background-color: #666;
+    font-color: #white;
+    font-size: larger;
+  }
