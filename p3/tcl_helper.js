@@ -130,7 +130,12 @@ function diagram(dom_id)
   {
     var top = 0, left = 0;
     var width = this.obj.width();
-    // XXX remove existing leds
+
+    // remove existing leds
+    this.obj.find(".led").remove()
+    this.leds = new Array();
+    
+    // add leds
     for(i = 0; i < n_leds; i++) {
       this.leds.push(new led(this, i, top, left));
       if(left+50 > width) {
