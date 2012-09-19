@@ -69,6 +69,7 @@ function diagram(dom_id)
   this.dom_id = dom_id;
   this.obj = $("#"+dom_id);
   this.leds = new Array();
+  this.frames = new Array();
 
   this.canvas = this.obj.find("canvas")[0]; 
 
@@ -113,6 +114,23 @@ function diagram(dom_id)
     this.leds.push(new led(this, 1, 10, 10));
   };
 
+  this.clear_frames =
+  function ()
+  {
+    this.frames = new Array();
+    this.frames.push(new frame(this));
+    this.current_frame = 0;
+    this.frames[this.current_frame].display();
+  };
+
+  this.append_frame =
+  function()
+  {
+    this.frames.push(new frame(this));
+    this.current_frame = this.frames.length - 1;
+    this.frames[this.current_frame].display();
+  };
+
   this.initialize = 
   function(n_leds)
   {
@@ -127,6 +145,7 @@ function diagram(dom_id)
         left += 50;
       }
     }
+    this.clear_frames();
     this.draw();
   }
 
