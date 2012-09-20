@@ -23,7 +23,7 @@
 
     var $diagram;
     var $brush_color;
-    var standard_notice = 'Drag LEDs to position them.<br>Drag and drop palette pots on LEDS or click on a palette pot to color multiple LEDs.<br> Use the color picker to customize your palette.';
+    var standard_notice = 'Drag LEDs to position them or click "Arrange LEDs" to do it in bulk.<br>Drag and drop palette pots on LEDS or click on a palette pot to color multiple LEDs.<br> Use the color picker to customize your palette.';
 
     function init() 
     {
@@ -58,6 +58,34 @@
         });
       });
 
+    }
+
+    function arrange_leds() 
+    {
+      var leds = $("div.led");
+      leds.hide();
+      $diagram.clear();
+      notice("click to place leds on the diagram");
+      var c_pos = $diagram.obj.offset();
+      var c_left = c_pos.left;
+      var c_top = c_pos.top;
+      var index = 0;
+      var max_index = leds.length;
+      var listener = function(event) { 
+        var led_obj = $(leds[index]);
+        led_obj.css("left", (event.clientX -25)+"px");
+        led_obj.css("top", (event.clientY -25)+"px");
+        led_obj.show();
+        $diagram.draw();
+        index += 1;
+        if(index >= max_index) {
+          $diagram.canvas.removeEventListener('click', listener, false);
+          clear_notice();
+        }
+      }
+
+      $diagram.canvas.addEventListener('click', listener, false);
+      
     }
 
     function notice(text)
@@ -137,6 +165,7 @@
       <label for="led_input" class="frame_op">Number of LEDs:</label>
       <input class="frame_op" type="text" id="led_input" />
       <button class="frame_op" onclick='initialize_diagram();'>Reset</button>
+      <button class="frameset_op" onclick='arrange_leds();'>Arrange LEDs</button>
     </div>
     
     <div id="diagram1" class="diagram" width="600px" height="400px">
