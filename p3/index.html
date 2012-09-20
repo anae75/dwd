@@ -22,20 +22,11 @@
   <script type="text/javascript">
 
     var $diagram;
-
-    // XXX - merge redundant code
-    function change_color(led, color)
-    {
-      var context = led.find("canvas")[0].getContext("2d");
-      context.fillStyle = color;
-      context.fill();
-    }
+    var $brush_color;
+    var standard_notice = 'Drag LEDs to position them.<br>Drag and drop palette pots on LEDS or click on a palette pot to color multiple LEDs.<br> Use the color picker to customize your palette.';
 
     function init() 
     {
-      // initialize the diagram
-      $diagram = new diagram("diagram1", "frames1");
-      $diagram.initialize(5);
 
       // initialize the palette
       var colors = [ "#000000", "#ffffff", 
@@ -43,13 +34,47 @@
         "#0000ff", "#007fff",
         "#ffff00", "#ff7f00", "#bfbf00",
         "#00ff00", "#2a562a" ];
-      for(i = 0; i < colors.length; i++) {
+      for(var i = 0; i < colors.length; i++) {
         add_palette_pot("#palette1 ul", i, colors[i]);
       }
-      
+
+      // initialize the diagram
+      $diagram = new diagram("diagram1", "frames1");
+      $diagram.initialize(5);
+
       // make the frames sortable
       $("#frames1 ul").sortable();
 
+      clear_notice();
+
+      // set brush color on palette click
+      $("div.pot").click( function() {
+        notice("click on LEDs to color");
+        $brush_color = $(this).css("background-color"); 
+        // clear brush color when done
+        $("#notice_done").show().click( function() {
+          $brush_color = null; 
+          clear_notice();
+        });
+      });
+      // click to change color if global brush_color is set
+      $("div.led").click( function() {
+        if($brush_color) {
+          $diagram.frame().change_color($(this).attr("led_id"), $brush_color);
+        }
+      });
+
+    }
+
+    function notice(text)
+    {
+      $("#notices span")[0].innerHTML = text;
+      $("#notices").effect("highlight", {}, 3000);
+    }
+    function clear_notice()
+    {
+      $("#notices span")[0].innerHTML = standard_notice;
+      $("#notices button").hide();
     }
 
     $(document).ready(function()
@@ -74,7 +99,6 @@
     }
     function play(delay)
     {
-      // XXX - $diagram.ordered_frames();
       var frame_ids = $("div.frame").map(function() { return $(this).attr("frame_id"); } );
       play_frame(0, frame_ids, delay);
     }
@@ -110,7 +134,6 @@
   </div>
 
   <div id="palette1" class="palette">
-    Drag to color your LEDs.
     <ul> </ul>
   </div>
 
@@ -146,6 +169,16 @@
       <textarea id="output" rows=10 readonly="readonly"></textarea>
     </div>
 
+  </div>
+
+  <div id="notices" class="notice">
+    <div>
+    <span> 
+    </span>
+    </div>
+    <button id="notice_cancel" onclick=''>Cancel</button>
+    <button id="notice_done" onclick=''>Done</button>
+    
   </div>
 
 </div>

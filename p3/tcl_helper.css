@@ -134,4 +134,20 @@
     resize: none;
   }
 
+/******************************/
+/* notices */
+
+  .notice {
+    float: left;
+    width: 200px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #d3d3b8;
+    
+  }
+
+  .notice div {
+    padding: 10px 0;
+    min-height: 75px;
+  }
 
