@@ -137,12 +137,21 @@ function diagram(dom_id, frameset_dom_id)
   };
 
   this.append_frame =
-  function()
+  function(append_after = null)
   {
-    this.frames.push(new frame(this, this.frames_target, this.frames.length+1));
+    this.frames.push(new frame(this, this.frames_target, this.frames.length+1, append_after));
     this.current_frame = this.frames.length - 1;
     this.frames[this.current_frame].display();
     this.update_selected(); 
+  };
+
+  this.duplicate_frame =
+  function()
+  {
+    var colors = this.frame().colors.slice(0);
+    this.append_frame(this.frame().obj);
+    this.frame().colors = colors;
+    this.frame().display();
   };
 
   this.initialize = 
@@ -245,7 +254,7 @@ function format_color(color)
 // belongs_to diagram
 // has_many colors
 
-  function frame(diagram, target, id)
+  function frame(diagram, target, id, append_after)
   {
     this.diagram = diagram;
     this.target = target;
@@ -285,6 +294,9 @@ function format_color(color)
     // create a dom element in the target 
     var li = $('<li class="frame"/>');
     var lastframe = target.find("div.frame").last().parent();
+    if(append_after) {
+      lastframe = append_after;
+    }
     if(lastframe.length > 0) {
       lastframe.after(li);
     } else {
