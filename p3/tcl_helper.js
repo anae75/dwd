@@ -63,7 +63,7 @@ function led(diagram, id, top, left)
   context.strokeStyle = "#555555";
   context.beginPath();
   //draw arc: arc(x, y, radius, startAngle, endAngle, anticlockwise)
-  context.arc(25, 25, 20, Math.PI*2, 0, true);
+  context.arc(25, 25, 10, Math.PI*2, 0, true);
   context.closePath();
   context.fill();
   context.stroke();
@@ -181,7 +181,8 @@ function diagram(dom_id, frameset_dom_id)
           //change_color($(this), ui.draggable[0].style.backgroundColor);
           //change_color($(this), ui.draggable.css("background-color"));
           $diagram.frame().change_color($(this).attr("led_id"), ui.draggable.css("background-color"));
-        }
+        },
+        accept: ".pot"
       });
 
     // click on led to change color if global brush_color is set
