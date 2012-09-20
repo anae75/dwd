@@ -112,18 +112,22 @@
       var canvas_pos = this.obj.find("canvas").offset();
       for(i = 1; i < this.leds.length; i++) {
 
-        var pos = this.leds[i-1].obj.offset();
-        var x1 = pos.left + this.leds[i-1].obj.width()/2 - canvas_pos.left;
-        var y1 = pos.top + this.leds[i-1].obj.height()/2 - canvas_pos.top;
+        if(this.leds[i].obj.is(":visible")) {
 
-        var pos = this.leds[i].obj.offset();
-        var x2 = pos.left + this.leds[i].obj.width()/2 - canvas_pos.left;
-        var y2 = pos.top + this.leds[i].obj.height()/2 - canvas_pos.top;
+          var pos = this.leds[i-1].obj.offset();
+          var x1 = pos.left + this.leds[i-1].obj.width()/2 - canvas_pos.left;
+          var y1 = pos.top + this.leds[i-1].obj.height()/2 - canvas_pos.top;
 
-        context.beginPath();
-        context.moveTo(x1,y1);
-        context.lineTo(x2,y2);
-        context.stroke();
+          var pos = this.leds[i].obj.offset();
+          var x2 = pos.left + this.leds[i].obj.width()/2 - canvas_pos.left;
+          var y2 = pos.top + this.leds[i].obj.height()/2 - canvas_pos.top;
+
+          context.beginPath();
+          context.moveTo(x1,y1);
+          context.lineTo(x2,y2);
+          context.stroke();
+
+        }
 
       }
     };
