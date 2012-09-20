@@ -184,6 +184,13 @@ function diagram(dom_id, frameset_dom_id)
         }
       });
 
+    // click on led to change color if global brush_color is set
+    $("div.led").click( function() {
+      if($brush_color) {
+        $diagram.frame().change_color($(this).attr("led_id"), $brush_color);
+      }
+    });
+
     this.clear_frames();
     this.draw();
   }

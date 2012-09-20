@@ -57,12 +57,6 @@
           clear_notice();
         });
       });
-      // click to change color if global brush_color is set
-      $("div.led").click( function() {
-        if($brush_color) {
-          $diagram.frame().change_color($(this).attr("led_id"), $brush_color);
-        }
-      });
 
     }
 
