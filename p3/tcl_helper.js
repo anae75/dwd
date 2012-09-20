@@ -346,7 +346,7 @@
           expandable: true
         },
         images: {
-          clientPath: '../jPicker/images/'
+          clientPath: '../jpicker/images/'
         },
         color:
         {
