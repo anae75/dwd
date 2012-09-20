@@ -158,11 +158,11 @@ function diagram(dom_id, frameset_dom_id)
     // add leds
     for(i = 0; i < n_leds; i++) {
       this.leds.push(new led(this, i, top, left));
-      if(left+50 > width) {
+      if(left+55 >= width) {
         left = 0;
-        top += 50;
+        top += 55;
       } else {
-        left += 50;
+        left += 55;
       }
     }
 

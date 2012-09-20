@@ -13,6 +13,11 @@
     background-attachment: fixed;
   }
 
+  #wrapper {
+    width: 960px;
+    margin: 0px auto;
+  }
+
   .diagram_holder {
     float: left;
   }
@@ -46,6 +51,7 @@
 
   .palette li {
     float: left;
+    list-style: none;
   }
 
   div.pot {
@@ -125,6 +131,7 @@
   .colordata textarea {
     height: 100%;
     width: 100%;
+    resize: none;
   }
 
 
