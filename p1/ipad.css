@@ -3,3 +3,9 @@
        height: 85px;
      }
 
+     div.larger .inner_cloud {
+       padding: 55px 90px 15px 85px;
+       height: 125px;
+       width: 440px;
+     }
+
