@@ -283,9 +283,13 @@ function format_color(color)
     };
 
     // create a dom element in the target 
-    var button = target.find(".button_item"); 
     var li = $('<li class="frame"/>');
-    button.before(li);
+    var lastframe = target.find("div.frame").last().parent();
+    if(lastframe.length > 0) {
+      lastframe.after(li);
+    } else {
+      li.prependTo(target.find("ul"));
+    }
     var div = $('<div class="frame">' + id + '</frame>').appendTo(li);
     div.attr({ frame_id: id });
     this.obj = li;
