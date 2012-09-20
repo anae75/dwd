@@ -106,20 +106,23 @@
     </div>
 
     <div class="buttons" >
-      <button onclick='clear_current_frame();'>Clear Current Frame</button>
-      <button onclick='play(500);'>Play</button>
-      <button onclick='export_colors();'>Export</button>
+      <button class="frame_op" onclick='clear_current_frame();'>Clear Current Frame</button>
+      <button class="frame_op" onclick='$diagram.append_frame();'>New frame</button>
+
+      <button class="frameset_op" onclick='export_colors();'>Export</button>
+      <button class="frameset_op" onclick='play(500);'>Play</button>
     </div>
 
     <div id="frames1" class="frameset">
       <ul> 
-        <li class="button_item"><button onclick='$diagram.append_frame();'>New frame</button></li>
       </ul>
     </div>
 
-    <div class="colordata" rows=20 cols=90>
-      <textarea id="output">
-      </textarea>
+    <div class="colordata" >
+      <div class="buttons" >
+        <button class="frameset_op" onclick='$("#output").focus().select();'>Select All</button>
+      </div>
+      <textarea id="output" rows=10 readonly="readonly"></textarea>
     </div>
 
   </div>
