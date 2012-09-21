@@ -118,10 +118,11 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
       var vmax = pos.top - 5;
       var vmin = pos.top + 5;
 
-      var hmin = 0;
-      var hmax = $(id).offsetParent().width() - $(id).width();
 
       var cbid = setInterval(function() {
+
+        var hmin = 0;
+        var hmax = $(id).offsetParent().width() - $(id).width();
 
         var obj = $(id);
         var pos = obj.offset();
@@ -150,7 +151,7 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
       setTimeout(function() {
         elem.fadeIn(1000);
         var pos = elem.offset();
-        pos.left = Math.random() * ($(document).width() - 100);
+        pos.left = Math.random() * ($(window).width() - 100);
         elem.offset(pos);
         setTimeout(function() {
           elem.fadeOut();
@@ -166,29 +167,35 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
       drift("#d_editor", 1, 25);
       drift("#d_git", 1, 45);
 
-      for(var i = 1; i <= 1; i++) {
+      for(var i = 1; i <= 2; i++) {
         var id = "#cloud" + i;
         var cloud = $(id);
-        var pos = cloud.offset();
-        pos.left = -1 * cloud.offsetParent().width()/2 + Math.random()*200; 
-        cloud.offset(pos);
         drift(id, 1, 21+i);
       }
 
-      var alien = $("#visitor1")
-      var pos = alien.offset();
-      pos.top = $(document).height() - 110;
-      alien.offset(pos);
+      set_alien_pos();
       pop_up($("#visitor1"), 10000, 5000);
-
-      var alien = $("#visitor2")
-      var pos = alien.offset();
-      pos.top = $(document).height() - 100;
-      alien.offset(pos);
       pop_up($("#visitor2"), 5000, 40000);
 
     }
 
+    function set_alien_pos() {
+      var alien = $("#visitor1")
+      var pos = alien.offset();
+      pos.top = $(window).height() - 110;
+      alien.offset(pos);
+
+      var alien = $("#visitor2")
+      var pos = alien.offset();
+      pos.top = $(window).height() - 100;
+      alien.offset(pos);
+    }
+
+    // adjust lower bound
+    $(window).resize(function () {
+      set_alien_pos();
+    });
+    
     $(document).ready(function(){
       start();
     });
@@ -196,9 +203,9 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 </head>
 <body>
 
-  <div id=cloud1 class="sprite cloud smaller" style="top: 70px;">
+  <div id=cloud1 class="sprite cloud larger" style="top: 80px; left: -j00px">
   </div> 
-  <div id=cloud2 class="sprite cloud smaller" style="top: 340px;">
+  <div id=cloud2 class="sprite cloud smaller" style="top: 540px; left: 600px">
   </div> 
 
   <div id=d_name class="sprite cloud" style="top: 25px; left: 200px;">
@@ -215,7 +222,7 @@ if((navigator.userAgent.match(/iPad|iPhone/i))) {
 
   <div id=d_host class="sprite cloud" style="top: 220px; left: 400px">
     <div class="inner_cloud">
-    This page is hosted on a Slicehost shared virtual host.
+    This page is hosted on a Slicehost virtual private server.
     </div>
   </div>
 
