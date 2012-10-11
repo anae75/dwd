@@ -465,7 +465,7 @@ class Form {
 	/*-------------------------------------------------------------------------------------------------
 	
 	-------------------------------------------------------------------------------------------------*/	
-	public function select_multiple($field, $options, $value = NULL, $html = NULL) {
+	public function select_multiple($field, $options, $value = Array(), $html = NULL) {
 		$value = (empty($this->data[$field])) ? $value : $this->data[$field];				
 		$input = '<select multiple="multiple" id="'.$field.'" name="'.$field.'" '.$html.'>'."\n";
 		foreach ((array) $options as $key => $val) {
@@ -535,9 +535,9 @@ class Form {
 	}
 
 	
-	public function hidden($field, $value = NULL) {
+	public function hidden($field, $value = NULL, $html = NULL) {
 		$value = (empty($this->data[$field])) ? $value : $this->data[$field];
-		echo '<input type="hidden" name="'.$field.'" id="'.$field.'" value="'.$value.'" />';
+		echo '<input type="hidden" name="'.$field.'" id="'.$field.'" '.$html.' value="'.$value.'" />';
 	}
 	
 	

@@ -1,12 +1,45 @@
 <?
-// All methods should be static, accessed like: Time::method(...);
+
+
 class Time {
 
-	/*-----------------------------------------------------------------------------------------------
+	/*-------------------------------------------------------------------------------------------------
 	
 	-------------------------------------------------------------------------------------------------*/
+	public static function offset($remote, $local = NULL, $now = NULL) {
+	
+		if ($local === NULL) {
+			# Use the default timezone
+			$local = date_default_timezone_get();
+		}
+
+		if (is_int($now)) {
+			# Convert the timestamp into a string
+			$now = date(DateTime::RFC2822, $now);
+		}
+
+		# Create timezone objects
+		$zone_remote = new DateTimeZone($remote);
+		$zone_local  = new DateTimeZone($local);
+
+		# Create date objects from timezones
+		$time_remote = new DateTime($now, $zone_remote);
+		$time_local  = new DateTime($now, $zone_local);
+
+		# Find the offset
+		$offset = $zone_remote->getOffset($time_remote) - $zone_local->getOffset($time_local);
+
+		return $offset;
+	}
+
+
+
+	/*-----------------------------------------------------------------------------------------------
+	Always use this method instead of date() or time() to find out the current time so
+	we are able to use the MIMIC_TIME feature when testing.
+	-------------------------------------------------------------------------------------------------*/
 	public static function now() {
-						
+	
 		# Do the test with strtotime, otherwise it reads constants weird if they don't exist and this doesn't work right		
 		if(@strtotime(MIMIC_TIME) > 0) {
 			return strtotime(MIMIC_TIME);
@@ -14,14 +47,14 @@ class Time {
 		else {
 			return time();
 		}
-	
+			
 	}
 	
 	
 	/*-------------------------------------------------------------------------------------------------
-	
+	$timestamp is usually application time, $timezone is usually the user's time
 	-------------------------------------------------------------------------------------------------*/
-	public static function display($timestamp, $time_format = NULL) {
+	public static function display($timestamp, $time_format = NULL, $timezone = NULL) {
 	
 		# Avoid printing December 31 1969 if there is no timestamp
 		if($timestamp <= 0) {
@@ -33,7 +66,6 @@ class Time {
 			# 1. If it's passed in
 			# 2. The App's TIME_FORMAT setting
 			# 3. A default value we set here
-			
 			if($time_format) {
 				
 			}
@@ -43,15 +75,23 @@ class Time {
 			else {
 				$time_format = "F j, Y g:ia";
 			}
+		
+			# If passed in a timezone, use that one
+			if (!empty($timezone)) {
+				$timestamp = $timestamp + self::offset($timezone);
+			} 
 			
 			return date($time_format, $timestamp);
 		}
+		
+		
+		
+		
 	
 	}
 	
 
 	/*-------------------------------------------------------------------------------------------------
-	This function was originally put in ordersSimpleFunctions.php by Amit
 	Given a timestamp, returns an english string with relative time like "2 hours ago"
 	-------------------------------------------------------------------------------------------------*/
 	public static function time_ago($datefrom, $dateto=-1) {

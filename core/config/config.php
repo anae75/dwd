@@ -15,6 +15,10 @@
 	if(!defined('LOCALE')) define('LOCALE', 'en_US');
     setlocale(LC_ALL, LOCALE);
     
+# Set timezone
+	if(!defined('TIMEZONE')) define('TIMEZONE', 'UTC'); 
+    date_default_timezone_set(TIMEZONE);
+    
 # Error reporting - default to off. Set in environment.php to turn on
 	if(!defined('DISPLAY_ERRORS')) define('DISPLAY_ERRORS', FALSE);
 	

@@ -4,6 +4,32 @@
 // All methods should be static, accessed like: Utils::method(...);
 class Utils {
 
+
+	/*-------------------------------------------------------------------------------------------------
+	
+	-------------------------------------------------------------------------------------------------*/
+	public static function generate_random_string($length = 6) {
+	
+		$vowels     = 'aeuy';
+		$consonants = 'bdghjmnpqrstvz';
+		$string     = '';
+		
+		$alt = time() % 2;
+		for ($i = 0; $i < $length; $i++) {
+			if ($alt == 1) {
+				$string .= $consonants[(rand() % strlen($consonants))];
+				$alt = 0;
+			} else {
+				$string .= $vowels[(rand() % strlen($vowels))];
+				$alt = 1;
+			}
+		}
+		
+		return $string;
+
+	}
+
+
 	/*-------------------------------------------------------------------------------------------------
 	
 	-------------------------------------------------------------------------------------------------*/
@@ -171,10 +197,12 @@ class Utils {
 	public static function quick_view($template, $message, $title = NULL, $type = 'message') {
 	
 		# Setup view
-			$template->content     = View::instance('v_message');
-			$template->title       = $title;
+			$template->content     		= View::instance('v_message');
+			$template->title       		= $title;
 			$template->content->message = $message;
 			$template->content->type    = $type;
+			$template->hide_menu 		= TRUE;
+			$template->hide_footer 		= TRUE;
 		
 		# Render view 
 			echo $template;
@@ -263,7 +291,13 @@ class Utils {
         foreach($files as $file) {
             
             if(strstr($file,".css")) {
-                $contents .= '<link rel="stylesheet" type="text/css" href="'.$file.'">';
+            
+            	if(strstr($file,"print_")) {
+            		$contents .= '<link rel="stylesheet" type="text/css" href="'.$file.'" media="print">';
+            	}
+            	else {
+	                $contents .= '<link rel="stylesheet" type="text/css" href="'.$file.'">';
+	            }
             }
             else {
             	$contents .= '<script type="text/javascript" src="'.$file.'"></script>';	
@@ -304,8 +338,9 @@ class Utils {
 		 			 		
 		# Extract  		
 		while($foundString != 0) {
-			$ini     = strpos($string,$start,$cursor);
-			if($ini) {
+			$ini = strpos($string,$start,$cursor);
+					
+			if($ini >= 0) {
 				$ini    += strlen($start);
 				$len     = strpos($string,$end,$ini) - $ini;
 				$cursor  = $ini;
