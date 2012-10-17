@@ -1,0 +1,11 @@
+
+# MAMP
+development:
+  adapter: ruby_mysql 
+  host: localhost
+  port: 8889
+  socket: /Applications/MAMP/tmp/mysql/mysql.sock
+  database: p2
+  username: root
+  password: root
+
