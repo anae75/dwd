@@ -21,8 +21,10 @@ class MyUser extends User {
 
   private function validates_length_of($attr, $len, $msg=null)
   {
-    if(empty($data[$attr] || strlen($data[$attr]) < $len) {
-      if(!$msg) { $msg = $attr . " needs to be at least" . $len . " characters"; }
+    if( empty($data[$attr]) || strlen($data[$attr]) < $len ) {
+      if(!$msg) { 
+        $msg = $attr . " needs to be at least " . $len . " characters"; 
+      }
       $this->errors[$attr] = $msg; 
     }
   }
@@ -36,5 +38,5 @@ class MyUser extends User {
     $this->validates_presence_of("last_name");
     return empty($this->errors);
   }
-	
+
 }
