@@ -9,10 +9,6 @@ class users_controller extends base_controller {
 
   public function index() {
     echo "Welcome to the users's department";
-    $newuser = new MyUser();
-    $data = [];
-    $valid = $newuser->valid($data);
-    var_dump($newuser);
   }
 
   public function signup() 
@@ -25,6 +21,13 @@ class users_controller extends base_controller {
   }
 
   public function p_signup() {
+    $newuser = new MyUser();
+    if(!$newuser->valid($_POST)) {
+      $this->template->set_global('errors', $newuser->errors);
+      # var_dump($_POST);
+      $this->signup();
+      return;
+    }
 
     # Encrypt the password  
     $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
