@@ -16,7 +16,22 @@
 
 <body>	
 
+  <div id=outer_container>
+
+    <div class=menubar>
+      <span class=leftmenu>
+        <?= View::instance('v_menu_bar'); ?>
+      </span>
+      <span class=rightmenu>
+        <?= View::instance('v_login_bar'); ?>
+      </span>
+    </div>
+
+    <div id=content_container class=maincontent>
 	<?=$content;?> 
+    </div>
+
+  </div>
 
 </body>
 </html>
