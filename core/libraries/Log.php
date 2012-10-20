@@ -341,6 +341,11 @@ class Log
      */
     public function log($line, $severity)
     {
+    
+    	if(is_array($line)) {
+	    	$line = var_export($line, true);
+    	}
+    
         if ($this->_severityThreshold >= $severity) {
             $status = $this->_getTimeLine($severity);
             $this->writeFreeFormLine("$status $line \n");
