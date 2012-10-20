@@ -8,7 +8,6 @@ class MyUser extends User {
   {
     parent::__construct();
     $this->errors = [];
-    echo "MyUser construct called<br><br>";
   } 
 
   private function validates_presence_of($data, $attr, $msg=null)
