@@ -13,7 +13,7 @@ class base_controller {
   public function __construct() {
 
     # Instantiate User class
-    $this->userObj = new User();
+    $this->userObj = new MyUser();
 
     # Authenticate / load user
     $this->user = $this->userObj->authenticate();			

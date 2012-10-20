@@ -5,14 +5,13 @@
 }
 
 body {
-  background-color: #fec864;
+  background-color: #c1c451;
 }
 
 #outer_container {
   min-width: 950px;
   margin: 0 auto;
   background-color: #c1c451;
-  min-height: 600px;
 }
 
 /* menu bar *************************************************/
@@ -55,6 +54,7 @@ body {
 
 .menubar li {
   display: inline ;
+}
 
 /* main content ********************************************/
 
@@ -63,3 +63,8 @@ body {
   clear: both;
   padding: 10px;
 }
+
+textarea {
+  resize: none;
+}
+

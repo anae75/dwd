@@ -10,6 +10,16 @@ class MyUser extends User {
     $this->errors = [];
   } 
 
+  // accessors
+  public function posts()
+  {
+    $sql = sprintf("select * from posts where user_id=%s", $this->_user->user_id); 
+    $posts = DB::instance(DB_NAME)->select_rows($sql, "object");
+    return $posts;
+  }
+
+  // validation
+
   private function validates_presence_of($data, $attr, $msg=null)
   {
     if(empty($data[$attr])) {

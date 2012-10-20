@@ -3,7 +3,7 @@
 class User {
 	
 	# Cache user in this class
-	private $_user;
+	protected $_user;
 	
 	# Can't use the email_template defined in base_controller
 	public $email_template;
