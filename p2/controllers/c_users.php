@@ -4,7 +4,6 @@ class users_controller extends base_controller {
   public function __construct() 
   {
     parent::__construct();
-    echo "users_controller construct called<br><br>";
   } 
 
   public function index() {
@@ -73,8 +72,7 @@ class users_controller extends base_controller {
     if(!$token) {
 
       # Send them back to the login page
-      Router::redirect("/users/login/");
-
+      Router::redirect("/users/login");
     } else {  # But if we did, login succeeded! 
       # Store this token in a cookie
       @setcookie("token", $token, strtotime('+1 year'), '/');
@@ -87,19 +85,22 @@ class users_controller extends base_controller {
   public function logout() {
 
     # Generate and save a new token for next login
-    $new_token = sha1(TOKEN_SALT.$email.Utils::generate_random_string());
+    $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
 
     # Create the data array we'll use with the update method
     # In this case, we're only updating one field, so our array only has one entry
     $data = Array("token" => $new_token);
 
     # Do the update
+    $token = $this->user->token;
     DB::instance(DB_NAME)->update("users", $data, "WHERE token = '".$token."'");
 
     # Delete their token cookie - effectively logging them out
     setcookie("token", "", strtotime('-1 year'), '/');
 
     echo "You have been logged out.";
+    echo "old token=" .$token. "<br>";
+    echo "new token=" .$new_token . "<br>";
 
   }
 
