@@ -27,7 +27,7 @@ class base_controller {
 	    
     # default client files
     $this->client_files = Array(
-      "../css/p2.css"
+      "/css/p2.css"
     );
     $this->template->client_files = Utils::load_client_files($this->client_files); 
 
