@@ -11,4 +11,20 @@ class test_controller extends base_controller {
       echo "set cookie " . $attr . "= " . $data . "<br>"; 
   }
 
+  public function echo_input($data=null) 
+  {
+    echo $data; 
+  }
+
+  public function index()
+  {
+    # Setup view
+    $this->template->content = View::instance('v_test_index');
+    $this->template->title   = "Misc Test Stuff";
+
+    # Render template
+    echo $this->template;
+
+  }
+
 } # end class

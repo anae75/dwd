@@ -6,10 +6,6 @@ class users_controller extends base_controller {
     parent::__construct();
   } 
 
-  public function index() {
-    echo "Welcome to the users's department";
-  }
-
   public function signup() 
   {
     # Setup view
@@ -83,6 +79,10 @@ class users_controller extends base_controller {
   }
 
   public function logout() {
+    if(!$this->user) {
+      Router::redirect("/users/login");
+      return;
+    }
 
     # Generate and save a new token for next login
     $new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
@@ -105,7 +105,6 @@ class users_controller extends base_controller {
   }
 
   public function profile() {
-
     # If user is blank, they're not logged in, show message and don't do anything else
     if(!$this->user) {
       echo "Members only. <a href='/users/login'>Login</a>";
@@ -121,6 +120,32 @@ class users_controller extends base_controller {
             
     # Render template
     echo $this->template;
+  }
+
+  public function index() {
+    if(!$this->user) {
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # Setup view
+    $this->template->content = View::instance('v_users_index');
+    $this->template->title   = "Users";
+
+    $users = MyUser::users();
+    $this->template->set_global('users', $users);
+            
+    # Render template
+    echo $this->template;
+  }
+
+  public function follow($user_id) 
+  {
+    if(!$this->user) {
+      Router::redirect("/users/login");
+      return;
+    }
+    $this->userObj->follow($user_id);
   }
 
 } # end of the class

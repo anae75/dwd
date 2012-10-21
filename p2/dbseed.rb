@@ -66,11 +66,45 @@ SAYINGS = [
   "The homework ate my cat",
   "spaghetti!!!",
   "The dead are walking..."
+
+  "Mother said, straight ahead,",
+  "Not to delay, or be mislead.",
+  "I should have heeded her advice.",
+  "But he seemed so nice.",
+  "And he showed me things, many beautiful things,",
+  "That I hadnt thought to explore.",
+  "They were off my path, so I never had dared.",
+  "I had been so careful, I never had cared.",
+  "And he made me feel excited..",
+  "Well, excited and scared.",
+  "When he said, Come in, with that sickening grin,",
+  "How could I know what was in store?",
+  "Once his teeth were bared, though, I really got scared.",
+  "Well, excited and scared..",
+  "But he drew me close, and he swallowed me down,",
+  "Down a dark, slimy path, where lie secrets that I never want to know,",
+  "And when everything familiar seemed to disappear forever,",
+  "At the end of the path, was Granny once again,",
+  "So we wait in the dark, until someone sets us free,",
+  "And were brought into the light,",
+  "And were back at the start..",
+  "And I know things now, many valuable things,",
+  "That I hadnt known before.",
+  "Do not put your faith in a cape and a hood.",
+  "They will not protect you the way that they should.",
+  "And take extra care with strangers, even flowers have their dangers,",
+  "And though scary is exciting,",
+  "Nice is different than good.",
+  "Now I know, dont be scared.  Granny is right, just be prepared.",
+  "Isnt it nice to know a lot?",
+  "..And a little bit.. not."
 ]
 
 def random_text
   SAYINGS[rand(SAYINGS.length)]  
 end
 
-seed_user(6)
+#seed_user(6)
 #seed_posts_for_user(10, "ana", 1)
+
+(0..10).each { |i| seed_user(i) }
