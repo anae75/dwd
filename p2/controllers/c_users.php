@@ -104,23 +104,32 @@ class users_controller extends base_controller {
 
   }
 
-  public function profile() {
-    # If user is blank, they're not logged in, show message and don't do anything else
+  public function profile($uid) {
     if(!$this->user) {
-      echo "Members only. <a href='/users/login'>Login</a>";
-      
-      # Return will force this method to exit here so the rest of 
-      # the code won't be executed and the profile view won't be displayed.
-      return false;
+      Router::redirect("/users/login");
+      return;
     }
-    
+
+    $profiled_user = $this->user;
+    if($uid) {
+      if(MyUser::user_exists($uid)) {
+        $profiled_user = MyUser::public_user_info_for($uid);
+      } else {
+        # XXX - user doesn't exist 
+        echo "User not found";
+        return;
+      }
+    }
+
     # Setup view
     $this->template->content = View::instance('v_users_profile');
-    $this->template->title   = "Profile of".$this->user->first_name;
+    $this->template->title   = "Profile for ".$profiled_user->first_name;
 
-    $followers = MyUser::followers($this->user->user_id);
+    $this->template->set_global('profiled_user', $profiled_user);
+
+    $followers = MyUser::followers($profiled_user->user_id);
     $this->template->set_global('followers', $followers);
-    $following = MyUser::following($this->user->user_id);
+    $following = MyUser::following($profiled_user->user_id);
     $this->template->set_global('following', $following);
             
     # Render template

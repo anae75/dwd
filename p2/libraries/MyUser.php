@@ -87,8 +87,20 @@ class MyUser extends User {
   public static function user_exists($user_id) 
   {
     $sql = sprintf("select count(1) from users where user_id=%s", $user_id);
-    $result = DB::instance(DB_NAME)->select_field($sql);	
+    $result = DB::instance(DB_NAME)->select_field($sql);
     return($result > 0);
+  }
+
+  public static function full_name($user)
+  {
+    return $user->first_name . " " . $user->last_name;
+  }
+
+  public static function public_user_info_for($user_id)
+  {
+    $sql = sprintf("select user_id, first_name, last_name from users where user_id=%s", $user_id);
+    $result = DB::instance(DB_NAME)->select_row($sql, "object");
+    return($result);
   }
 
   # all followers of $user_id
