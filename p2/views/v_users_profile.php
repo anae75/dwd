@@ -15,10 +15,12 @@
 </ul>
 
 <? if(!$viewing_self) { ?>
-  <? if(array_key_exists($profiled_user->user_id, $user->following)) { ?>
-    You are already following this user. 
+  <? $puid = $profiled_user->user_id ?>
+  <? if(array_key_exists($puid, $user->following)) { ?>
+    <span id="label_unfollow_<?=$puid?>">You are already following this user.</a></span> 
+    <button id="button_unfollow_<?=$puid?>" onclick="unfollow(this, <?= $puid ?>);">unfollow</button>
   <? } else { ?>
-    You are not following this user. 
-    <button onclick="follow(<?= $profiled_user->user_id ?>);">follow</button>
+    <span id="label_follow_<?=$puid?>">You are not following this user.</a></span> 
+    <button id="button_follow_<?=$puid?>" onclick="follow(this, <?= $puid ?>);">follow</button>
   <? } ?>
 <? } ?>

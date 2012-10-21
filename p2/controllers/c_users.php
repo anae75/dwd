@@ -157,13 +157,22 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  private function error_response()
+  {
+      header('HTTP/1.1 500 Internal Server Error');
+  }
+
   public function follow($user_id) 
   {
     if(!$this->user) {
       Router::redirect("/users/login");
       return;
     }
-    $this->userObj->follow($user_id);
+    if($this->userObj->follow($user_id)) {
+      echo "success";
+    } else {
+      error_response();
+    }
   }
 
   public function unfollow($user_id) 
@@ -172,7 +181,11 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
-    $this->userObj->unfollow($user_id);
+    if(!$this->userObj->unfollow($user_id)) {
+      echo "success";
+    } else {
+      error_response();
+    }
   }
 
 } # end of the class

@@ -27,12 +27,19 @@ class MyUser extends User {
         "stream_id" => 0
       );
       $result = DB::instance(DB_NAME)->insert("users_followers", $attrs);
-      echo "alert('You are now following.')";
-    } else {
-      # XXX error - no such user
-      header('HTTP/1.1 500 Internal Server Error');
-      #echo "no such user " . $user_id;
-    }
+      return true;
+    } 
+    return false;  # no such user
+  }
+
+  public function unfollow($user_id)
+  {
+    if(MyUser::user_exists($user_id)) {
+      $sql = sprintf(" where user_id=%d and follower_id=%d", $user_id, $this->_user->user_id);
+      $result = DB::instance(DB_NAME)->delete("users_followers", $sql);
+      return true;
+    } 
+    return false;  # no such user
   }
 
   // accessors
