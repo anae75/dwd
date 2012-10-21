@@ -116,7 +116,6 @@ END_SQL;
       where uf.follower_id=$user_id
       order by users.last_name asc, users.first_name asc
 END_SQL;
-    echo $sql;
     $users = DB::instance(DB_NAME)->select_rows($sql, "object");
     return($users);
   }

@@ -14,6 +14,16 @@ TOKEN_SALT = '#%&^)JOIL;HFPIEFD8F!$#NP8FXVG'
 ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('.','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
 @connection = ActiveRecord::Base.connection
 
+@uids = [];
+
+def follow_previous_users(follower_id)
+  @uids.each do |user_id|
+    next if user_id == follower_id
+    sql = "insert into users_followers (user_id, follower_id) values (#{user_id}, #{follower_id})" 
+    @connection.execute(sql)
+  end
+end
+
 def seed_posts_for_user(user_id, name, num)
   (0..num).each do |i|
     t = Time.now.to_i - 60*60*24*i
@@ -35,19 +45,21 @@ def seed_user(i)
   insert into users (first_name, last_name, email, password, token, created, modified) 
     values ('#{first_name}', '#{last_name}', '#{email}', '#{password}', '#{token}', #{Time.now.to_i}, #{Time.now.to_i})
   END_SQL
-  puts sql
+  #puts sql
   user_id = nil
   begin
     insertresult = @connection.execute sql
     user = @connection.execute "select user_id from users where email='#{email}'"
     user_id = user.fetch_row.first
-    puts user_id
+    puts "#{email} #{user_id}"
+    @uids << user_id
   ensure
     insertresult.free if insertresult
     user.free if user
   end
 
   seed_posts_for_user(user_id, first_name, 10) if user_id
+  follow_previous_users(user_id);
 end
 
 SAYINGS = [
@@ -65,7 +77,7 @@ SAYINGS = [
   "blah blah blah blah blah blah blah",
   "The homework ate my cat",
   "spaghetti!!!",
-  "The dead are walking..."
+  "The dead are walking...",
 
   "Mother said, straight ahead,",
   "Not to delay, or be mislead.",
