@@ -10,6 +10,13 @@ class MyUser extends User {
     $this->errors = [];
   } 
 
+  public function __load_user() 
+  {
+    $data = parent::__load_user(); 
+    $data->following = $this->following_user_ids();
+    return $data;
+  }
+
   // follow/unfollow
   public function follow($user_id)
   {
@@ -130,6 +137,13 @@ END_SQL;
 END_SQL;
     $users = DB::instance(DB_NAME)->select_rows($sql, "object");
     return($users);
+  }
+
+  public function following_user_ids()
+  {
+    $sql = sprintf("select distinct user_id from users_followers where follower_id=%d", $this->_user->user_id);
+    $user_ids = DB::instance(DB_NAME)->select_kv($sql, "user_id", "user_id");
+    return($user_ids);
   }
 
 }

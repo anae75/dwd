@@ -111,7 +111,8 @@ class users_controller extends base_controller {
     }
 
     $profiled_user = $this->user;
-    if($uid) {
+    if($uid && $uid != $this->user->user_id) {
+      $viewing_self = false;
       if(MyUser::user_exists($uid)) {
         $profiled_user = MyUser::public_user_info_for($uid);
       } else {
@@ -119,6 +120,8 @@ class users_controller extends base_controller {
         echo "User not found";
         return;
       }
+    } else {
+      $viewing_self = true;
     }
 
     # Setup view
@@ -126,6 +129,7 @@ class users_controller extends base_controller {
     $this->template->title   = "Profile for ".$profiled_user->first_name;
 
     $this->template->set_global('profiled_user', $profiled_user);
+    $this->template->set_global('viewing_self', $viewing_self);
 
     $followers = MyUser::followers($profiled_user->user_id);
     $this->template->set_global('followers', $followers);

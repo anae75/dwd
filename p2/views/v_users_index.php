@@ -3,7 +3,8 @@
 <? } else { ?>
   <ul>
     <? foreach($users as $u ) { ?>
-      <li> <?= sprintf("%s %s", $u->first_name, $u->last_name) ?> 
+      <li> 
+          <a href="/users/profile/<?= $u->user_id ?>"><?= MyUser::full_name($u) ?></a>
           <button onclick="follow(<?= $u->user_id ?>);">follow</button>
       </li>
     <? } ?>
