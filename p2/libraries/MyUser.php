@@ -13,9 +13,7 @@ class MyUser extends User {
   // follow/unfollow
   public function follow($user_id)
   {
-    $sql = sprintf("select count(1) from users where user_id=%s", $user_id);
-    $result = DB::instance(DB_NAME)->select_field($sql);	
-    if($result > 0) {
+    if(MyUser::user_exists($user_id)) {
       $attrs = Array(
         "user_id" => $user_id,
         "follower_id" => $this->_user->user_id,
@@ -28,10 +26,6 @@ class MyUser extends User {
       header('HTTP/1.1 500 Internal Server Error');
       #echo "no such user " . $user_id;
     }
-  }
-
-  public function unfollow($user_id)
-  {
   }
 
   // accessors
@@ -88,6 +82,43 @@ class MyUser extends User {
     $sql = "select user_id, first_name, last_name from users order by last_name asc, first_name asc"; 
     $users = DB::instance(DB_NAME)->select_rows($sql, "object");
     return $users;
+  }
+
+  public static function user_exists($user_id) 
+  {
+    $sql = sprintf("select count(1) from users where user_id=%s", $user_id);
+    $result = DB::instance(DB_NAME)->select_field($sql);	
+    return($result > 0);
+  }
+
+  # all followers of $user_id
+  public static function followers($user_id)
+  {
+    # why this language can't deal with whitespace before the END_SQL is a mystery
+    $sql = <<<END_SQL
+      select distinct users.user_id, users.first_name, users.last_name 
+      from users_followers uf
+        inner join users on users.user_id=uf.follower_id
+      where uf.user_id=$user_id
+      order by users.last_name asc, users.first_name asc
+END_SQL;
+    $users = DB::instance(DB_NAME)->select_rows($sql, "object");
+    return($users);
+  }
+
+  # all users being followed by $user_id
+  public static function following($user_id)
+  {
+    $sql = <<<END_SQL
+      select distinct users.user_id, users.first_name, users.last_name 
+      from users_followers uf
+        inner join users on users.user_id=uf.user_id
+      where uf.follower_id=$user_id
+      order by users.last_name asc, users.first_name asc
+END_SQL;
+    echo $sql;
+    $users = DB::instance(DB_NAME)->select_rows($sql, "object");
+    return($users);
   }
 
 }

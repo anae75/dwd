@@ -117,6 +117,11 @@ class users_controller extends base_controller {
     # Setup view
     $this->template->content = View::instance('v_users_profile');
     $this->template->title   = "Profile of".$this->user->first_name;
+
+    $followers = MyUser::followers($this->user->user_id);
+    $this->template->set_global('followers', $followers);
+    $following = MyUser::following($this->user->user_id);
+    $this->template->set_global('following', $following);
             
     # Render template
     echo $this->template;
@@ -146,6 +151,15 @@ class users_controller extends base_controller {
       return;
     }
     $this->userObj->follow($user_id);
+  }
+
+  public function unfollow($user_id) 
+  {
+    if(!$this->user) {
+      Router::redirect("/users/login");
+      return;
+    }
+    $this->userObj->unfollow($user_id);
   }
 
 } # end of the class
