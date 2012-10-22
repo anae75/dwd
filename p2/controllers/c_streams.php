@@ -20,6 +20,20 @@ class streams_controller extends base_controller {
     echo $this->template;
   }
 
+  public function manage()
+  {
+    if(!$this->user) {
+      Router::redirect("/users/login");
+      return;
+    }
+    # render
+    $this->template->content = View::instance('v_streams_manage');
+    $this->template->title   = "Manage Streams";
+    $streams = $this->userObj->streams();
+    $this->template->set_global('streams', $streams);
+    echo $this->template;
+  }
+
   public function create() 
   {
     if(!$this->user) {
@@ -41,6 +55,19 @@ class streams_controller extends base_controller {
     $_POST['user_id']  = $this->user->user_id;
     $user_id = DB::instance(DB_NAME)->insert("streams", $_POST);
     Router::redirect("/streams");
+  }
+
+  public function move($user_id, $stream_id) 
+  {
+    if(!$this->user) {
+      header('HTTP/1.1 500 Internal Server Error');
+      return;
+    }
+    if(Stream::move_stream($this->user->user_id, $user_id, $stream_id)) {
+      echo "ok";
+    } else {
+      header('HTTP/1.1 500 Internal Server Error');
+    }
   }
 
 };
