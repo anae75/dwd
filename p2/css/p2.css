@@ -67,3 +67,32 @@ textarea {
   resize: none;
 }
 
+/* stream **************************************************/
+div.stream {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid black;
+  float: left;
+}
+
+.stream dt {
+  background-color: #f0be45;
+  margin: 0 2px;
+  font-size: smaller;
+}
+
+.stream dd {
+  background-color: #fef5ca;
+  margin: 0 2px;
+  padding: 0 2px 5px 2px;
+}
+
+.stream .title {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.stream .user {
+  font-weight: bold;
+}
+

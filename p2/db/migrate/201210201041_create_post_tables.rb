@@ -17,7 +17,7 @@ class CreatePostTables < ActiveRecord::Migration
     create_table :users_followers do |t|
       t.integer :user_id
       t.integer :follower_id
-      t.integer :stream_id
+      t.integer :stream_id,     :default => 0
     end
 
   end

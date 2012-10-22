@@ -17,7 +17,7 @@ class MyUser extends User {
     return $data;
   }
 
-  // follow/unfollow
+  # follow/unfollow
   public function follow($user_id)
   {
     if(MyUser::user_exists($user_id)) {
@@ -42,7 +42,9 @@ class MyUser extends User {
     return false;  # no such user
   }
 
-  // accessors
+  ############################################################
+  # associations
+
   public function posts()
   {
     $sql = sprintf("select * from posts where user_id=%s", $this->_user->user_id); 
@@ -50,7 +52,35 @@ class MyUser extends User {
     return $posts;
   }
 
-  // validation
+  # everyone the current user is following
+  public function following_user_ids()
+  {
+    $sql = sprintf("select distinct user_id from users_followers where follower_id=%d", $this->_user->user_id);
+    $user_ids = DB::instance(DB_NAME)->select_kv($sql, "user_id", "user_id");
+    return($user_ids);
+  }
+
+  # structured stream info
+  public function streams()
+  {
+    $streams = array();
+
+    # create the default stream
+    $s = new Stream(Stream::default_stream_id, $this->_user->user_id, "main stream", "My main stream." );
+    $streams[] = $s;
+
+    # get any additional streams
+    $sql = sprintf("select * from streams where user_id=%d", $this->_user->user_id);
+    $streaminfo = DB::instance(DB_NAME)->select_rows($sql, "object");
+    foreach($streaminfo as $info) {
+      $s = new Stream($info->id, $this->_user->user_id, $info->name, $info->description);
+      $streams[] = $s;
+    }
+    return $streams;
+  }
+
+  ############################################################
+  # validation
 
   private function validates_presence_of($data, $attr, $msg=null)
   {
@@ -90,7 +120,8 @@ class MyUser extends User {
     return empty($this->errors);
   }
 
-  // statics
+  ############################################################
+  # statics
   public static function users()
   {
     $sql = "select user_id, first_name, last_name from users order by last_name asc, first_name asc"; 
@@ -144,13 +175,6 @@ END_SQL;
 END_SQL;
     $users = DB::instance(DB_NAME)->select_rows($sql, "object");
     return($users);
-  }
-
-  public function following_user_ids()
-  {
-    $sql = sprintf("select distinct user_id from users_followers where follower_id=%d", $this->_user->user_id);
-    $user_ids = DB::instance(DB_NAME)->select_kv($sql, "user_id", "user_id");
-    return($user_ids);
   }
 
 }
