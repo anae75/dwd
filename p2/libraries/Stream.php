@@ -13,12 +13,12 @@ class Stream {
 
   public function __construct($stream_id, $user_id, $name, $description="")
   {
-    $this->errors = [];
+    $this->errors = Array();
     $this->id = $stream_id;
     $this->user_id = $user_id;
     $this->name = $name;
     $this->description = $description;
-    $this->following = [];
+    $this->following = Array();
     $this->load_stream();
   } 
 
@@ -36,12 +36,12 @@ END_SQL;
   # XXX support data range and limit
   public function posts()
   {
-    $uids = []; 
+    $uids = Array(); 
     foreach($this->following as $f) {
       $uids[] = $f->user_id;
     }
     if(empty($uids)) {
-      return [];
+      return Array();
     }
     $uids_sql = join(',', $uids);
     $sql = <<<END_SQL

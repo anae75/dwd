@@ -7,7 +7,7 @@ class MyUser extends User {
   public function __construct() 
   {
     parent::__construct();
-    $this->errors = [];
+    $this->errors = Array();
   } 
 
   public function __load_user() 
@@ -107,7 +107,7 @@ class MyUser extends User {
 
   public function valid($data) 
   {
-    $this->errors = [];
+    $this->errors = Array();
     $this->validates_length_of($data, "last_name", 1, 50);
     $this->validates_length_of($data, "first_name", 1, 50);
     $this->validates_length_of($data, "email", 8, 50);
