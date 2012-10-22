@@ -98,10 +98,12 @@ class users_controller extends base_controller {
     # Delete their token cookie - effectively logging them out
     setcookie("token", "", strtotime('-1 year'), '/');
 
-    echo "You have been logged out.";
-    echo "old token=" .$token. "<br>";
-    echo "new token=" .$new_token . "<br>";
+    #echo "You have been logged out.";
+    #echo "old token=" .$token. "<br>";
+    #echo "new token=" .$new_token . "<br>";
 
+    # back to welcome page
+    Router::redirect("/"); 
   }
 
   public function profile($uid) {
