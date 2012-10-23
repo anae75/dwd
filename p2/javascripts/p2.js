@@ -28,3 +28,21 @@
       }
     });
   }
+
+  function show_user_profile(user_id) {
+    $.ajax({
+      type: "get",
+      url: "/users/mini_profile/"+user_id, 
+      success: function(resp) {
+        $(resp).dialog({
+          modal: true,
+          resizable: false,
+          close: function() {
+            $("#mymodal").remove();
+          }
+        });
+      }
+    });
+  }
+
+

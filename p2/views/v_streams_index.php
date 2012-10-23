@@ -9,7 +9,9 @@ Streams go here.
         
       <? foreach($stream->posts() as $p) { ?>
         <dt> 
-          <span class=user><?= $p->first_name ?></span>
+          <span class=user>
+            <a href="javascript:void(0)" onclick="show_user_profile(<?=$p->user_id?>)"> <?= $p->first_name ?></a>
+          </span>
           at <?= date('D M d, Y, h:ia', $p->created) ?>
         </dt>
         <dd>

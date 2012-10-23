@@ -27,4 +27,9 @@ class test_controller extends base_controller {
 
   }
 
+  public function test_div()
+  {
+    echo '<div id="mymodal"> This is some text. <a href="/streams">this is a link</a> </div>';
+  }
+
 } # end class

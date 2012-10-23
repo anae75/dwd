@@ -155,3 +155,11 @@ div.stream {
   float: right;
 }
 
+/* jquery-ui ***********************************************/
+
+.ui-dialog {
+//  background-color: #C1C451;
+//  padding: 10px;
+}
+
+

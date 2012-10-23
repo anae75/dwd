@@ -142,6 +142,18 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  public function mini_profile($uid)
+  {
+    if(!$this->user || !MyUser::user_exists($uid)) {
+      error_response();
+      return;
+    }
+    $profiled_user = MyUser::public_user_info_for($uid);
+    $view = View::instance('v_users_mini_profile');
+    $view->set("profiled_user", $profiled_user);
+    echo $view->render();
+  }
+
   public function index() {
     if(!$this->user) {
       Router::redirect("/users/login");
