@@ -8,13 +8,13 @@ Streams go here.
       <dl>
         
       <? foreach($stream->posts() as $p) { ?>
-        <dt> 
+        <dt class="user_<?=$p->user_id ?>"> 
           <span class=user>
             <a href="javascript:void(0)" onclick="show_user_profile(<?=$p->user_id?>)"> <?= $p->first_name ?></a>
           </span>
           at <?= date('D M d, Y, h:ia', $p->created) ?>
         </dt>
-        <dd>
+        <dd class="user_<?=$p->user_id ?>">
           <?= $p->text ?>
         </dd>
       <? } ?>

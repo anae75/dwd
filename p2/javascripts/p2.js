@@ -21,7 +21,8 @@
       success: function(resp) {
         $("#button_unfollow_"+user_id)[0].disabled = "disabled";
         $("#label_unfollow_"+user_id).html("You are no longer following this user.");
-        alert("You are no longer following this user.");
+        $(".user_"+user_id).remove();
+        //alert("You are no longer following this user.");
       },
       error: function() { 
         alert("An error occurred while trying to unfollow this user."); 
