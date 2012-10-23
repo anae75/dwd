@@ -9,7 +9,9 @@
   <? foreach($streams as $stream) { ?>
     <div id=stream_<?=$stream->id?> stream_id=<?=$stream->id?> class=stream >
       <span class=title> <?= $stream->name ?> </span>
-      <button>Delete</button>
+      <? if($stream->id != Stream::default_stream_id) {?>
+        <button onclick="window.location.href='/streams/delete/<?=$stream->id?>'">Delete</button>
+      <? } ?>
       <ul>
         
       <? foreach($stream->following as $f) { ?>

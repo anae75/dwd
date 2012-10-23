@@ -70,4 +70,17 @@ class streams_controller extends base_controller {
     }
   }
 
+  public function delete($stream_id)
+  {
+    if(!$this->user) {
+      header('HTTP/1.1 500 Internal Server Error');
+      return;
+    }
+    if(Stream::delete_stream($this->user->user_id, $stream_id)) {
+      Router::redirect("/streams/manage");
+    } else {
+      header('HTTP/1.1 500 Internal Server Error');
+    }
+  }
+
 };

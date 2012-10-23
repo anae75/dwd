@@ -55,12 +55,31 @@ END_SQL;
     return $posts;
   }
 
+  # move a followed user from one stream to another
   static public function move_stream($follower_id, $user_id, $stream_id) 
   {
     $where_sql = sprintf(" where user_id=%d and follower_id=%d", $user_id, $follower_id);
     $data = Array("stream_id" => $stream_id);
     DB::instance(DB_NAME)->update("users_followers", $data, $where_sql);
     return true;
+  }
+
+  static public function delete_stream($user_id, $stream_id) 
+  {
+    if($stream_id == Stream::default_stream_id) {
+      return false;
+    }
+    if(MyUser::user_exists($user_id)) {
+      # move all users in this stream to the default stream
+      $where_sql = sprintf(" where follower_id=%d and stream_id=%d", $user_id, $stream_id);
+      $data = Array("stream_id" => Stream::default_stream_id);
+      DB::instance(DB_NAME)->update("users_followers", $data, $where_sql);
+      # delete the stream
+      $sql = sprintf(" where user_id=%d and id=%d", $user_id, $stream_id);
+      $result = DB::instance(DB_NAME)->delete("streams", $sql);
+      return true;
+    } 
+
   }
 
 } # end class
