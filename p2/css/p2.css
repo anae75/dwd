@@ -71,6 +71,30 @@ textarea {
   resize: none;
 }
 
+/* welcome *************************************************/
+
+div.centering {
+  width: 900px;
+  margin: 0px auto;
+}
+
+#welcome {
+  width: 550px;
+  height: 300px;
+  background-color: #fef5ca;
+  float: left;
+}
+
+#welcome .name {
+  font-size: 3.5em;
+}
+
+#recent_posts {
+  width: 300px;
+  float: right;
+}
+
+
 /* stream **************************************************/
 div.stream {
   width: 300px;

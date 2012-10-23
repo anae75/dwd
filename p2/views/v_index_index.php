@@ -1,5 +1,12 @@
 
-<h2>Recent posts:</h2>
+<div class=centering>
+
+<div id=welcome title="Welcome to MMMMicroblogger">
+Welcome to <br><span class=name>MMMMicroblogger</span>
+</div>
+
+<div id=recent_posts class=stream>
+<h2>Here's what people are saying:</h2>
 <dl>
 <? foreach($posts as $p) { ?>
   <dt> 
@@ -11,4 +18,4 @@
   </dd>
 <? } ?>
 </dl>
-
+</div>
