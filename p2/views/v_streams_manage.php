@@ -10,7 +10,7 @@
     <div id=stream_<?=$stream->id?> stream_id=<?=$stream->id?> class=stream >
       <span class=title> <?= $stream->name ?> </span>
       <? if($stream->id != Stream::default_stream_id) {?>
-        <button onclick="window.location.href='/streams/delete/<?=$stream->id?>'">Delete</button>
+        <button onclick="if(confirm('Are you sure you want to delete this stream?')) { window.location.href='/streams/delete/<?=$stream->id?>'}">Delete</button>
       <? } ?>
       <ul>
         

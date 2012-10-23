@@ -15,6 +15,9 @@
   }
 
   function unfollow(obj, user_id) {
+    if(!confirm("Are you sure you want to unfollow this user?")) {
+      return;
+    }
     $.ajax({
       type: "get",
       url: "/users/unfollow/" + user_id, 
