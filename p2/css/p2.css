@@ -97,6 +97,7 @@ textarea {
 div.centering {
   width: 900px;
   margin: 0px auto;
+  text-align: center;
 }
 
 #welcome {
@@ -108,6 +109,10 @@ div.centering {
 
 #welcome .name {
   font-size: 3.5em;
+}
+
+.logo {
+  min-height: 270px;
 }
 
 #recent_posts {
@@ -122,6 +127,7 @@ div.stream {
   padding: 10px;
   border: 1px solid black;
   float: left;
+  text-align: left;
 }
 
 .stream dt {

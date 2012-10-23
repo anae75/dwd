@@ -1,8 +1,13 @@
 
 <div class=centering>
 
+
 <div id=welcome title="Welcome to MMMMicroblogger">
-Welcome to <br><span class=name>MMMMicroblogger</span>
+  <div class=logo>
+  Welcome to <br><span class=name>MMMMicroblogger</span>
+  </div>
+  Get started!
+  <a href="/users/login">Log In</a> or <a href="/users/signup">Sign Up</a> </li>
 </div>
 
 <div id=recent_posts class=stream>
