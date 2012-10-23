@@ -52,6 +52,14 @@ class MyUser extends User {
     return $posts;
   }
 
+  # This should properly be a member method but I don't want the overhead of loading a new user.
+  public static function most_recent_post($uid)
+  {
+    $sql = sprintf("select * from posts where user_id=%s order by created desc limit 1", $uid); 
+    $post = DB::instance(DB_NAME)->select_row($sql, "object");
+    return $post;
+  }
+
   # everyone the current user is following
   public function following_user_ids()
   {
@@ -143,8 +151,19 @@ class MyUser extends User {
 
   public static function public_user_info_for($user_id)
   {
+    # profile information
     $sql = sprintf("select user_id, first_name, last_name from users where user_id=%s", $user_id);
     $result = DB::instance(DB_NAME)->select_row($sql, "object");
+
+    # most recent post
+    $sql = sprintf("select * from posts where user_id=%s order by created desc limit 1", $user_id); 
+    $post = DB::instance(DB_NAME)->select_row($sql, "object");
+    $result->most_recent_post = $post;
+
+    # number of followers
+    $sql = sprintf("select count(1) from users_followers where user_id=%s", $user_id);
+    $result->nfollowers = DB::instance(DB_NAME)->select_field($sql);
+
     return($result);
   }
 
