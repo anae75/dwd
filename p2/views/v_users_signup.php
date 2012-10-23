@@ -1,4 +1,7 @@
-<form method='POST' action='/users/p_signup'>
+<div class=centering>
+  <div class=form_content style="width: 300px">
+
+    <form method='POST' action='/users/p_signup'>
 
         First Name<br>
         <input type='text' name='first_name'> <?= @$errors["first_name"] ?>
@@ -18,5 +21,7 @@
         
         <button type='submit'>Submit</button>
 
-</form>
+    </form>
+  </div>
+</div>
 

@@ -100,6 +100,15 @@ div.centering {
   text-align: center;
 }
 
+div.form_content {
+  margin: 0px auto;
+  text-align: left;
+}
+
+.form_content input {
+  width: 95%;
+}
+
 #welcome {
   width: 550px;
   height: 300px;
@@ -122,12 +131,18 @@ div.centering {
 
 
 /* stream **************************************************/
+#streams_container {
+  white-space: nowrap;
+}
+
 div.stream {
   width: 300px;
   padding: 10px;
   border: 1px solid black;
-  float: left;
   text-align: left;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .stream dt {
