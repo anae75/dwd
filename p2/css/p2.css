@@ -52,12 +52,33 @@ body {
   float: right;
 }
 
-.menubar ul {
+.menubar ul, 
+.submenubar ul {
   list-style: none;
 }
 
-.menubar li {
+.menubar li,
+.submenubar li {
   display: inline ;
+}
+
+/* submenu */
+
+.submenubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #60360c;
+}
+
+.submenubar a:link,
+.submenubar a:visited
+{
+  color: #60360c;
+}
+
+.submenubar a:hover
+{
+  color: #d25831;
 }
 
 /* main content ********************************************/
@@ -128,5 +149,9 @@ div.stream {
   background-color: #fef5ca;
   padding: 5px;  
   margin: 2px 0;
+}
+
+.stream button {
+  float: right;
 }
 

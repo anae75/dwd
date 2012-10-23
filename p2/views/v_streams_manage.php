@@ -1,8 +1,15 @@
+<div class=submenubar>
+  <ul>
+    <li> <a href="/streams/create">Create a New Stream</a> </li> 
+  </ul>
+</div>
+
 <div id=streams_container>
 
   <? foreach($streams as $stream) { ?>
     <div id=stream_<?=$stream->id?> stream_id=<?=$stream->id?> class=stream >
       <span class=title> <?= $stream->name ?> </span>
+      <button>Delete</button>
       <ul>
         
       <? foreach($stream->following as $f) { ?>
