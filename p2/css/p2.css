@@ -138,7 +138,7 @@ div.form_content {
 div.stream {
   width: 300px;
   padding: 10px;
-  border: 1px solid black;
+  //border: 1px solid black;
   text-align: left;
   white-space: normal;
   display: inline-block;
@@ -178,9 +178,27 @@ div.stream {
 
 /* jquery-ui ***********************************************/
 
-.ui-dialog {
-//  background-color: #C1C451;
-//  padding: 10px;
+.miniprofile {
+  background: #c1c451;
+  font-size: .9em;
 }
+
+.miniprofile .ui-dialog-titlebar {
+  background: #82964e;
+}
+
+.miniprofile a:link,
+.miniprofile a:visited
+{
+  color: #60360c;
+  text-decoration: none;
+}
+
+.miniprofile a:hover
+{
+  color: #d25831;
+}
+
+
 
 

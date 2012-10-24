@@ -41,6 +41,7 @@
           modal: true,
           resizable: false,
           width: 400,
+          dialogClass: "miniprofile",
           close: function() {
             $("#mymodal").remove();
           }
