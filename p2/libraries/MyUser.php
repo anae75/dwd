@@ -14,6 +14,7 @@ class MyUser extends User {
   {
     $data = parent::__load_user(); 
     $data->following = $this->following_user_ids();
+    $data->nfollowers = count($data->following);
     return $data;
   }
 

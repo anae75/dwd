@@ -1,7 +1,11 @@
 <h1>This is the profile of <?= MyUser::full_name($profiled_user) ?></h1>
 
+<? if($viewing_self) { ?>
+  You have <?= $profiled_user->nfollowers ?> followers.
+<? } else { ?>
+  This user has <?= $profiled_user->nfollowers ?> followers.
+<? } ?>
 
-This user has <?= $profiled_user->nfollowers ?> followers.
 <br>
 
 <? if(!$viewing_self) { ?>
