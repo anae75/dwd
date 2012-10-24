@@ -6,6 +6,7 @@
       success: function(resp) {
         $("#button_follow_"+user_id)[0].disabled = "disabled";
         $("#label_follow_"+user_id).html("You are now following this user.");
+        $(".following_"+user_id).show();
         alert("You are now following this user.");
       },
       error: function() { 
@@ -24,6 +25,7 @@
       success: function(resp) {
         $("#button_unfollow_"+user_id)[0].disabled = "disabled";
         $("#label_unfollow_"+user_id).html("You are no longer following this user.");
+        $(".following_"+user_id).hide();
         $(".user_"+user_id).remove();
       },
       error: function() { 

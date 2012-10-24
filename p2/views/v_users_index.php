@@ -8,9 +8,8 @@
             <?= MyUser::full_name($u) ?></a>
           </a>
 
-          <? if(array_key_exists($u->user_id, $user->following)) { ?>
-            (You are following this user.)
-          <? } ?>
+          <? if(array_key_exists($u->user_id, $user->following)) { $display = "inline"; } else { $display="none"; } ?>
+          <span class="following_<?=$u->user_id?>" style="display: <?=$display?>">(You are following this user.)</span>
       </li>
     <? } ?>
   </ul>
