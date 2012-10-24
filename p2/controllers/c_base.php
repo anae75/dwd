@@ -12,6 +12,8 @@ class base_controller {
   -------------------------------------------------------------------------------------------------*/
   public function __construct() {
 
+    Flash::init();
+
     # Instantiate User class
     $this->userObj = new MyUser();
 

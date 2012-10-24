@@ -38,6 +38,7 @@ class users_controller extends base_controller {
     # Insert this user into the database
     $user_id = DB::instance(DB_NAME)->insert("users", $_POST);
 
+    Flash::set("Thanks for signing up.  Please log in now.");
     Router::redirect("/users/login");
   }        
 
@@ -102,11 +103,13 @@ class users_controller extends base_controller {
     #echo "new token=" .$new_token . "<br>";
 
     # back to welcome page
+    Flash::set("You have been logged out.  Please visit again!");
     Router::redirect("/"); 
   }
 
   public function profile($uid) {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }
@@ -155,6 +158,7 @@ class users_controller extends base_controller {
 
   public function index() {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }

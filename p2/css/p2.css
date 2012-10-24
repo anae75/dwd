@@ -92,6 +92,12 @@ textarea {
   resize: none;
 }
 
+.notice {
+  color: #F53D00;
+  text-align: center;
+  padding: 20px;
+}
+
 /* welcome *************************************************/
 
 div.centering {
@@ -184,7 +190,7 @@ div.stream {
 }
 
 .miniprofile .ui-dialog-titlebar {
-  background: #82964e;
+  background: #d35821;
 }
 
 .miniprofile a:link,

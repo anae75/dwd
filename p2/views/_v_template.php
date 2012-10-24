@@ -29,6 +29,12 @@
       </span>
     </div>
 
+    <? if(Flash::has_message()) { ?>
+    <div class="notice">
+      <?= Flash::get(); ?>
+    </div>
+    <? } ?>
+
     <div id=content_container class=maincontent>
 	<?=$content;?> 
     </div>

@@ -9,6 +9,7 @@ class streams_controller extends base_controller {
   public function index()
   {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }
@@ -23,6 +24,7 @@ class streams_controller extends base_controller {
   public function manage()
   {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }
@@ -37,6 +39,7 @@ class streams_controller extends base_controller {
   public function create() 
   {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }
@@ -49,6 +52,7 @@ class streams_controller extends base_controller {
   public function p_create() 
   {
     if(!$this->user) {
+      Flash::set("Please log in.");
       Router::redirect("/users/login");
       return;
     }

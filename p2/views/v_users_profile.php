@@ -1,4 +1,6 @@
-<h1>This is the profile of <?= MyUser::full_name($profiled_user) ?></h1>
+<h1>This is the profile of <?= MyUser::full_name($profiled_user) ?>
+<? if($viewing_self) { ?> <span class="notice">(That's you!)</span> <? } ?>
+</h1>
 
 <? if($viewing_self) { ?>
   You have <?= $profiled_user->nfollowers ?> followers.
