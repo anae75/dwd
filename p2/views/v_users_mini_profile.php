@@ -3,14 +3,16 @@
   <a href="/users/profile/<?=$profiled_user->user_id?>"><?= MyUser::full_name($profiled_user) ?></a>
   <br>
 
-  <? $p = $profiled_user->most_recent_post; ?>
   <dl>
-    <dt > 
-      Most recent post at <?= date('D M d, Y, h:ia', $p->created) ?>
-    </dt>
-    <dd >
-      <?= $p->text ?>
-    </dd>
+    <? $p = $profiled_user->most_recent_post; ?>
+    <? if($p) { ?> 
+      <dt > 
+        Most recent post at <?= date('D M d, Y, h:ia', $p->created) ?>
+      </dt>
+      <dd >
+        <?= $p->text ?>
+      </dd>
+    <? } ?> 
 
     <dt>
       This user has <?= $profiled_user->nfollowers ?> followers.
