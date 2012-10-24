@@ -71,12 +71,17 @@ body {
 }
 
 .submenubar a:link,
-.submenubar a:visited
+.submenubar a:visited,
+.user a:link,
+.user a:visited 
 {
   color: #60360c;
+  text-decoration: none;
 }
 
-.submenubar a:hover
+.miniprofile .user a:hover,
+.submenubar a:hover,
+.user a:hover
 {
   color: #d25831;
 }
@@ -168,9 +173,11 @@ div.stream {
   font-weight: bold;
 }
 
-.stream .user {
+.user {
   font-weight: bold;
+  font-size: 1.25em;
 }
+
 
 .stream li {
   background-color: #fef5ca;
@@ -200,11 +207,8 @@ div.stream {
   text-decoration: none;
 }
 
-.miniprofile a:hover
+.ui-widget-overlay
 {
-  color: #d25831;
+  background: #000;
 }
-
-
-
 
