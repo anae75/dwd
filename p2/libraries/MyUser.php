@@ -16,7 +16,8 @@ class MyUser extends User {
     if($data) {
       # only if authentication succeeded!
       $data->following = $this->following_user_ids();
-      $data->nfollowers = count($data->following);
+      $sql = sprintf("select count(1) from users_followers where user_id=%s", $data->user_id);
+      $data->nfollowers = DB::instance(DB_NAME)->select_field($sql);
     }
     return $data;
   }
