@@ -52,7 +52,7 @@ class MyUser extends User {
 
   public function posts()
   {
-    $sql = sprintf("select * from posts where user_id=%s", $this->_user->user_id); 
+    $sql = sprintf("select * from posts where user_id=%s order by created desc", $this->_user->user_id); 
     $posts = DB::instance(DB_NAME)->select_rows($sql, "object");
     return $posts;
   }

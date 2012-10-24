@@ -33,13 +33,12 @@ class users_controller extends base_controller {
     $_POST['token']    = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
 
     # Dump out the results of POST to see what the form submitted
-    print_r($_POST);
+    # print_r($_POST);
 
     # Insert this user into the database
     $user_id = DB::instance(DB_NAME)->insert("users", $_POST);
 
-    # For now, just confirm they've signed up - we can make this fancier later
-    echo "You're signed up";
+    Router::redirect("/users/login");
   }        
 
   public function login() {

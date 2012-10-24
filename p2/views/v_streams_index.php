@@ -1,4 +1,3 @@
-Streams go here.
 
 <div id=streams_container>
 
