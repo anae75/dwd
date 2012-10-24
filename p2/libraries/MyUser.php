@@ -13,8 +13,11 @@ class MyUser extends User {
   public function __load_user() 
   {
     $data = parent::__load_user(); 
-    $data->following = $this->following_user_ids();
-    $data->nfollowers = count($data->following);
+    if($data) {
+      # only if authentication succeeded!
+      $data->following = $this->following_user_ids();
+      $data->nfollowers = count($data->following);
+    }
     return $data;
   }
 
