@@ -120,17 +120,58 @@ class MyUser extends User {
 
   public function valid($data) 
   {
+    $is_new_user = !isset($this->_user->user_id);
     $this->errors = Array();
-    $this->validates_length_of($data, "last_name", 1, 50);
-    $this->validates_length_of($data, "first_name", 1, 50);
-    $this->validates_length_of($data, "email", 8, 50);
-    $this->validates_length_of($data, "password", 8, 50);
-
-    $sql = sprintf("select 1 from users where email='%s'", $data["email"]);
-    if( DB::instance(DB_NAME)->select_field($sql) ) {
-      $this->errors["email"] = "email address is taken";
+    if($is_new_user || isset($data["last_name"])) {
+      $this->validates_length_of($data, "last_name", 1, 50);
+    }
+    if($is_new_user || isset($data["first_name"])) {
+      $this->validates_length_of($data, "first_name", 1, 50);
+    }
+    if($is_new_user || isset($data["email"])) {
+      $this->validates_length_of($data, "email", 8, 50);
+      $sql = sprintf("select 1 from users where email='%s'", $data["email"]);
+      if( DB::instance(DB_NAME)->select_field($sql) ) {
+        $this->errors["email"] = "email address is taken";
+      }
+    }
+    if($is_new_user || isset($data["password"])) {
+      $this->validates_length_of($data, "password", 8, 50);
     }
     return empty($this->errors);
+  }
+
+  public function error_message()
+  {
+    $msg = "";
+    if(!empty($this->errors)) {
+      $msg = join(". ", $this->errors);
+    }
+    return $msg;
+  }
+
+  public function update($data)
+  {
+    # remove values that are not being updated
+    if(empty($data["password"])) {
+      unset($data["password"]);
+      unset($data["password_confirm"]);
+    }
+    $attrs = Array("first_name", "last_name", "email");
+    foreach($attrs as $attr) {
+      if($data[$attr] == $this->_user->$attr) {
+        unset($data[$attr]);
+      }
+    }
+    if(!$this->valid($data)) {
+      return false;
+    } 
+    if(isset($data["password"])) {
+      $data["password"] = sha1(PASSWORD_SALT.$_POST['password']);
+      unset($data["password_confirm"]); 
+    }
+    DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = " . $this->_user->user_id);
+    return true;
   }
 
   ############################################################

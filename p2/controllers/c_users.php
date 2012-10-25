@@ -18,9 +18,8 @@ class users_controller extends base_controller {
   public function p_signup() {
     $newuser = new MyUser();
     if(!$newuser->valid($_POST)) {
-      $this->template->set_global('errors', $newuser->errors);
-      # var_dump($_POST);
-      $this->signup();
+      Flash::set("Signup failed: " . $newuser->error_message());
+      Router::redirect("/users/signup");
       return;
     }
 
@@ -61,9 +60,13 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
-    Flash::set("Your settings have been saved.");
-    Router::redirect("/streams");
-    return;
+    if($this->userObj->update($_POST)) {
+      Flash::set("Your settings have been saved.");
+      Router::redirect("/streams");
+    } else {
+      Flash::set("Update failed: " . $this->userObj->error_message());
+      Router::redirect("/users/edit");
+    }
   }
 
   public function login() {
@@ -90,8 +93,8 @@ class users_controller extends base_controller {
                             
     # If we didn't get a token back, login failed
     if(!$token) {
-
       # Send them back to the login page
+      Flash::set("Your login information was not recognized.  Please try again.");
       Router::redirect("/users/login");
     } else {  # But if we did, login succeeded! 
       # Store this token in a cookie
