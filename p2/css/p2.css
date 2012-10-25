@@ -144,16 +144,33 @@ div.form_content {
 /* stream **************************************************/
 #streams_container {
   white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #888;
 }
 
 div.stream {
   width: 300px;
-  padding: 10px;
+  //padding: 10px;
   //border: 1px solid black;
   text-align: left;
   white-space: normal;
   display: inline-block;
   vertical-align: top;
+  border: 1px solid #82964e;
+  background-color: #82964e;
+}
+
+.stream .title {
+  background-color: #82964e;
+  color: #60360C;
+  font-size: .7em;
+}
+
+.stream_content {
+  margin-top: 2px;
+  height: 550px;
+  overflow-y: auto;
 }
 
 .stream dt {
@@ -171,6 +188,7 @@ div.stream {
 .stream .title {
   font-size: 1.25em;
   font-weight: bold;
+  height: 50px;
 }
 
 .stream .description{

@@ -8,23 +8,27 @@
 
   <? foreach($streams as $stream) { ?>
     <div id=stream_<?=$stream->id?> stream_id=<?=$stream->id?> class=stream >
-      <span class=title> <?= $stream->name ?> </span>
+      <div class=title title="<?= htmlspecialchars($stream->description) ?>"  > <?= htmlspecialchars($stream->name) ?> 
+
       <? if($stream->id != Stream::default_stream_id) {?>
         <button onclick="if(confirm('Are you sure you want to delete this stream?')) { window.location.href='/streams/delete/<?=$stream->id?>'}">Delete</button>
+        <br>
       <? } ?>
-      <br>
-      <span class=description><?= $stream->description ?></span>
-      <ul>
-        
-      <? foreach($stream->following as $f) { ?>
-        <li class="user user_<?=$f->user_id ?>" user_id=<?=$f->user_id ?>> 
-          <a href="javascript:void(0)" onclick="show_user_profile(<?=$f->user_id?>)">
-            <?= $f->first_name ?> <?= $f->last_name ?>
-          </a>
-        </li>
-      <? } ?>
+      </div >
 
-      </ul>
+      <div class=stream_content>
+        <ul>
+        <? foreach($stream->following as $f) { ?>
+          <li class="user user_<?=$f->user_id ?>" user_id=<?=$f->user_id ?>> 
+            <a href="javascript:void(0)" onclick="show_user_profile(<?=$f->user_id?>)">
+              <?= $f->first_name ?> <?= $f->last_name ?>
+            </a>
+          </li>
+        <? } ?>
+        </ul>
+
+      </div>
+
     </div>
   <? } ?>
 
