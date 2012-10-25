@@ -21,12 +21,12 @@
   <div id=outer_container>
 
     <div class=menubar>
-      <span class=leftmenu>
+      <div class=leftmenu>
         <?= View::instance('v_menu_bar'); ?>
-      </span>
-      <span class=rightmenu>
+      </div>
+      <div class=rightmenu>
         <?= View::instance('v_login_bar'); ?>
-      </span>
+      </div>
     </div>
 
     <? if(Flash::has_message()) { ?>
