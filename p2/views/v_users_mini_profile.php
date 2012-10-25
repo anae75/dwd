@@ -13,7 +13,7 @@
         Most recent post at <?= date('D M d, Y, h:ia', $p->created) ?>
       </dt>
       <dd >
-        <?= $p->text ?>
+        <?= htmlspecialchars($p->text) ?>
       </dd>
     <? } ?> 
   </dl>

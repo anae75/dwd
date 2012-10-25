@@ -15,11 +15,11 @@
 <dl>
 <? foreach($posts as $p) { ?>
   <dt> 
-    <span class=user><?= $p->first_name ?></span>
+    <span class=user><?= htmlspecialchars($p->first_name) ?></span>
     at <?= date('D M d, Y, h:ia', $p->created) ?>
   </dt>
   <dd>
-    <?= $p->text ?>
+    <?= htmlspecialchars($p->text) ?>
   </dd>
 <? } ?>
 </dl>

@@ -19,7 +19,7 @@
       </span>
     </dt>
     <dd class="user_<?=$user->user_id ?>">
-      <?= $p->text ?>
+      <?= htmlspecialchars($p->text) ?>
     </dd>
   <? } ?>
 

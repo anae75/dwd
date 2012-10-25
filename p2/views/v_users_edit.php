@@ -4,15 +4,15 @@
     <form id=users_edit_form method='POST' action='/users/p_edit'>
 
         First Name<br>
-        <input type='text' name='first_name' value='<?=$user->first_name?>'>
+        <input type='text' name='first_name' value="<?=htmlspecialchars($user->first_name)?>">
         <br><br>
         
         Last Name<br>
-        <input type='text' name='last_name' value='<?=$user->last_name?>'>
+        <input type='text' name='last_name' value="<?=htmlspecialchars($user->last_name)?>">
         <br><br>
 
         Email<br>
-        <input type='text' name='email' value='<?=$user->email?>'>
+        <input type='text' name='email' value="<?=htmlspecialchars($user->email)?>">
         <br><br>
 
         New Password<br>

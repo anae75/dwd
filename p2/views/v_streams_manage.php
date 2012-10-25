@@ -21,7 +21,7 @@
         <? foreach($stream->following as $f) { ?>
           <li class="user user_<?=$f->user_id ?>" user_id=<?=$f->user_id ?>> 
             <a href="javascript:void(0)" onclick="show_user_profile(<?=$f->user_id?>)">
-              <?= $f->first_name ?> <?= $f->last_name ?>
+              <?= MyUser::full_name($f) ?>
             </a>
           </li>
         <? } ?>

@@ -195,7 +195,7 @@ class MyUser extends User {
 
   public static function full_name($user)
   {
-    return $user->first_name . " " . $user->last_name;
+    return htmlspecialchars($user->first_name . " " . $user->last_name);
   }
 
   public static function public_user_info_for($user_id)

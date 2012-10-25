@@ -1,6 +1,6 @@
 <? if($user) { ?>
   <ul>
-    <li> Welcome, <?= $user->first_name ?> | </li>
+    <li> Welcome, <?= htmlspecialchars($user->first_name) ?> | </li>
     <li> <a href="/users/profile/<?= $user->user_id ?>">My Profile</a> | </li> 
     <li> <a href="/users/logout">Log Out</a> </li> 
   </ul>
