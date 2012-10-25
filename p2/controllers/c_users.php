@@ -42,6 +42,30 @@ class users_controller extends base_controller {
     Router::redirect("/users/login");
   }        
 
+  public function edit()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+    $this->template->content = View::instance('v_users_edit');
+    $this->template->title   = "Edit User Settings";
+    echo $this->template;
+  }
+
+  public function p_edit()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+    Flash::set("Your settings have been saved.");
+    Router::redirect("/streams");
+    return;
+  }
+
   public function login() {
     # Setup view
     $this->template->content = View::instance('v_users_login');

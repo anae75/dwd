@@ -1,3 +1,11 @@
+<? if($viewing_self) { ?>
+<div class=submenubar>
+  <ul>
+    <li> <a href="/users/edit">Edit Your Settings</a> </li> 
+  </ul>
+</div>
+<? } ?>
+
 <h1>This is the profile of <?= MyUser::full_name($profiled_user) ?>
 <? if($viewing_self) { ?> <span class="notice">(That's you!)</span> <? } ?>
 </h1>
