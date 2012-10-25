@@ -14,8 +14,9 @@
       <? } ?>
       <br>
       <span class=description><?= $stream->description ?></span>
+
+      <div class=stream_content>
       <ul>
-        
       <? foreach($stream->following as $f) { ?>
         <li class="user user_<?=$f->user_id ?>" user_id=<?=$f->user_id ?>> 
           <a href="javascript:void(0)" onclick="show_user_profile(<?=$f->user_id?>)">
@@ -23,8 +24,8 @@
           </a>
         </li>
       <? } ?>
-
       </ul>
+      </div>
     </div>
   <? } ?>
 
