@@ -12,6 +12,7 @@
 <div class=stream >
   <span class=title> Your posts: </span>
 
+  <dl>
   <? foreach($posts as $p ) { ?>
     <dt class="user_<?=$p->user_id ?>"> 
       <span class=user>
@@ -22,6 +23,7 @@
       <?= htmlspecialchars($p->text) ?>
     </dd>
   <? } ?>
+  </dl>
 
 </div>
 
