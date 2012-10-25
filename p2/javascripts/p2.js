@@ -55,6 +55,7 @@
   function show_help() {
     $("#context_help").dialog({
         modal: true,
+        dialogClass: "miniprofile",
         width: 600
     });
   }

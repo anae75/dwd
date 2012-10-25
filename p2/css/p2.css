@@ -219,10 +219,16 @@ div.stream {
 /* help ****************************************************/
 div.help {
   display: none;
+  font-size: .9em;
 }
 
 .help .title {
   font-weight: bold;
+  font-size: 1em;
+}
+
+.help dl {
+  margin: 15px 0;
 }
 
 .help dt {
