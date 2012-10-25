@@ -170,7 +170,10 @@ class MyUser extends User {
       $data["password"] = sha1(PASSWORD_SALT.$_POST['password']);
       unset($data["password_confirm"]); 
     }
-    DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = " . $this->_user->user_id);
+    # is there anything left to update?
+    if(!empty($data)) {
+      DB::instance(DB_NAME)->update("users", $data, "WHERE user_id = " . $this->_user->user_id);
+    }
     return true;
   }
 
