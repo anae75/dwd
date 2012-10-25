@@ -25,6 +25,17 @@
   </div>
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you sign up</span>
+  <dl>
+  <dt>Welcome!</dt>
+  <dd>Enter the required information and click "Submit" to get started.</dd>
+  <dt>Already have an account?</dt>
+  <dd>Click "Log In" on the top menu bar to go to your streams.</dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>
+
 <script>
   $(document).ready(function() {
     $("#users_signup_form").validate({

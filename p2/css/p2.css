@@ -216,3 +216,17 @@ div.stream {
   background: #000;
 }
 
+/* help ****************************************************/
+div.help {
+  display: none;
+}
+
+.help .title {
+  font-weight: bold;
+}
+
+.help dt {
+  font-weight: bold;
+  margin-top: 5px;
+}
+

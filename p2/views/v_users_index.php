@@ -15,3 +15,12 @@
   </ul>
 <? } ?>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can see all the users in the system</span>
+  <dl>
+  <dt> Browse </dt>
+  <dd> Click on the user name to see some quick info on the user including their latest post and how many followers they
+  have.  You can follow or unfollow them immediately or click on "Full Profile" to get more information. </dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>

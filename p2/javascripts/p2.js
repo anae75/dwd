@@ -52,4 +52,10 @@
     });
   }
 
+  function show_help() {
+    $("#context_help").dialog({
+        modal: true,
+        width: 600
+    });
+  }
 

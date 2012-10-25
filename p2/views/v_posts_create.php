@@ -9,6 +9,15 @@
   </div>
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can create a new post</span>
+  <dl>
+  <dt> Let your followers know what you're up to </dt>
+  <dd> Enter some short text and click "Submit" to tell the world. </dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>
+
 <script>
   $(document).ready(function() {
     $("#create_post_form").validate({

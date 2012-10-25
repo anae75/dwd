@@ -29,7 +29,17 @@
   </div>
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can change your own settings information</span>
+  <dl>
+  <dt> Need to change your name, email or password? </dt>
+  <dd> Fill in the new information and click "Submit" to apply your changes. </dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>
+
 <script>
+
   $(document).ready(function() {
     $("#users_edit_form").validate({
       rules: {

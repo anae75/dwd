@@ -25,3 +25,13 @@
 
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can see all your posts</span>
+  <dl>
+  <dd> Your posts are displayed from newest to oldest. </dd>
+  <dt> Haven't posted anything yet? </dt>
+  <dd> Click "Create a New Post" to get started! </dd>
+  </dl>
+
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>

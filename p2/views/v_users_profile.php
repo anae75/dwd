@@ -58,3 +58,14 @@
 
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can get more information on a user</span>
+  <dl>
+  <dt> Profile </dt>
+  <dd> You can see who the user is following and who's following them. 
+       You can also follow or unfollow the user right from their profile page. </dd>
+  <dt> Viewing your own profile? Need to change some settings?</dt>
+  <dd> Click "Edit Your Settings" to change your own settings such as your email or password. </dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>

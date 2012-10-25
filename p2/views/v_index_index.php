@@ -24,3 +24,14 @@
 <? } ?>
 </dl>
 </div>
+
+<div id=context_help class=help>
+  <span class="title">Welcome to MMMMicroblogger!</span>
+  <dl>
+  <dt>Why?</dt>
+  <dd>This is where you can keep up with all the latest news from friends and interesting people around the internet.</dd>
+  <dt>Get Started</dt>
+  <dd>If you have an account, click "Log In" to go to your home page.  Or "Sign Up" to create an account now.</dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>

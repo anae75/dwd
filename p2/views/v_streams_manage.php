@@ -30,6 +30,24 @@
 
 </div>
 
+<div id=context_help class=help>
+  <span class="title">This is where you can manage all your streams.</span>
+  <dl>
+  <dt>Getting Started</dt>
+  <dd>
+      By default, everyone you follow starts off in your main stream all the way at the left.
+      Drag and drop user names to move them from one stream to another.</dd>
+  <dt>Creating Streams</dt>
+  <dd>Click "Create a New Stream" and enter the name of your stream and an optional description.  
+      For example, you might want a stream for Family and another one for Work or Friends.
+  </dd>
+  <dt>Deleting streams</dt>
+  <dd>Click the "delete" button at the top of each stream.  Don't worry, all the users you've placed in that stream will
+  be moved back into the main stream --you won't lose them!</dd>
+  <dd>You cannot delete the main stream.</dd>
+  </dl>
+</div>
+
 <script>
   function move_to_stream(user, new_stream)
   {
