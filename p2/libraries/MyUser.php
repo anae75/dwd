@@ -16,7 +16,7 @@ class MyUser extends User {
     if($data) {
       # only if authentication succeeded!
       $data->following = $this->following_user_ids();
-      $sql = sprintf("select count(1) from users_followers where user_id=%s", $data->user_id);
+      $sql = sprintf("select count(1) from users_followers where user_id=%d", $data->user_id);
       $data->nfollowers = DB::instance(DB_NAME)->select_field($sql);
     }
     return $data;
@@ -52,7 +52,7 @@ class MyUser extends User {
 
   public function posts()
   {
-    $sql = sprintf("select * from posts where user_id=%s order by created desc", $this->_user->user_id); 
+    $sql = sprintf("select * from posts where user_id=%d order by created desc", $this->_user->user_id); 
     $posts = DB::instance(DB_NAME)->select_rows($sql, "object");
     return $posts;
   }
@@ -60,7 +60,7 @@ class MyUser extends User {
   # This should properly be a member method but I don't want the overhead of loading a new user.
   public static function most_recent_post($uid)
   {
-    $sql = sprintf("select * from posts where user_id=%s order by created desc limit 1", $uid); 
+    $sql = sprintf("select * from posts where user_id=%d order by created desc limit 1", $uid); 
     $post = DB::instance(DB_NAME)->select_row($sql, "object");
     return $post;
   }
@@ -120,6 +120,8 @@ class MyUser extends User {
 
   public function valid($data) 
   {
+    $data = DB::instance(DB_NAME)->sanitize($data);
+
     $is_new_user = !isset($this->_user->user_id);
     $this->errors = Array();
     if($is_new_user || isset($data["last_name"])) {
@@ -188,7 +190,7 @@ class MyUser extends User {
 
   public static function user_exists($user_id) 
   {
-    $sql = sprintf("select count(1) from users where user_id=%s", $user_id);
+    $sql = sprintf("select count(1) from users where user_id=%d", $user_id);
     $result = DB::instance(DB_NAME)->select_field($sql);
     return($result > 0);
   }
@@ -201,16 +203,16 @@ class MyUser extends User {
   public static function public_user_info_for($user_id)
   {
     # profile information
-    $sql = sprintf("select user_id, first_name, last_name from users where user_id=%s", $user_id);
+    $sql = sprintf("select user_id, first_name, last_name from users where user_id=%d", $user_id);
     $result = DB::instance(DB_NAME)->select_row($sql, "object");
 
     # most recent post
-    $sql = sprintf("select * from posts where user_id=%s order by created desc limit 1", $user_id); 
+    $sql = sprintf("select * from posts where user_id=%d order by created desc limit 1", $user_id); 
     $post = DB::instance(DB_NAME)->select_row($sql, "object");
     $result->most_recent_post = $post;
 
     # number of followers
-    $sql = sprintf("select count(1) from users_followers where user_id=%s", $user_id);
+    $sql = sprintf("select count(1) from users_followers where user_id=%d", $user_id);
     $result->nfollowers = DB::instance(DB_NAME)->select_field($sql);
 
     return($result);

@@ -81,6 +81,8 @@ class users_controller extends base_controller {
           
     # Hash submitted password so we can compare it against one in the db
     $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+
+    $_POST = DB::instance(DB_NAME)->sanitize($_POST);
     
     # Search the db for this email and password
     # Retrieve the token if it's available
