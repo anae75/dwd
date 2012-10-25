@@ -173,6 +173,10 @@ div.stream {
   font-weight: bold;
 }
 
+.stream .description{
+  font-size: .9em;
+}
+
 .user {
   font-weight: bold;
   font-size: 1.25em;

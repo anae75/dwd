@@ -79,7 +79,7 @@ class MyUser extends User {
     $streams = array();
 
     # create the default stream
-    $s = new Stream(Stream::default_stream_id, $this->_user->user_id, "main stream", "My main stream." );
+    $s = new Stream(Stream::default_stream_id, $this->_user->user_id, "Main", "My main stream" );
     $streams[] = $s;
 
     # get any additional streams

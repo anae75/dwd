@@ -12,6 +12,8 @@
       <? if($stream->id != Stream::default_stream_id) {?>
         <button onclick="if(confirm('Are you sure you want to delete this stream?')) { window.location.href='/streams/delete/<?=$stream->id?>'}">Delete</button>
       <? } ?>
+      <br>
+      <span class=description><?= $stream->description ?></span>
       <ul>
         
       <? foreach($stream->following as $f) { ?>
