@@ -1,9 +1,30 @@
+  // move a user from one stream to another
+  function move_to_stream(user, new_stream)
+  {
+    // ajax call to change the stream
+    user_id = user.attr("user_id");
+    new_stream_id = new_stream.attr("stream_id");
+    $.ajax({
+      type: "get",
+      url: "/streams/move/" + user_id + "/" + new_stream_id, 
+      success: function(resp) {
+        // move the html element
+        list = new_stream.find("ul");
+        user.appendTo(list);
+      },
+      error: function() { 
+        alert("An error occurred while trying to move this user to a different stream."); 
+      }
+    });
+  }
 
+  // follow a user
   function follow(obj, user_id) {
     $.ajax({
       type: "get",
       url: "/users/follow/" + user_id, 
       success: function(resp) {
+        // update the page
         $("#button_follow_"+user_id)[0].disabled = "disabled";
         $("#label_follow_"+user_id).html("You are now following this user.");
         $(".following_"+user_id).show();
@@ -15,6 +36,7 @@
     });
   }
 
+  // unfollow a user
   function unfollow(obj, user_id) {
     if(!confirm("Are you sure you want to unfollow this user?")) {
       return;
@@ -23,6 +45,7 @@
       type: "get",
       url: "/users/unfollow/" + user_id, 
       success: function(resp) {
+        // update the page
         $("#button_unfollow_"+user_id)[0].disabled = "disabled";
         $("#label_unfollow_"+user_id).html("You are no longer following this user.");
         $(".following_"+user_id).hide();
@@ -34,6 +57,7 @@
     });
   }
 
+  // show mini profile for user
   function show_user_profile(user_id) {
     $.ajax({
       type: "get",
@@ -52,6 +76,7 @@
     });
   }
 
+  // display page-specific help
   function show_help() {
     $("#context_help").dialog({
         modal: true,

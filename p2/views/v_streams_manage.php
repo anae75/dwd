@@ -53,26 +53,6 @@
 </div>
 
 <script>
-  function move_to_stream(user, new_stream)
-  {
-    // change the stream
-    user_id = user.attr("user_id");
-    new_stream_id = new_stream.attr("stream_id");
-    $.ajax({
-      type: "get",
-      url: "/streams/move/" + user_id + "/" + new_stream_id, 
-      success: function(resp) {
-        // move the html element
-        list = new_stream.find("ul");
-        foo = list;
-        user.appendTo(list);
-      },
-      error: function() { 
-        alert("An error occurred while trying to move this user to a different stream."); 
-      }
-    });
-  }
-
   function init()
   {
     $(".user").draggable({helper: "clone"});
