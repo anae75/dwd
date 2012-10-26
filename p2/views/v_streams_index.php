@@ -3,7 +3,7 @@
 
   <? foreach($streams as $stream) { ?>
     <div id=stream_<?=$stream->id?> class=stream >
-      <div class=title> <?= $stream->name ?> </div>
+      <div class=title> <?= htmlspecialchars($stream->name) ?> </div>
       <div class=stream_content>
         <dl>
         <? foreach($stream->posts() as $p) { ?>
