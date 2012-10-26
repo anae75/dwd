@@ -7,7 +7,7 @@
 <div id=streams_container>
 
   <? foreach($streams as $stream) { ?>
-    <div id=stream_<?=$stream->id?> stream_id=<?=$stream->id?> class=stream >
+    <div id=stream_<?=$stream->id?> data-streamid=<?=$stream->id?> class=stream >
       <div class=title title="<?= htmlspecialchars($stream->description) ?>"  > <?= htmlspecialchars($stream->name) ?> 
 
       <? if($stream->id != Stream::default_stream_id) {?>
@@ -19,7 +19,7 @@
       <div class=stream_content>
         <ul>
         <? foreach($stream->following as $f) { ?>
-          <li class="user user_<?=$f->user_id ?>" user_id=<?=$f->user_id ?>> 
+          <li class="user user_<?=$f->user_id ?>" data-userid=<?=$f->user_id ?>> 
             <a href="javascript:void(0)" onclick="show_user_profile(<?=$f->user_id?>)">
               <?= MyUser::full_name($f) ?>
             </a>

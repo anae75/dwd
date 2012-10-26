@@ -2,8 +2,8 @@
   function move_to_stream(user, new_stream)
   {
     // ajax call to change the stream
-    user_id = user.attr("user_id");
-    new_stream_id = new_stream.attr("stream_id");
+    user_id = user.attr("data-userid");
+    new_stream_id = new_stream.attr("data-streamid");
     $.ajax({
       type: "get",
       url: "/streams/move/" + user_id + "/" + new_stream_id, 
