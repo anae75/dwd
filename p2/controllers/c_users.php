@@ -138,7 +138,7 @@ class users_controller extends base_controller {
     Router::redirect("/"); 
   }
 
-  public function profile($uid) {
+  public function profile($uid=null) {
     if(!$this->user) {
       Flash::set("Please log in.");
       Router::redirect("/users/login");
