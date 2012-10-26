@@ -2,6 +2,7 @@
   <div class=form_content style="width: 425px">
     <h2>Create a New Stream</h2>
     <form id=create_stream_form method='POST' action='/streams/p_create'>
+      <?= Helper::csrf_token() ?>
       <label>Name:*</label>
       <input type"text" name="name" cols=50>
       <br><br>

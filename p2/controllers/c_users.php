@@ -60,6 +60,7 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
+    Helper::csrf_protect($_POST);
     if($this->userObj->update($_POST)) {
       Flash::set("Your settings have been saved.");
       Router::redirect("/streams");
@@ -70,6 +71,7 @@ class users_controller extends base_controller {
   }
 
   public function login() {
+    Helper::csrf_init();
     # Setup view
     $this->template->content = View::instance('v_users_login');
     $this->template->title   = "Login";

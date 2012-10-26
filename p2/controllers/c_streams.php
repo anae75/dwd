@@ -56,6 +56,7 @@ class streams_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
+    Helper::csrf_protect($_POST);
     $_POST['user_id']  = $this->user->user_id;
     $user_id = DB::instance(DB_NAME)->insert("streams", $_POST);
     Router::redirect("/streams/manage");
