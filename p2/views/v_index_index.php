@@ -1,8 +1,8 @@
 <div class=centering>
 
-  <div id=welcome title="Welcome to MMMMicroblogger">
+  <div id=welcome >
     <div class=logo>
-    Welcome to <br><span class=name>MMMMicroblogger</span>
+      <img src="/logo.png" title="Welcome to MMMMicroblogger">
     </div>
     Get started!
     <a href="/users/login">Log In</a> or <a href="/users/signup">Sign Up</a>

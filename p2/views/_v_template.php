@@ -24,6 +24,7 @@
       <div class=leftmenu>
         <?= View::instance('v_menu_bar'); ?>
       </div>
+        <a href="/"><img src="/logo-sm.png" title="Welcome to MMMMicroblogger"></a>
       <div class=rightmenu>
         <?= View::instance('v_login_bar'); ?>
       </div>

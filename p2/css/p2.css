@@ -16,10 +16,10 @@ body {
 }
 /* menu bar *************************************************/
 .menubar {
-  height: 1.5em;
-  padding: 10px 5px;
+  padding: 5px 10px 0;
   background-color: #2a3119;
   color: #c1c451;
+  text-align: center;
 }
 .menubar a {
   font-size: 1.1em;
@@ -31,9 +31,11 @@ body {
   color: #e2e3ac;
 }
 .leftmenu {
+  padding-top: 20px;
   float: left;
 }
 .rightmenu {
+  padding-top: 20px;
   float: right;
 }
 .menubar ul,
@@ -94,7 +96,6 @@ div.form_content {
 #welcome {
   width: 550px;
   height: 300px;
-  background-color: #82964e;
   float: left;
 }
 #welcome .name {
