@@ -26,11 +26,15 @@ class Helper
 
   public static function csrf_hidden_field()
   {
-    return sprintf("<input type='hidden' name='csrf_token' value='%s'>", $_SESSION["csrf_token"]);
+    return sprintf("<input type='hidden' name='csrf_token' value='%s'>", Helper::csrf_token());
   }
 
   public static function csrf_token()
-  {
+  { 
+    # the session may have expired
+    if(!isset($_SESSION["csrf_token"])) {
+      Helper::csrf_init();
+    }
     return $_SESSION["csrf_token"];
   }
 
