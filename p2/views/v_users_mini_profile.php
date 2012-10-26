@@ -1,6 +1,6 @@
 <div id="mymodal">
 
-<span class=user>
+<span class=title>
   <a href="/users/profile/<?=$profiled_user->user_id?>"><?= MyUser::full_name($profiled_user) ?></a>
 </span>
   <br>

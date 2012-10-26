@@ -12,6 +12,7 @@
 @dk_orange:     #F53D00;
 
 @blue:          #0a85ff;
+@steel:         #47516f;
 
 @body_bg:               @light_green;
 
@@ -19,7 +20,7 @@
 @menubar_font:          @light_green;
 @menubar_link_font:     @v_light_green;
 
-@link_font:             @forest;
+@link_font:             @steel;
 @hover_color:           @dk_orange;
 
 @notice_font:           @dk_orange;
@@ -36,7 +37,7 @@
 
 @dialog_title_bg:       @dk_orange; 
 @dialog_bg:             @light_green;
-@dialog_link_font:      @forest;
+@dialog_link_font:      @steel;
 
 /* reset ****************************************************/
 * {
@@ -198,12 +199,6 @@ div.stream {
   background-color: @stream_bg;
 }
 
-.stream .title {
-  background-color: @stream_title_bg;
-  color: @stream_title_font;
-  font-size: .7em;
-}
-
 .stream_content {
   margin-top: 2px;
   height: 550px;
@@ -223,6 +218,8 @@ div.stream {
 }
 
 .stream .title {
+  background-color: @stream_title_bg;
+  color: @stream_title_font;
   font-size: 1.25em;
   font-weight: bold;
   height: 50px;
@@ -256,6 +253,11 @@ dt .user {
 
 .miniprofile .ui-dialog-titlebar {
   background: @dialog_title_bg; 
+}
+
+.miniprofile .title {
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .miniprofile a:link,
