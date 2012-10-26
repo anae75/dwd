@@ -85,3 +85,10 @@
     });
   }
 
+  // csrf_token set in template
+  $(document).ready(function() {
+    $("body").bind("ajaxSend", function(elm, xhr, s){
+      xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+    });
+  });
+

@@ -2,7 +2,7 @@
   <div class=form_content style="width: 425px">
     <h2>Post Something!</h2>
     <form id=create_post_form method='POST' action='/posts/p_create'>
-            <?= Helper::csrf_token() ?>
+            <?= Helper::csrf_hidden_field() ?>
             <textarea form=create_post_form rows="4" cols="50" name="text" maxlength=160 ></textarea>
             <br><br>
             <button type='submit'>Submit</button>

@@ -2,7 +2,7 @@
   <div class=form_content style="width: 300px">
 
     <form id=users_edit_form method='POST' action='/users/p_edit'>
-        <?= Helper::csrf_token() ?>
+        <?= Helper::csrf_hidden_field() ?>
 
         First Name<br>
         <input type='text' name='first_name' value="<?=htmlspecialchars($user->first_name)?>">

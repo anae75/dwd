@@ -35,6 +35,10 @@ class base_controller {
     );
     $this->template->client_files = Utils::load_client_files($this->client_files); 
 
+    if(Utils::is_ajax()) {
+      Helper::csrf_protect_ajax();
+    }
+
   }
 
 } # eoc

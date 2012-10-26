@@ -13,6 +13,10 @@
 				
 	<!-- Controller Specific JS/CSS -->
 	<?php echo @$client_files; ?>
+
+        <script>
+          csrf_token='<?= Helper::csrf_token() ?>';
+        </script>
 	
 </head>
 

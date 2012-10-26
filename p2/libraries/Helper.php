@@ -17,9 +17,21 @@ class Helper
     return $data;
   }
 
-  public static function csrf_token()
+  public static function csrf_protect_ajax()
+  {
+    if(!isset($_SESSION["csrf_token"]) || !isset($_SERVER['HTTP_X_CSRF_TOKEN']) || ($_SESSION["csrf_token"] != $_SERVER['HTTP_X_CSRF_TOKEN']) ) {
+      die("csrf");
+    }
+  }
+
+  public static function csrf_hidden_field()
   {
     return sprintf("<input type='hidden' name='csrf_token' value='%s'>", $_SESSION["csrf_token"]);
+  }
+
+  public static function csrf_token()
+  {
+    return $_SESSION["csrf_token"];
   }
 
 }
