@@ -11,6 +11,7 @@ class Helper
   public static function csrf_protect(&$data)
   {
     if(!isset($_SESSION["csrf_token"]) || !isset($data["csrf_token"]) || ($_SESSION["csrf_token"] != $data["csrf_token"] )) {
+      Helper::send_error();
       die("csrf");
     }
     unset($data["csrf_token"]);
@@ -20,6 +21,7 @@ class Helper
   public static function csrf_protect_ajax()
   {
     if(!isset($_SESSION["csrf_token"]) || !isset($_SERVER['HTTP_X_CSRF_TOKEN']) || ($_SESSION["csrf_token"] != $_SERVER['HTTP_X_CSRF_TOKEN']) ) {
+      Helper::send_error();
       die("csrf");
     }
   }
@@ -36,6 +38,11 @@ class Helper
       Helper::csrf_init();
     }
     return $_SESSION["csrf_token"];
+  }
+
+  public static function send_error()
+  {
+      header('HTTP/1.1 500 Internal Server Error');
   }
 
 }

@@ -198,7 +198,7 @@ class users_controller extends base_controller {
   public function mini_profile($uid)
   {
     if(!$this->user || !MyUser::user_exists($uid)) {
-      error_response();
+      Helper::send_error();
       return;
     }
     $profiled_user = MyUser::public_user_info_for($uid);
@@ -225,11 +225,6 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
-  private function error_response()
-  {
-      header('HTTP/1.1 500 Internal Server Error');
-  }
-
   public function follow($user_id) 
   {
     if(!$this->user) {
@@ -239,7 +234,7 @@ class users_controller extends base_controller {
     if($this->userObj->follow($user_id)) {
       echo "success";
     } else {
-      error_response();
+      Helper::send_error();
     }
   }
 
@@ -252,7 +247,7 @@ class users_controller extends base_controller {
     if(!$this->userObj->unfollow($user_id)) {
       echo "success";
     } else {
-      error_response();
+      Helper::send_error();
     }
   }
 

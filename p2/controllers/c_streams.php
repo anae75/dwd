@@ -65,26 +65,26 @@ class streams_controller extends base_controller {
   public function move($user_id, $stream_id) 
   {
     if(!$this->user) {
-      header('HTTP/1.1 500 Internal Server Error');
+      Helper::send_error();
       return;
     }
     if(Stream::move_stream($this->user->user_id, $user_id, $stream_id)) {
       echo "ok";
     } else {
-      header('HTTP/1.1 500 Internal Server Error');
+      Helper::send_error();
     }
   }
 
   public function delete($stream_id)
   {
     if(!$this->user) {
-      header('HTTP/1.1 500 Internal Server Error');
+      Helper::send_error();
       return;
     }
     if(Stream::delete_stream($this->user->user_id, $stream_id)) {
       Router::redirect("/streams/manage");
     } else {
-      header('HTTP/1.1 500 Internal Server Error');
+      Helper::send_error();
     }
   }
 
