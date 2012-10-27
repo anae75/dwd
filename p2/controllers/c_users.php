@@ -244,7 +244,7 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
-    if(!$this->userObj->unfollow($user_id)) {
+    if($this->userObj->unfollow($user_id)) {
       echo "success";
     } else {
       Helper::send_error();
