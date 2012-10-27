@@ -11,7 +11,12 @@
       <div class=title title="<?= htmlspecialchars($stream->description) ?>"  > <?= htmlspecialchars($stream->name) ?> 
 
       <? if($stream->id != Stream::default_stream_id) {?>
-        <button onclick="if(confirm('Are you sure you want to delete this stream?')) { window.location.href='/streams/delete/<?=$stream->id?>'}">Delete</button>
+        <button onclick="if(confirm('Are you sure you want to delete this stream?')) { $.ajax({
+                              url: '/streams/delete/<?=$stream->id?>',
+                              type: 'post',
+                              success: function() { window.location.href='/streams/manage'; },
+                              error: function () { alert('An error occurred while trying to delete this stream.'); }
+                              })}">Delete</button>
         <br>
       <? } ?>
       </div >

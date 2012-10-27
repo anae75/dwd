@@ -82,7 +82,7 @@ class streams_controller extends base_controller {
       return;
     }
     if(Stream::delete_stream($this->user->user_id, $stream_id)) {
-      Router::redirect("/streams/manage");
+      echo "success";
     } else {
       Helper::send_error();
     }
