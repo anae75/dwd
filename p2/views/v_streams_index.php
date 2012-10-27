@@ -5,6 +5,9 @@
     <div id=stream_<?=$stream->id?> class=stream >
       <div class=title> <?= htmlspecialchars($stream->name) ?> </div>
       <div class=stream_content>
+        <? if(!$stream->posts()) { ?>
+          <div class="ifempty">This stream is empty.  Follow some users and add them to this stream.</div>
+        <? } ?>
         <dl>
         <? foreach($stream->posts() as $p) { ?>
           <dt class="user_<?=$p->user_id ?>"> 

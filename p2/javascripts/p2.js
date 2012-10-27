@@ -11,6 +11,7 @@
         // move the html element
         list = new_stream.find("ul");
         user.appendTo(list);
+        new_stream.find(".ifempty").hide();
       },
       error: function() { 
         alert("An error occurred while trying to move this user to a different stream."); 

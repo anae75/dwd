@@ -161,6 +161,10 @@ dt .user {
 .stream button {
   float: right;
 }
+.ifempty {
+  text-align: center;
+  padding: 10px;
+}
 /* jquery-ui ***********************************************/
 .miniprofile {
   background: #c1c451;

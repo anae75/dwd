@@ -17,6 +17,10 @@
       </div >
 
       <div class=stream_content>
+        <? if(!$stream->following) { ?>
+          <div class="ifempty">This stream is empty.  Follow some users and drag them to this stream.</div>
+        <? } ?>
+
         <ul>
         <? foreach($stream->following as $f) { ?>
           <li class="user user_<?=$f->user_id ?>" data-userid=<?=$f->user_id ?>> 
