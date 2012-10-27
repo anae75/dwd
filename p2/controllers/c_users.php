@@ -8,6 +8,11 @@ class users_controller extends base_controller {
 
   public function signup() 
   {
+    if($this->user) {
+      Flash::set("You are already logged in.");
+      Router::redirect("/streams");
+      return;
+    }
     # Setup view
     $this->template->content = View::instance('v_users_signup');
     $this->template->title   = "Signup";
@@ -16,6 +21,11 @@ class users_controller extends base_controller {
   }
 
   public function p_signup() {
+    if($this->user) {
+      Flash::set("You are already logged in.");
+      Router::redirect("/streams");
+      return;
+    }
     $newuser = new MyUser();
     if(!$newuser->valid($_POST)) {
       Flash::set("Signup failed: " . $newuser->error_message());
@@ -71,6 +81,11 @@ class users_controller extends base_controller {
   }
 
   public function login() {
+    if($this->user) {
+      Flash::set("You are already logged in.");
+      Router::redirect("/streams");
+      return;
+    }
     Helper::csrf_init();
     # Setup view
     $this->template->content = View::instance('v_users_login');
@@ -80,6 +95,11 @@ class users_controller extends base_controller {
   }
 
   public function p_login() {
+    if($this->user) {
+      Flash::set("You are already logged in.");
+      Router::redirect("/streams");
+      return;
+    }
           
     # Hash submitted password so we can compare it against one in the db
     $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
