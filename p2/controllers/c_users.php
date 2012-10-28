@@ -106,6 +106,7 @@ class users_controller extends base_controller {
       Router::redirect("/streams");
       return;
     }
+    Helper::reset_session();
     Helper::csrf_init();
     # Setup view
     $this->template->content = View::instance('v_users_login');
