@@ -6,6 +6,10 @@ class posts_controller extends base_controller {
     parent::__construct();
   } 
 
+  #
+  # Display the create posts page.
+  # side effects: none
+  #
   public function create()
   {
     if(!$this->user) {
@@ -21,6 +25,10 @@ class posts_controller extends base_controller {
 
   }
 
+  #
+  # Create a post
+  # XXX side effects: yes
+  #
   public function p_create() 
   {
     if(!$this->user) {
@@ -39,6 +47,10 @@ class posts_controller extends base_controller {
     Router::redirect("/posts");
   }
 
+  # 
+  # Display all posts of user
+  # side effects: none
+  # 
   public function index() 
   {
     if(!$this->user) {

@@ -10,6 +10,11 @@ class index_controller extends base_controller {
   Access via http://yourapp.com/index/index/
   -------------------------------------------------------------------------------------------------*/
 
+  #
+  # This is the main "welcome" page for the site.
+  #
+  # side effects: none
+  #
   public function index() {
     # logged in users go directly to their streams
     if($this->user) {

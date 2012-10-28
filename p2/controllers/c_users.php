@@ -6,6 +6,10 @@ class users_controller extends base_controller {
     parent::__construct();
   } 
 
+  # 
+  # Display signup screen
+  # side effects: no
+  # 
   public function signup() 
   {
     if($this->user) {
@@ -20,6 +24,10 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  #
+  # Sign up a user
+  # XXX side effects: yes (relying on DB::insert to sanitize input)
+  #
   public function p_signup() {
     if($this->user) {
       Flash::set("You are already logged in.");
@@ -51,6 +59,10 @@ class users_controller extends base_controller {
     Router::redirect("/users/login");
   }        
 
+  #
+  # Display edit screen for user
+  # side effects: no
+  #
   public function edit()
   {
     if(!$this->user) {
@@ -63,6 +75,10 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  #
+  # Update user input
+  # XXX side effects: yes
+  #
   public function p_edit()
   {
     if(!$this->user) {
@@ -80,6 +96,10 @@ class users_controller extends base_controller {
     }
   }
 
+  # 
+  # Display login screen
+  # side effects: no
+  # 
   public function login() {
     if($this->user) {
       Flash::set("You are already logged in.");
@@ -94,6 +114,10 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  # 
+  # Log in a user
+  # XXX side effects: yes
+  # 
   public function p_login() {
     if($this->user) {
       Flash::set("You are already logged in.");
@@ -129,6 +153,11 @@ class users_controller extends base_controller {
     }
   }
 
+  #
+  # Log out the current user
+  # XXX side effects: yes
+  # TODO --> csrf vulnerability here <--
+  #
   public function logout() {
     if(!$this->user) {
       Router::redirect("/users/login");
@@ -149,15 +178,15 @@ class users_controller extends base_controller {
     # Delete their token cookie - effectively logging them out
     setcookie("token", "", strtotime('-1 year'), '/');
 
-    #echo "You have been logged out.";
-    #echo "old token=" .$token. "<br>";
-    #echo "new token=" .$new_token . "<br>";
-
     # back to welcome page
     Flash::set("You have been logged out.  Please visit again!");
     Router::redirect("/"); 
   }
 
+  # 
+  # Show user info
+  # side effects: no
+  # 
   public function profile($uid=null) {
     if(!$this->user) {
       Flash::set("Please log in.");
@@ -171,7 +200,6 @@ class users_controller extends base_controller {
       if(MyUser::user_exists($uid)) {
         $profiled_user = MyUser::public_user_info_for($uid);
       } else {
-        # XXX - user doesn't exist 
         echo "User not found";
         return;
       }
@@ -195,6 +223,10 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  # 
+  # Show user info
+  # side effects: no
+  # 
   public function mini_profile($uid)
   {
     if(!$this->user || !MyUser::user_exists($uid)) {
@@ -207,6 +239,10 @@ class users_controller extends base_controller {
     echo $view->render();
   }
 
+  #
+  # Show all users
+  # side effects: no
+  #
   public function index() {
     if(!$this->user) {
       Flash::set("Please log in.");
@@ -225,13 +261,17 @@ class users_controller extends base_controller {
     echo $this->template;
   }
 
+  # 
+  # Follow a user
+  # XXX side effects: yes
+  # 
   public function follow($user_id) 
   {
     if(!$this->user) {
       Router::redirect("/users/login");
       return;
     }
-    # relying on Helper::csrf_protect_ajax
+    # MUST be ajax because relying on Helper::csrf_protect_ajax
     if(!Utils::is_ajax()) {
       Helper::send_error();
       return;
@@ -243,13 +283,17 @@ class users_controller extends base_controller {
     }
   }
 
+  # 
+  # Follow a user
+  # XXX side effects: yes
+  # 
   public function unfollow($user_id) 
   {
     if(!$this->user) {
       Router::redirect("/users/login");
       return;
     }
-    # relying on Helper::csrf_protect_ajax
+    # MUST be ajax because relying on Helper::csrf_protect_ajax
     if(!Utils::is_ajax()) {
       Helper::send_error();
       return;
