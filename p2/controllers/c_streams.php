@@ -68,6 +68,11 @@ class streams_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    # relying on Helper::csrf_protect_ajax
+    if(!Utils::is_ajax()) {
+      Helper::send_error();
+      return;
+    }
     if(Stream::move_stream($this->user->user_id, $user_id, $stream_id)) {
       echo "ok";
     } else {
@@ -78,6 +83,11 @@ class streams_controller extends base_controller {
   public function delete($stream_id)
   {
     if(!$this->user) {
+      Helper::send_error();
+      return;
+    }
+    # relying on Helper::csrf_protect_ajax
+    if(!Utils::is_ajax()) {
       Helper::send_error();
       return;
     }

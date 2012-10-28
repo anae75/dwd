@@ -231,6 +231,11 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
+    # relying on Helper::csrf_protect_ajax
+    if(!Utils::is_ajax()) {
+      Helper::send_error();
+      return;
+    }
     if($this->userObj->follow($user_id)) {
       echo "success";
     } else {
@@ -242,6 +247,11 @@ class users_controller extends base_controller {
   {
     if(!$this->user) {
       Router::redirect("/users/login");
+      return;
+    }
+    # relying on Helper::csrf_protect_ajax
+    if(!Utils::is_ajax()) {
+      Helper::send_error();
       return;
     }
     if($this->userObj->unfollow($user_id)) {
