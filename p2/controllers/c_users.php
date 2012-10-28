@@ -194,6 +194,7 @@ class users_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
+    $uid = DB::instance(DB_NAME)->sanitize($uid);
 
     $profiled_user = $this->user;
     if($uid && $uid != $this->user->user_id) {
@@ -234,6 +235,7 @@ class users_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    $uid = DB::instance(DB_NAME)->sanitize($uid);
     $profiled_user = MyUser::public_user_info_for($uid);
     $view = View::instance('v_users_mini_profile');
     $view->set("profiled_user", $profiled_user);
@@ -277,6 +279,7 @@ class users_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    $user_id = DB::instance(DB_NAME)->sanitize($user_id);
     if($this->userObj->follow($user_id)) {
       echo "success";
     } else {
@@ -299,6 +302,7 @@ class users_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    $user_id = DB::instance(DB_NAME)->sanitize($user_id);
     if($this->userObj->unfollow($user_id)) {
       echo "success";
     } else {

@@ -63,7 +63,7 @@ class streams_controller extends base_controller {
 
   #
   # Create a stream
-  # XXX side effects: yes
+  # XXX side effects: yes (relying on DB::insert to sanitize input)
   #
   public function p_create() 
   {
@@ -93,6 +93,8 @@ class streams_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    $user_id = DB::instance(DB_NAME)->sanitize($user_id);
+    $stream_id = DB::instance(DB_NAME)->sanitize($stream_id);
     if(Stream::move_stream($this->user->user_id, $user_id, $stream_id)) {
       echo "ok";
     } else {
@@ -115,6 +117,7 @@ class streams_controller extends base_controller {
       Helper::send_error();
       return;
     }
+    $stream_id = DB::instance(DB_NAME)->sanitize($stream_id);
     if(Stream::delete_stream($this->user->user_id, $stream_id)) {
       echo "success";
     } else {
