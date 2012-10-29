@@ -106,8 +106,6 @@ class users_controller extends base_controller {
       Router::redirect("/streams");
       return;
     }
-    Helper::reset_session();
-    Helper::csrf_init();
     # Setup view
     $this->template->content = View::instance('v_users_login');
     $this->template->title   = "Login";
@@ -125,6 +123,9 @@ class users_controller extends base_controller {
       Router::redirect("/streams");
       return;
     }
+
+    Helper::reset_session();
+    Helper::csrf_init();
           
     # Hash submitted password so we can compare it against one in the db
     $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
