@@ -1,7 +1,14 @@
 <?php
 
+#
+# Defines a stream -- a collection of users being followed.
+# belongs_to user
+# has_many following through users_followers
+#
+
 class Stream {
 
+  # no stream assigned
   const default_stream_id = 0;
 
   public $errors;
@@ -22,6 +29,7 @@ class Stream {
     $this->load_stream();
   } 
 
+  # load public information of users being followed in this stream
   private function load_stream()
   {
     $sql = <<<END_SQL
@@ -33,7 +41,8 @@ END_SQL;
     $this->following = DB::instance(DB_NAME)->select_rows($sql, "object");
   }
 
-  # XXX support data range and limit
+  # get all posts in this stream
+  # TODO: support data range and limit.  this should really be paginated or something
   public function posts()
   {
     $uids = Array(); 
@@ -64,6 +73,8 @@ END_SQL;
     return true;
   }
 
+  # delete a stream
+  # any users being followed in this stream get moved to the default stream
   static public function delete_stream($user_id, $stream_id) 
   {
     if($stream_id == Stream::default_stream_id) {
@@ -79,7 +90,7 @@ END_SQL;
       $result = DB::instance(DB_NAME)->delete("streams", $sql);
       return true;
     } 
-
+    return false;
   }
 
 } # end class
