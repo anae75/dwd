@@ -19,6 +19,11 @@
 
 </dl>
 
+<?= Time::time_ago(Time::now() -60) ?><br>
+<?= Time::display(Time::now() -60, null, "America/New_York") ?><br>
+
+<?= View::instance('v_test_fragment', Array("local" => "some value")) ?>
+
 <script>
   function call_echo_input(inputdata) {
     $.ajax({
