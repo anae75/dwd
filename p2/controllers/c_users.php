@@ -124,9 +124,6 @@ class users_controller extends base_controller {
       return;
     }
 
-    Helper::reset_session();
-    Helper::csrf_init();
-          
     # Hash submitted password so we can compare it against one in the db
     $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
@@ -147,6 +144,9 @@ class users_controller extends base_controller {
       Flash::set("Your login information was not recognized.  Please try again.");
       Router::redirect("/users/login");
     } else {  # But if we did, login succeeded! 
+      Helper::reset_session();
+      Helper::csrf_init();
+          
       # Store this token in a cookie
       @setcookie("token", $token, strtotime('+1 year'), '/');
 
