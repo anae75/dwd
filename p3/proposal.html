@@ -1,0 +1,30 @@
+<html>
+<body>
+
+  Proposal:<h1> A Total Control Lighting prototyping helper </h1>
+
+  <h2>What is Total Control Lighting?</h2>
+
+  <p>
+  It is a string of LEDs for the Arduino.  RGB color and brightness can be individually set for each LED.  To save on data
+  pins, the LEDs are wired in series and a chip attached to each LED forwards the color and brightness information to the
+  next LED and so on.  In this way one can have dozens of LEDs individually controlled using only 2 data pins.
+  </p>
+
+  <h2>Why do you need a helper?</h2>
+
+  <p>
+  TCL strings are fun, but it can be a headache figuring out the indexes of each LED for a complicated lighting pattern.
+  It's pretty easy if the LEDs are laid out neatly in a grid, but what if you want to sew LEDs on your T-shirt and display
+  an animated smiley face on your back as you're walking through the Yard?
+  </p>
+
+  <p>
+  My helper will display a canvas where the user can drag a string of LEDs to an arbitrary position (with lines drawn
+  between them to show the wiring) and then go in and change the colors of each LED.  There will be support for simple
+  animations by allowing the user to generate a series of frames.  When the user is done, the helper will output an 
+  array of values that can be cut and pasted into an Arduino sketch.
+  </p>
+
+</body>
+</html>
