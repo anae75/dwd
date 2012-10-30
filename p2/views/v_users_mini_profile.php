@@ -10,7 +10,7 @@
     <? $p = $profiled_user->most_recent_post; ?>
     <? if($p) { ?> 
       <dt > 
-        Most recent post at <?= date('D M d, Y, h:ia', $p->created) ?>
+        Most recent post <?= Helper::format_date($p->created) ?>
       </dt>
       <dd >
         <?= htmlspecialchars($p->text) ?>

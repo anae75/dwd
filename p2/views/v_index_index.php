@@ -14,7 +14,7 @@
   <? foreach($posts as $p) { ?>
     <dt> 
       <span class=user><?= htmlspecialchars($p->first_name) ?></span>
-      at <?= date('D M d, Y, h:ia', $p->created) ?>
+      <?= Helper::format_date($p->created) ?>
     </dt>
     <dd>
       <?= htmlspecialchars($p->text) ?>

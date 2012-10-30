@@ -16,7 +16,7 @@
   <? foreach($posts as $p ) { ?>
     <dt class="user_<?=$p->user_id ?>"> 
       <span class=user>
-        <?= date('D M d, Y, h:ia', $p->created) ?>
+        <?= Helper::format_date($p->created) ?>
       </span>
     </dt>
     <dd class="user_<?=$user->user_id ?>">

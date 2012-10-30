@@ -80,4 +80,16 @@ class Helper
 
   }
 
+  #
+  # consolidate date display
+  #
+  public static function format_date($t)
+  {
+    # if less than a day old print how long ago, otherwise print real date
+    if(Time::now() - $t < 60*60*24) {
+      return Time::time_ago($t);    
+    }
+    return Time::display($t, null, "America/New_York");    
+  }
+
 }

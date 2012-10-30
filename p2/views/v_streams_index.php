@@ -14,7 +14,7 @@
             <span class=user>
               <a href="javascript:void(0)" onclick="show_user_profile(<?=$p->user_id?>)"> <?= htmlspecialchars($p->first_name) ?></a>
             </span>
-            at <?= date('D M d, Y, h:ia', $p->created) ?>
+            <?= Helper::format_date($p->created) ?>
           </dt>
           <dd class="user_<?=$p->user_id ?>">
             <?= htmlspecialchars($p->text) ?>
