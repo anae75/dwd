@@ -159,7 +159,7 @@
     };
 
     this.initialize = 
-    function(n_leds)
+    function(n_leds, n_cols=10)
     {
       var top = 0, left = 0;
       var width = this.obj.width();
@@ -167,17 +167,22 @@
       // remove existing leds
       this.obj.find(".led").remove()
       this.leds = new Array();
-      
+
       // add leds
       direction = 1;
+      col = 0;
+      left = Math.floor((width - (n_cols*25))/2);
+      top = 25;
       for(i = 0; i < n_leds; i++) {
         this.leds.push(new led(this, i, top, left));
-        if(left+25*direction >= width || left+25*direction < 0) {
-          //left = 0;
+        newleft = left+25*direction;
+        newcol = col + direction;
+        if( newleft >= width || newleft < 0 || newcol < 0 || newcol >= n_cols ) {
           top += 25;
           direction = -1*direction;
         } else {
           left += 25*direction;
+          col += direction;
         }
       }
 
