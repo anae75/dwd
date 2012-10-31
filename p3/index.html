@@ -134,12 +134,20 @@
     {
       var nleds = parseInt($("#led_input").val());
       $foo = nleds;
+      var ncols = parseInt($("#ncols_input").val());
       if(isNaN(nleds) || nleds < 1) {
         alert("Please enter the number of LEDs.");
-      } else {
-        if(confirm("The diagram and all frames will be cleared.  Continue?")) {
-          $diagram.initialize(nleds);
-        }
+        return;
+      } 
+
+      # TODO handle too many columns
+      if(isNaN(ncols) || ncols < 1) {
+        alert("Please enter the number of columns.");
+        return;
+      } 
+
+      if(confirm("The diagram and all frames will be cleared.  Continue?")) {
+        $diagram.initialize(nleds, ncols);
       }
     }
 
@@ -164,6 +172,9 @@
     <div class="buttons" >
       <label for="led_input" class="frame_op">Number of LEDs:</label>
       <input class="frame_op" type="text" id="led_input" />
+      <label for="ncols_input" class="frame_op">Columns:</label>
+      <input class="frame_op" type="text" id="ncols_input" />
+
       <button class="frame_op" onclick='initialize_diagram();'>Reset</button>
       <button class="frameset_op" onclick='arrange_leds();'>Arrange LEDs</button>
     </div>
