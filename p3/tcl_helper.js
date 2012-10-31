@@ -169,13 +169,15 @@
       this.leds = new Array();
       
       // add leds
+      direction = 1;
       for(i = 0; i < n_leds; i++) {
         this.leds.push(new led(this, i, top, left));
-        if(left+55 >= width) {
-          left = 0;
-          top += 55;
+        if(left+25*direction >= width || left+25*direction < 0) {
+          //left = 0;
+          top += 25;
+          direction = -1*direction;
         } else {
-          left += 55;
+          left += 25*direction;
         }
       }
 
