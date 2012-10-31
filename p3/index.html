@@ -73,8 +73,8 @@
       var max_index = leds.length;
       var listener = function(event) { 
         var led_obj = $(leds[index]);
-        led_obj.css("left", (event.clientX -25)+"px");
-        led_obj.css("top", (event.clientY -25)+"px");
+        led_obj.css("left", (event.clientX -10)+"px");
+        led_obj.css("top", (event.clientY -10)+"px");
         led_obj.show();
         $diagram.draw();
         index += 1;

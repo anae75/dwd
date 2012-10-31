@@ -21,7 +21,7 @@
 // Led
 /*
     <div id="led1" class=led onclick="">
-      <canvas id="led1_canvas" height="50px" width="50px"> </canvas>
+      <canvas id="led1_canvas" height="20px" width="20px"> </canvas>
       <div class="label">1</div>
     </div>
 */
@@ -53,8 +53,8 @@
     this.obj.draggable(options);
 
     this.canvas = $('<canvas />').attr({
-      height: "50px",
-      width: "50px"
+      height: "20px",
+      width: "20px"
     }).appendTo(this.obj)[0];
 
     // draw the circle
@@ -63,7 +63,7 @@
     context.strokeStyle = "#555555";
     context.beginPath();
     //draw arc: arc(x, y, radius, startAngle, endAngle, anticlockwise)
-    context.arc(25, 25, 10, Math.PI*2, 0, true);
+    context.arc(10, 10, 10, Math.PI*2, 0, true);
     context.closePath();
     context.fill();
     context.stroke();
