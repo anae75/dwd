@@ -137,11 +137,11 @@
     {
       this.frames_target.find("li.frame").remove();
       this.frames = new Array();
-      this.append_frame();
+      this.append_frame(null);
     };
 
     this.append_frame =
-    function(append_after = null)
+    function(append_after)
     {
       this.frames.push(new frame(this, this.frames_target, this.frames.length+1, append_after));
       this.current_frame = this.frames.length - 1;
@@ -159,7 +159,7 @@
     };
 
     this.initialize = 
-    function(n_leds, n_cols=10)
+    function(n_leds, n_cols)
     {
       var top = 0, left = 0;
       var width = this.obj.width();
