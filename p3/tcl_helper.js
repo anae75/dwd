@@ -253,9 +253,10 @@
         for(j = 0; j < colors.length; j ++) {
           formatted_colors[j] = format_color(colors[j]);
         } 
-        formatted_frames[i] = "[ " + formatted_colors.join(",") + " ]";
+        formatted_frames[i] = "{ " + formatted_colors.join(",") + " }";
       } 
-      var output = "[ " + formatted_frames.join(" ,") + " ]";
+      var dec = "byte colors["+ frames.length +"]["+ colors.length +"][3] = ";
+      var output = dec + "{ " + formatted_frames.join(" ,\n") + " };";
       return output;
     };
 
@@ -265,7 +266,7 @@
   {
     var c = hexToRgb(color);
     $foo = color;
-    return "[" + c.r + ", " + c.g + ", " + c.b + "]";
+    return "{" + c.r + ", " + c.g + ", " + c.b + "}";
   }
 
   //------------------------------
