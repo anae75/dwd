@@ -32,7 +32,7 @@
       var colors = [ "#000000", "#ffffff", 
         "#ff0000", "#bf00bf",
         "#0000ff", "#007fff",
-        "#ffff00", "#ff7f00", "#bfbf00",
+        "#ffff00", "#ff7f00", 
         "#00ff00", "#2a562a" ];
       for(var i = 0; i < colors.length; i++) {
         add_palette_pot("#palette1 ul", i, colors[i]);
@@ -135,14 +135,14 @@
       var nleds = parseInt($("#led_input").val());
       $foo = nleds;
       var ncols = parseInt($("#ncols_input").val());
-      if(isNaN(nleds) || nleds < 1) {
-        alert("Please enter the number of LEDs.");
+      if(isNaN(nleds) || nleds < 1 || nleds > 100) {
+        alert("Please enter a number of LEDs between 1 and 100.");
         return;
       } 
 
       // TODO handle too many columns
-      if(isNaN(ncols) || ncols < 1) {
-        alert("Please enter the number of columns.");
+      if(isNaN(ncols) || ncols < 1 || ncols > 20) {
+        alert("Please enter a number of columns between 1 and 20.");
         return;
       } 
 
@@ -157,66 +157,89 @@
 <body>
 
 <div id="wrapper">
-  <div>
-    <p>Some stuff at the top.</p>
-    <p>Some stuff at the top.</p>
-    <p>Some stuff at the top.</p>
+  <div id="banner">
+    <h1> Total Control Lighting Helper </h1>
   </div>
 
-  <div id="palette1" class="palette">
-    <ul> </ul>
-  </div>
-
-  <div class="diagram_holder">
-
+  <table>
+  <tr>
+    <td>
+    </td>
+    <td>
     <div class="buttons" >
-      <label for="led_input" class="frame_op">Number of LEDs:</label>
-      <input class="frame_op" type="text" id="led_input" />
-      <label for="ncols_input" class="frame_op">Columns:</label>
-      <input class="frame_op" type="text" id="ncols_input" />
 
-      <button class="frame_op" onclick='initialize_diagram();'>Reset</button>
-      <button class="frameset_op" onclick='arrange_leds();'>Arrange LEDs</button>
-    </div>
-    
-    <div id="diagram1" class="diagram" width="600px" height="400px">
-      <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
-    </div>
+      <h2> Set up your diagram </h2>
+      Give me <input type="text" id="led_input" size=5 maxlength=5 value=10 /> LEDs arranged in 
+      <input type="text" id="ncols_input" size=5 maxlength=5 value=10 /> columns.
+      <button onclick='initialize_diagram();'>Initialize the Diagram</button>
+      <br>
 
-    <div class="buttons" >
-      <button class="frame_op" onclick='clear_current_frame();'>Clear Current Frame</button>
-      <button class="frame_op" onclick='$diagram.append_frame();'>New frame</button>
-      <button class="frame_op" onclick='$diagram.duplicate_frame();'>Duplicate frame</button>
-
-      <button class="frameset_op" onclick='export_colors();'>Export</button>
-      <button class="frameset_op" onclick='play(500);'>Play</button>
+      Arrange your LEDs by dragging them. Or click
+      <button onclick='arrange_leds();'>Arrange LEDs</button>
+      to click a freehand pattern on the canvas.
     </div>
 
-    <div id="frames1" class="frameset">
-      <ul> 
-      </ul>
-    </div>
+    </td>
+    <td>
+    </td>
+  </tr>
 
-    <div class="colordata" >
-      <div class="buttons" >
-        <button class="frameset_op" onclick='$("#output").focus().select();'>Select All</button>
+  <tr>
+    <td>
+      <div id="palette1" class="palette">
+        <span>
+        </span>
+        <ul> </ul>
       </div>
-      <textarea id="output" rows=10 readonly="readonly"></textarea>
-    </div>
+    </td>
+
+    <td>
+      <div class="diagram_holder">
+        
+        <div id="diagram1" class="diagram" width="600px" height="400px">
+          <canvas class="diagram1_canvas" width="600px" height="400px"></canvas>
+        </div>
+
+        <div class="buttons" >
+          <h2> Create a simple frame-by-frame animation </h2>
+          <button class="frame_op" onclick='clear_current_frame();'>Clear Current Frame</button>
+          <button class="frame_op" onclick='$diagram.append_frame();'>New frame</button>
+          <button class="frame_op" onclick='$diagram.duplicate_frame();'>Duplicate frame</button>
+
+          <button class="frame_op" onclick='play(500);'>Play</button>
+        </div>
+
+        <div id="frames1" class="frameset">
+          <ul> 
+          </ul>
+        </div>
+
+        <div class="colordata" >
+          <h2> Cut and past to your Arduino sketch </h2>
+          <div class="buttons" >
+            <button class="frame_op" onclick='export_colors();'>Generate Frame Data</button>
+            <button class="frame_op" onclick='$("#output").focus().select();'>Select All</button>
+          </div>
+          <textarea id="output" rows=10 readonly="readonly"></textarea>
+        </div>
+
+      </div>
+    </td>
+
+    <td>
+      <div id="notices" class="notice">
+        <div>
+        <span> 
+        </span>
+        </div>
+        <button id="notice_cancel" onclick=''>Cancel</button>
+        <button id="notice_done" onclick=''>Done</button>
+      </div>
+    </td>
+
+  </tr>
+  </table>
 
   </div>
-
-  <div id="notices" class="notice">
-    <div>
-    <span> 
-    </span>
-    </div>
-    <button id="notice_cancel" onclick=''>Cancel</button>
-    <button id="notice_done" onclick=''>Done</button>
-    
-  </div>
-
-</div>
-
 </body>
 </html>
