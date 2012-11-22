@@ -14,12 +14,13 @@
   }
 
   #wrapper {
-    width: 960px;
+    width: 980px;
     margin: 0px auto;
   }
 
   .diagram_holder {
     float: left;
+    width: 600px;
   }
 
   .diagram {
