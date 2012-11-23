@@ -90,6 +90,7 @@
     this.leds = new Array();
     this.frames = new Array();
     this.frames_target = $("#"+frameset_dom_id);
+    this.frame_counter = 0;
 
     this.canvas = this.obj.find("canvas")[0]; 
 
@@ -143,7 +144,8 @@
     this.append_frame =
     function(append_after)
     {
-      this.frames.push(new frame(this, this.frames_target, this.frames.length+1, append_after));
+      this.frame_counter += 1;
+      this.frames.push(new frame(this, this.frames_target, this.frame_counter, append_after));
       this.current_frame = this.frames.length - 1;
       this.frames[this.current_frame].display();
       this.update_selected(); 
@@ -156,6 +158,25 @@
       this.append_frame(this.frame().obj);
       this.frame().colors = colors;
       this.frame().display();
+    };
+
+    this.delete_frame =
+    function()
+    {
+      if(this.frames.length <= 1) {
+        alert("You cannot delete the only remaining frame.");
+        return;
+      }
+      // remove from the dom
+      var fid = this.frame().id;
+      $("[frame_id="+fid+"]").parent().remove()
+      // remove from the array of frames
+      this.frames.splice(this.current_frame, 1); 
+      // update the display
+      if(this.current_frame > 0) {
+        this.current_frame -= 1;
+      }
+      this.update_selected();
     };
 
     this.initialize = 
