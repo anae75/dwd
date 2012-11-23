@@ -138,6 +138,7 @@
     {
       this.frames_target.find("li.frame").remove();
       this.frames = new Array();
+      this.frame_counter = 0;
       this.append_frame(null);
     };
 
@@ -258,8 +259,19 @@
     this.ordered_frames =
     function ()
     {
-      return this.frames;
-      //$("div.frame").map(function() { return $(this).attr("frame_id"); } );
+      var frames = this.frames;
+      var ids = $("div.frame").map(function() { return $(this).attr("frame_id"); } );
+      var ordered = new Array();
+      var i, f;
+      for(f = 0; f < frames.length; f++) {
+        for(i =0; i < ids.length; i++) {
+          if(ids[i] == frames[f].id) {
+            ordered[i] = frames[f];
+            break;
+          }
+        }
+      }
+      return ordered;
     }
 
     this.export =
