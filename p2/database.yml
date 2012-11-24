@@ -3,9 +3,10 @@
 development:
   adapter: ruby_mysql 
   host: localhost
-  port: 8889
-  socket: /Applications/MAMP/tmp/mysql/mysql.sock
+  port: 3306
+  socket: /var/run/mysqld/mysqld.sock      
   database: p2
-  username: root
-  password: root
+  username: dwde75
+  password: dwde75
+
 
