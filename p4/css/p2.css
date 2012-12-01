@@ -1,0 +1,207 @@
+/* reset ****************************************************/
+* {
+  padding: 0;
+  margin: 0;
+}
+ul {
+  list-style: none;
+}
+body {
+  background-color: #c1c451;
+}
+#outer_container {
+  min-width: 950px;
+  margin: 0 auto;
+  background-color: #c1c451;
+}
+/* menu bar *************************************************/
+.menubar {
+  padding: 5px 10px 0;
+  background-color: #2a3119;
+  color: #c1c451;
+  text-align: center;
+  height: 50px;
+}
+.menubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #e2e3ac;
+}
+.menubar a:link,
+.menubar a:visited {
+  color: #e2e3ac;
+}
+.leftmenu {
+  padding-top: 20px;
+  float: left;
+}
+.rightmenu {
+  padding-top: 20px;
+  float: right;
+}
+.menubar ul,
+.submenubar ul {
+  list-style: none;
+}
+.menubar li,
+.submenubar li {
+  display: inline ;
+}
+/* submenu */
+.submenubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #c1c451;
+}
+a:link,
+a:visited,
+.submenubar a:link,
+.submenubar a:visited,
+.user a:link,
+.user a:visited {
+  color: #47516f;
+  text-decoration: none;
+}
+a:hover,
+.menubar a:hover,
+.submenubar a:hover,
+.user a:hover {
+  color: #f53d00;
+}
+/* main content ********************************************/
+.maincontent {
+  clear: both;
+  padding: 20px;
+}
+textarea {
+  resize: none;
+}
+.notice {
+  color: #f53d00;
+  text-align: center;
+  padding: 20px;
+}
+/* welcome *************************************************/
+div.centering {
+  width: 900px;
+  margin: 0px auto;
+  text-align: center;
+}
+div.form_content {
+  margin: 0px auto;
+  text-align: left;
+}
+.form_content input {
+  width: 95%;
+}
+#welcome {
+  width: 550px;
+  height: 300px;
+  float: left;
+}
+#welcome .name {
+  font-size: 3.5em;
+}
+.logo {
+  min-height: 270px;
+}
+#recent_posts {
+  width: 300px;
+  float: right;
+}
+/* stream **************************************************/
+#streams_container {
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #82964e;
+}
+div.stream {
+  width: 300px;
+  text-align: left;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #82964e;
+  background-color: #82964e;
+}
+.stream_content {
+  margin-top: 2px;
+  height: 550px;
+  overflow-y: auto;
+}
+.stream dt {
+  background-color: #f0be45;
+  margin: 0 2px;
+  font-size: smaller;
+}
+.stream dd {
+  background-color: #f5f4d9;
+  margin: 0 2px;
+  padding: 0 2px 5px 2px;
+}
+.stream .title {
+  background-color: #82964e;
+  color: #2a3119;
+  font-size: 1.25em;
+  font-weight: bold;
+  height: 50px;
+}
+.stream .description {
+  font-size: .9em;
+}
+dt .user {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.stream li {
+  background-color: #f5f4d9;
+  padding: 5px;
+  margin: 2px 0;
+}
+.stream button {
+  float: right;
+}
+.ifempty {
+  text-align: center;
+  padding: 10px;
+}
+/* jquery-ui ***********************************************/
+.miniprofile {
+  background: #c1c451;
+  font-size: .9em;
+}
+.miniprofile .ui-dialog-titlebar {
+  background: #f53d00;
+}
+.miniprofile .title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.miniprofile a:link,
+.miniprofile a:visited {
+  color: #47516f;
+  text-decoration: none;
+}
+.miniprofile a:hover {
+  color: #f53d00;
+}
+.ui-widget-overlay {
+  background: #000;
+}
+/* help ****************************************************/
+div.help {
+  display: none;
+  font-size: .9em;
+}
+.help .title {
+  font-weight: bold;
+  font-size: 1em;
+}
+.help dl {
+  margin: 15px 0;
+}
+.help dt {
+  font-weight: bold;
+  margin-top: 5px;
+}

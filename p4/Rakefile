@@ -1,0 +1,36 @@
+require "rubygems"
+require "bundler/setup"
+
+require 'active_record'
+require 'sqlite3'
+
+desc "Migrate the database through scripts in db/migrate."
+task :migrate do
+  ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('.','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
+  ActiveRecord::Migrator.migrate("db/migrate/")
+end
+
+# rake migrate_down VERSION=201210161939
+# rake migrate_down VERSION=0
+task :migrate_down do 
+  target_version = ENV["VERSION"]
+  puts "this is task migrate_down VERSION=#{target_version}"
+  die "no version given" if target_version.empty?
+  ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('.','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
+  ActiveRecord::Migrator.down("db/migrate/", target_version.to_i)
+end
+
+# rake foo VERSION=201210161939
+task :foo do 
+  target_version = ENV["VERSION"]
+  puts "this is task foo VERSION=#{target_version}"
+end
+
+task :clear_db do
+  ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('.','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
+  conn = ActiveRecord::Base.connection
+  conn.execute "delete from posts"
+  conn.execute "delete from streams"
+  conn.execute "delete from users_followers"
+  conn.execute "delete from users"
+end

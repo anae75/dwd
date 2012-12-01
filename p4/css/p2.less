@@ -1,0 +1,306 @@
+
+@forest:        #2A3119;
+@dark_green:    #82964e;
+@light_green:   #c1c451;
+@v_light_green: #E2E3AC;
+
+@brown:         #60360C;
+@cream:         #f5f4d9;
+
+@dk_yellow:     #f0be45;
+@pumpkin:       #d35821;
+@dk_orange:     #F53D00;
+
+@blue:          #0a85ff;
+@steel:         #47516f;
+
+@body_bg:               @light_green;
+
+@menubar_bg:            @forest;
+@menubar_font:          @light_green;
+@menubar_link_font:     @v_light_green;
+
+@link_font:             @steel;
+@hover_color:           @dk_orange;
+
+@notice_font:           @dk_orange;
+
+@stream_border:         #888;
+@stream_bg:             @dark_green;
+@stream_border:         @dark_green;
+@stream_title_bg:       @dark_green;
+@stream_title_font:     @forest;
+
+
+@post_title_bg:         @dk_yellow;
+@post_bg:               @cream;
+
+@dialog_title_bg:       @dk_orange; 
+@dialog_bg:             @light_green;
+@dialog_link_font:      @steel;
+
+/* reset ****************************************************/
+* {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  background-color: @body_bg;
+}
+
+#outer_container {
+  min-width: 950px;
+  margin: 0 auto;
+  background-color: @body_bg;
+}
+
+/* menu bar *************************************************/
+
+.menubar {
+  padding: 5px 10px 0;
+  background-color: @menubar_bg;
+  color: @menubar_font;
+  text-align: center;
+  height: 50px;
+}
+
+
+.menubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: @menubar_link_font; 
+}
+
+.menubar a:link,
+.menubar a:visited
+{
+  color: @menubar_link_font; 
+}
+
+.leftmenu {
+  padding-top: 20px;
+  float: left;
+}
+
+.rightmenu {
+  padding-top: 20px;
+  float: right;
+}
+
+.menubar ul, 
+.submenubar ul {
+  list-style: none;
+}
+
+.menubar li,
+.submenubar li {
+  display: inline ;
+}
+
+/* submenu */
+
+.submenubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: @menubar_font;
+}
+
+a:link,
+a:visited,
+.submenubar a:link,
+.submenubar a:visited,
+.user a:link,
+.user a:visited 
+{
+  color: @link_font;
+  text-decoration: none;
+}
+
+a:hover,
+.menubar a:hover,
+.submenubar a:hover,
+.user a:hover
+{
+  color: @hover_color; 
+}
+
+/* main content ********************************************/
+
+.maincontent {
+  clear: both;
+  padding: 20px;
+}
+
+textarea {
+  resize: none;
+}
+
+.notice {
+  color: @notice_font; 
+  text-align: center;
+  padding: 20px;
+}
+
+/* welcome *************************************************/
+
+div.centering {
+  width: 900px;
+  margin: 0px auto;
+  text-align: center;
+}
+
+div.form_content {
+  margin: 0px auto;
+  text-align: left;
+}
+
+.form_content input {
+  width: 95%;
+}
+
+#welcome {
+  width: 550px;
+  height: 300px;
+  float: left;
+}
+
+#welcome .name {
+  font-size: 3.5em;
+}
+
+.logo {
+  min-height: 270px;
+}
+
+#recent_posts {
+  width: 300px;
+  float: right;
+}
+
+
+/* stream **************************************************/
+#streams_container {
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid @stream_border;
+}
+
+div.stream {
+  width: 300px;
+  text-align: left;
+  white-space: normal;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid @stream_border;
+  background-color: @stream_bg;
+}
+
+.stream_content {
+  margin-top: 2px;
+  height: 550px;
+  overflow-y: auto;
+}
+
+.stream dt {
+  background-color: @post_title_bg;
+  margin: 0 2px;
+  font-size: smaller;
+}
+
+.stream dd {
+  background-color: @post_bg; 
+  margin: 0 2px;
+  padding: 0 2px 5px 2px;
+}
+
+.stream .title {
+  background-color: @stream_title_bg;
+  color: @stream_title_font;
+  font-size: 1.25em;
+  font-weight: bold;
+  height: 50px;
+}
+
+.stream .description{
+  font-size: .9em;
+}
+
+dt .user {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.stream li {
+  background-color: @post_bg;
+  padding: 5px;  
+  margin: 2px 0;
+}
+
+.stream button {
+  float: right;
+}
+
+.ifempty {
+  text-align: center;
+  padding: 10px;
+}
+
+/* jquery-ui ***********************************************/
+
+.miniprofile {
+  background: @dialog_bg;
+  font-size: .9em;
+}
+
+.miniprofile .ui-dialog-titlebar {
+  background: @dialog_title_bg; 
+}
+
+.miniprofile .title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.miniprofile a:link,
+.miniprofile a:visited
+{
+  color: @dialog_link_font;
+  text-decoration: none;
+}
+
+.miniprofile a:hover
+{
+  color: @hover_color;
+}
+
+.ui-widget-overlay
+{
+  background: #000;
+}
+
+/* help ****************************************************/
+div.help {
+  display: none;
+  font-size: .9em;
+}
+
+.help .title {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.help dl {
+  margin: 15px 0;
+}
+
+.help dt {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
