@@ -89,7 +89,7 @@ class users_controller extends base_controller {
     Helper::csrf_protect($_POST);
     if($this->userObj->update($_POST)) {
       Flash::set("Your settings have been saved.");
-      Router::redirect("/streams");
+      Router::redirect("/");
     } else {
       Flash::set("Update failed: " . $this->userObj->error_message());
       Router::redirect("/users/edit");

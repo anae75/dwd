@@ -91,7 +91,7 @@ div.form_content {
   margin: 0px auto;
   text-align: left;
 }
-.form_content input {
+.form_content input.text {
   width: 95%;
 }
 #welcome {

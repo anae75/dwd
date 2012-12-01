@@ -5,23 +5,33 @@
         <?= Helper::csrf_hidden_field() ?>
 
         First Name<br>
-        <input type='text' name='first_name' value="<?=htmlspecialchars($user->first_name)?>">
+        <input type='text' name='first_name' class="text" value="<?=htmlspecialchars($user->first_name)?>">
         <br><br>
         
         Last Name<br>
-        <input type='text' name='last_name' value="<?=htmlspecialchars($user->last_name)?>">
+        <input type='text' name='last_name' class="text" value="<?=htmlspecialchars($user->last_name)?>">
         <br><br>
 
         Email<br>
-        <input type='text' name='email' value="<?=htmlspecialchars($user->email)?>">
+        <input type='text' name='email' class="text" value="<?=htmlspecialchars($user->email)?>">
         <br><br>
 
         New Password<br>
-        <input type='password' id=password name='password'>
+        <input type='password' class="text" id=password name='password'>
         <br><br>
 
         Confirm New Password<br>
-        <input type='password' name='password_confirm'>
+        <input type='password' class="text" name='password_confirm'>
+        <br><br>
+
+        Publish Content <input type='checkbox' name='publish_content' <?=$user->publish_content ? "checked='yes'" : "" ?> >
+        <br>
+        (Checking this box will allow your characters to "visit" other users' stories.)
+        <br><br>
+
+        Use External Content <input type='checkbox' name='use_external_content' <?= $user->use_external_content ?  "checked='yes'" : "" ?> >
+        <br>
+        (Checking this box will allow other users' characters to visit your stories.)
         <br><br>
 
         <button type='submit'>Submit</button>

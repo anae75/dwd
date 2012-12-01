@@ -84,12 +84,21 @@ class MyUser extends User {
 
   public function update($data)
   {
+    # convert checkboxes from "on" to 0 or 1
+    $attrs = Array("publish_content", "use_external_content");
+    foreach($attrs as $attr) {
+      if($data[$attr] == "on") {
+        $data[$attr] = 1; 
+      } else {
+        $data[$attr] = 0; 
+      }
+    }
     # remove values that are not being updated
     if(empty($data["password"])) {
       unset($data["password"]);
       unset($data["password_confirm"]);
     }
-    $attrs = Array("first_name", "last_name", "email");
+    $attrs = Array("first_name", "last_name", "email", "publish_content", "use_external_content");
     foreach($attrs as $attr) {
       if($data[$attr] == $this->_user->$attr) {
         unset($data[$attr]);
