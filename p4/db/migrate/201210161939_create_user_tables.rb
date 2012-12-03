@@ -10,6 +10,8 @@ class CreateUserTables < ActiveRecord::Migration
       t.string :last_name, :null => false
       t.string :email, :null => false
 
+      t.boolean :superuser, :default => false
+
       # preferences
       t.boolean :publish_content, :default => true
       t.boolean :use_external_content, :default => true
