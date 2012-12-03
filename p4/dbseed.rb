@@ -149,6 +149,12 @@ def create_default_characters
                           :description => "",
                           :user_id => @user_id,
                           :filename => filename("char_03_big_backpack.png")
+
+  @susie, @susie_img = create_character :name => "Susie",
+                          :description => "Just Another T Rider",
+                          :user_id => @user_id,
+                          :filename => filename("char_04_susie.png")
+
 end
 
 def create_transit_police_scene
@@ -213,7 +219,7 @@ end # create_transit_police_scene
 
 def create_story
   sql = sql_for_insert("stories", :user_id => @user_id, 
-                                  :hero_id => @sob_story_guy,
+                                  :hero_id => @susie,
                                   :current_scene => 0,
                                   :companion_1_id => @sob_story_guy, 
                                   :companion_2_id => @backpack_guy, 
