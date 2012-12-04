@@ -220,6 +220,7 @@ end # create_transit_police_scene
 def create_story
   sql = sql_for_insert("stories", :user_id => @user_id, 
                                   :hero_id => @susie,
+                                  :completed => 0,
                                   :current_scene => 0,
                                   :companion_1_id => @sob_story_guy, 
                                   :companion_2_id => @backpack_guy, 
@@ -228,7 +229,7 @@ def create_story
   nrows = @connection.insert sql
   story_id = last_row("stories") 
 
-  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @transit_police_scene)
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @transit_police_scene, :seq => 0)
   nrows = @connection.insert sql
 
   story_id

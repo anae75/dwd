@@ -43,8 +43,9 @@ class AddCharacter < ActiveRecord::Migration
 
     create_table :stories do |t|
       t.references :user
+      t.integer :current_scene, :default => 0
+      t.boolean :completed, :default => false
       t.integer :hero_id
-      t.integer :current_scene
       t.integer :companion_1_id
       t.integer :companion_2_id
       t.integer :companion_3_id
@@ -54,6 +55,7 @@ class AddCharacter < ActiveRecord::Migration
     create_table :story_scenes do |t|
       t.references :story
       t.references :scene
+      t.integer    :seq
       t.timestamps
     end
 
