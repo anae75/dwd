@@ -217,6 +217,20 @@ def create_transit_police_scene
   scene_id
 end # create_transit_police_scene
 
+def create_penelope_scene
+  scene_id = create_scene :user_id => @user_id, :title => "Snakes on a Train"
+
+  # penelope
+  npc_id = create_npc :name => "Penelope", :user_id => @user_id
+  penelope_01 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("penelope_01.png")
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => penelope_01, :posx => 0, :posy => 0, :scale => 1
+
+  scene_id
+end
+
 def create_story
   sql = sql_for_insert("stories", :user_id => @user_id, 
                                   :hero_id => @susie,
@@ -231,6 +245,8 @@ def create_story
 
   sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @transit_police_scene, :seq => 0)
   nrows = @connection.insert sql
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @penelope_scene, :seq => 1)
+  nrows = @connection.insert sql
 
   story_id
 end
@@ -244,5 +260,6 @@ reset_db
 @user_id = create_superuser
 create_default_characters
 @transit_police_scene = create_transit_police_scene
+@penelope_scene = create_penelope_scene
 story_id = create_story
 
