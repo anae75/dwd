@@ -166,6 +166,12 @@ class stories_controller extends base_controller {
   {
     # TODO error checking!
 
+    # retrieve the currently playing story or create a new one
+    $story = Story::current_story_for($this->user);
+    if(!$story) {
+      $story = Story::create_for($this->user->user_id);
+    }
+
     # create a new character
     $opts = Array();
     $opts["user_id"] = $this->user->user_id;
@@ -181,6 +187,9 @@ class stories_controller extends base_controller {
     $img = $_POST['form_imagedata'];
     $img_id = UploadedImage::create($img, $opts);
 
+    $story->set_hero($char_id);
+
+    Router::redirect("/stories/next_scene");
   }
 
 } # end class
