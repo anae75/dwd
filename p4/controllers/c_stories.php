@@ -58,6 +58,9 @@ class stories_controller extends base_controller {
     }
 
     # unless hero? redirect_to character/new
+    if(!$story->has_hero()) {
+      Router::redirect("/stories/new_character");
+    }
 
     # unless companions? redirect_to story/new_companions
     if(!$story->has_companions()) {
@@ -83,7 +86,6 @@ class stories_controller extends base_controller {
     $this->template->content = View::instance('v_stories_next_scene');
     $this->template->title   = "The Story Continues";
 
-    $users = MyUser::users();
     $this->template->set_global('story', $story);
     $this->template->set_global('scene', $scene);
             
@@ -116,7 +118,6 @@ class stories_controller extends base_controller {
     $this->template->content = View::instance('v_stories_choose_companions');
     $this->template->title   = "Choose Your Companions";
 
-    $users = MyUser::users();
     $this->template->set_global('story', $story);
     $this->template->set_global('characters', $characters);
 
@@ -145,6 +146,20 @@ class stories_controller extends base_controller {
     $story->set_companions($ids);
 
     Router::redirect("/stories/next_scene");
+  }
+
+  public function new_character() 
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # Setup view
+    $this->template->content = View::instance('v_stories_new_character');
+    $this->template->title   = "Create Your Character";
+    echo $this->template;
   }
 
 } # end class
