@@ -162,4 +162,15 @@ class stories_controller extends base_controller {
     echo $this->template;
   }
 
+  public function p_new_character()
+  {
+        $img = $_POST['form_imagedata'];
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $file = "images/" . "foobar" . '.png';
+        $success = file_put_contents($file, $data);
+        echo $success;
+  }
+
 } # end class
