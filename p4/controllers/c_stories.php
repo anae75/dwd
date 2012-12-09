@@ -164,13 +164,23 @@ class stories_controller extends base_controller {
 
   public function p_new_character()
   {
-        $img = $_POST['form_imagedata'];
-        $img = str_replace('data:image/png;base64,', '', $img);
-        $img = str_replace(' ', '+', $img);
-        $data = base64_decode($img);
-        $file = "images/" . "foobar" . '.png';
-        $success = file_put_contents($file, $data);
-        echo $success;
+    # TODO error checking!
+
+    # create a new character
+    $opts = Array();
+    $opts["user_id"] = $this->user->user_id;
+    $opts["name"] = $_POST["name"];
+    $opts["description"] = $_POST["description"];
+    $opts["npc"] = 0;
+    $char_id = Character::create($opts);
+
+    # add image for the character
+    $opts = Array();
+    $opts["user_id"] = $this->user->user_id;
+    $opts["character_id"] = $char_id;
+    $img = $_POST['form_imagedata'];
+    $img_id = UploadedImage::create($img, $opts);
+
   }
 
 } # end class
