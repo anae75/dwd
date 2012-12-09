@@ -1,7 +1,7 @@
 
 The story has <?= $story->n_scenes() ?> scenes. <br>
 
-<h2> Current Scene: <?= $scene->title ?> </h2>
+<h2> Current Scene: <?= $scene->title() ?> </h2>
 <?= var_dump($scene); ?> <br>
 
 <h2> Current Story </h2>

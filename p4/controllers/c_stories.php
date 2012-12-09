@@ -58,7 +58,12 @@ class stories_controller extends base_controller {
     }
 
     # unless hero? redirect_to character/new
+
     # unless companions? redirect_to story/new_companions
+    if(!$story->has_companions()) {
+      Router::redirect("/stories/choose_companions");
+    }
+
     # if(scenes.blank?) {
     #   session[:scenes] = story.select_scenes()        # story model takes care of current_scene
     # }
@@ -70,7 +75,9 @@ class stories_controller extends base_controller {
 
     # display the next scene and advance the scene pointer
     # render :play_scene
-    $scene = $story->pop();
+    $opts = Array();
+    $opts["dont_advance"] = true;
+    $scene = $story->pop($opts);
 
     # Setup view
     $this->template->content = View::instance('v_stories_next_scene');
@@ -83,6 +90,61 @@ class stories_controller extends base_controller {
     # Render template
     echo $this->template;
 
+  }
+
+  public function choose_companions() 
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # retrieve the currently playing story or create a new one
+    $story = Story::current_story_for($this->user);
+    if(!$story) {
+      echo "creating new story";
+      $story = Story::create_for($this->user->user_id);
+    }
+
+    $opts["use_external_content"] = $this->user->use_external_content;
+    $opts["user_id"] = $this->user->user_id;
+    $opts["hero_id"] = $story->hero_id();
+    $characters = Story::possible_companions($opts);
+
+    # Setup view
+    $this->template->content = View::instance('v_stories_choose_companions');
+    $this->template->title   = "Choose Your Companions";
+
+    $users = MyUser::users();
+    $this->template->set_global('story', $story);
+    $this->template->set_global('characters', $characters);
+
+    # Render template
+    echo $this->template;
+  }
+
+  public function select_companions()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # retrieve the currently playing story or create a new one
+    $story = Story::current_story_for($this->user);
+    if(!$story) {
+      $story = Story::create_for($this->user->user_id);
+    }
+
+    $ids = Array();
+    for($i = 1; $i <= 3; $i++) {
+      $ids[] = $_POST["companion_" . $i . "_id"];
+    }
+    $story->set_companions($ids);
+
+    Router::redirect("/stories/next_scene");
   }
 
 } # end class

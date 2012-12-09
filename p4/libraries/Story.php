@@ -44,21 +44,32 @@ class Story {
   public function load_scenes()
   {
     $sql = sprintf("select * from scenes inner join story_scenes on scenes.id=story_scenes.scene_id where story_id=%d order by seq asc", $this->_story->id);
-    $this->_scenes = DB::instance(DB_NAME)->select_rows($sql, "object");
+    $rows = DB::instance(DB_NAME)->select_rows($sql, "object");
+    if(!$rows) {
+      return;
+    }
+    $this->_scenes = Array();
+    foreach($rows as $row) {
+      $scene = new Scene($row);
+      $this->_scenes[] = $scene;
+    }
   }
 
-  public function pop()
+  public function pop($opts)
   {
     if($this->finished()) {
       return null;
     }
     $scene = $this->_scenes[$this->_story->current_scene];
 
-    $this->_story->current_scene += 1;
-    $data = Array();
-    $data["current_scene"] = $this->_story->current_scene;
-    DB::instance(DB_NAME)->update("stories", $data, "WHERE id = " . $this->_story->id);
-    
+    # advance the scene pointer
+    if(!$opts["dont_advance"]) {
+      $this->_story->current_scene += 1;
+      $data = Array();
+      $data["current_scene"] = $this->_story->current_scene;
+      DB::instance(DB_NAME)->update("stories", $data, "WHERE id = " . $this->_story->id);
+    }
+
     return $scene;
   }
 
@@ -73,6 +84,29 @@ class Story {
     $data["completed"] = 1;
     DB::instance(DB_NAME)->update("stories", $data, "WHERE id = " . $this->_story->id);
     $this->_story->completed = 1;
+  }
+
+  public function has_companions()
+  {
+    $n = 0;
+    if($this->_story->companion_1_id) { $n++; }
+    if($this->_story->companion_2_id) { $n++; }
+    if($this->_story->companion_3_id) { $n++; }
+    return ($n == 3);
+  }
+
+  public function set_companions($ids)
+  {
+    $data = Array();
+    $data["companion_1_id"] = $this->_story->companion_1_id = $ids[0];
+    $data["companion_2_id"] = $this->_story->companion_2_id = $ids[1];
+    $data["companion_3_id"] = $this->_story->companion_3_id = $ids[2];
+    DB::instance(DB_NAME)->update("stories", $data, "WHERE id = " . $this->_story->id);
+  }
+
+  public function hero_id()
+  {
+    return $this->_story->hero_id;
   }
 
   ############################################################
@@ -130,15 +164,30 @@ class Story {
   public static function get_scenes($opts)
   {
     $sql = sprintf("select scenes.* from scenes inner join users on scenes.user_id=users.user_id ");
-    if($opts["use_external_content"]) {
-    } else { 
+    $sql .= sprintf(" where users.publish_content=1 ");
+    if(!$opts["use_external_content"]) {
       # use only default content or the user's own content
-      $sql .= sprintf(" where users.user_id=%d or users.superuser=1 ", $opts["user_id"]);
+      $sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
     }
     if(!isset($opts["max"])) {
       $opts["max"] = 3;
     }
     $sql .= sprintf(" order by rand() limit %d ", $opts["max"]); 
+    $data = DB::instance(DB_NAME)->select_rows($sql, "object");
+    return $data;
+  }
+
+  public static function possible_companions($opts) 
+  {
+    $sql = sprintf("select characters.*, images.filename from characters inner join users on characters.user_id=users.user_id and npc=0 inner join images on images.character_id=characters.id");
+    if(!$opts["use_external_content"]) {
+      # use only default content or the user's own content
+      $sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
+    }
+    $sql .= sprintf(" and users.publish_content=1 ");
+    if($opts["hero_id"]) {
+      $sql .= sprintf(" and not characters.id=%d ", $opts["hero_id"]);
+    }
     $data = DB::instance(DB_NAME)->select_rows($sql, "object");
     return $data;
   }
