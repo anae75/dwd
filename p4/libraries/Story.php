@@ -63,7 +63,7 @@ class Story {
     $scene = $this->_scenes[$this->_story->current_scene];
 
     # advance the scene pointer
-    if(!$opts["dont_advance"]) {
+    if(!array_key_exists("dont_advance", $opts) || !$opts["dont_advance"]) {
       $this->_story->current_scene += 1;
       $data = Array();
       $data["current_scene"] = $this->_story->current_scene;
