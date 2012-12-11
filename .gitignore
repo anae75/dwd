@@ -1,3 +1,6 @@
 test/config.php
 *.swp
 environment.php
+p4/database.yml
+p2/database.yml
+p2/database-prod.yml
