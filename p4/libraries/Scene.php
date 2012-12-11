@@ -74,9 +74,9 @@ class Scene {
       }
 
       $img = Array();
-      $img["posx"] = $pos->posx;
-      $img["posy"] = $pos->posy;
-      $img["scale"] = $pos->scale;
+      $img["posx"] = (int) $pos->posx;
+      $img["posy"] = (int) $pos->posy;
+      $img["scale"] = (int) $pos->scale;
       $img["image_url"] = $img_url;
       $data["images"][$character_id] = $img;
 

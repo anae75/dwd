@@ -31,7 +31,7 @@ function add_dialog_prompt(shot)
   var prompt = $("#dialog_prompt");
   var char_id = shot["prompt_dialog"];
   var left = canvas_pos.left + shot["images"][char_id]["posx"] + shot["images"][char_id]["image"].width*2/3;
-  var top = canvas_pos.top + shot["images"][char_id]["posy"] - shot["images"][char_id]["image"].height/2;
+  var top = canvas_pos.top + shot["images"][char_id]["posy"]; 
   $("#dialog_form #shot_id")[0].value = shot["shot_id"];
   $("#dialog_form #character_id")[0].value = char_id;
   prompt.css("display", "block");
@@ -134,7 +134,7 @@ function show_internal(shot, callback)
     add_drawing_prompt(shot);
   }
   if(callback && !wait_for_prompt) {
-    setTimeout(callback, 500);
+    setTimeout(callback, 1000);
   }
 }
 
@@ -157,9 +157,9 @@ function play_shots(shots)
 function show_dialog(image, text)
 {
   dialog = $("<div class='dialog bubble cleanup'>"+text+"</div>").appendTo($("body"));
-  var canvas_pos = $(".canvas_holder").position()
+  var canvas_pos = $(".canvas_holder").position();
   var left = canvas_pos.left + image["posx"] + image["image"].width*2/3;
-  var top = canvas_pos.top + image["posy"] - image["image"].height/2;
+  var top = canvas_pos.top + image["posy"];
   dialog.css("display", "block");
   dialog.css("position", "absolute");
   dialog.css("left", left+"px");
