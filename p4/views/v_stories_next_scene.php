@@ -3,6 +3,8 @@ The story has <?= $story->n_scenes() ?> scenes. <br>
 
 <h2> Current Scene: <?= $scene->title() ?> </h2>
 <?= var_dump($scene); ?> <br>
+<h3> shots </h3>
+<?= print_r($scene->export() ); ?> <br>
 
 <h2> Current Story </h2>
 <?= var_dump($story); ?> <br>
@@ -17,3 +19,7 @@ The story has <?= $story->n_scenes() ?> scenes. <br>
   </dl>
   Remember, you can always click "Need Help?" to get help on whatever page you're on.
 </div>
+
+<script>
+  var shots = <?= json_encode($scene->export()) ?>;
+</script>

@@ -12,6 +12,7 @@ class Story {
     # load scenes
     if($this->_story->id) {
       $this->load_scenes();
+      $this->load_hero();
     }
   } 
 
@@ -41,16 +42,22 @@ class Story {
   # Story setup methods
   ############################################################
 
+  public function load_hero() 
+  {
+    $sql = sprintf("select * from images where character_id=%d", $this->_story->hero_id);
+    $this->_story->hero_image = DB::instance(DB_NAME)->select_row($sql, "object");
+  }
+
   public function load_scenes()
   {
-    $sql = sprintf("select * from scenes inner join story_scenes on scenes.id=story_scenes.scene_id where story_id=%d order by seq asc", $this->_story->id);
+    $sql = sprintf("select scenes.* from scenes inner join story_scenes on scenes.id=story_scenes.scene_id where story_id=%d order by seq asc", $this->_story->id);
     $rows = DB::instance(DB_NAME)->select_rows($sql, "object");
     if(!$rows) {
       return;
     }
     $this->_scenes = Array();
     foreach($rows as $row) {
-      $scene = new Scene($row);
+      $scene = new Scene($row, $this);
       $this->_scenes[] = $scene;
     }
   }
@@ -107,6 +114,11 @@ class Story {
   public function hero_id()
   {
     return $this->_story->hero_id;
+  }
+
+  public function hero_image()
+  {
+    return $this->_story->hero_image;
   }
 
   ############################################################

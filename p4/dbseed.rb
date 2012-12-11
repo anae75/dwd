@@ -37,6 +37,8 @@ def sql_for_insert(table, opts)
   cols = ""
   vals = ""
   opts.each_pair do |k,v|
+    v = 1 if v.is_a?(TrueClass)
+    v = 0 if v.is_a?(FalseClass)
     cols += ", #{k}"
     vals += ", '#{v}'"
   end
