@@ -54,7 +54,6 @@ class stories_controller extends base_controller {
     $story = Story::current_story_for($this->user);
     if(!$story) {
       $story = Story::create_for($this->user->user_id);
-      echo "creating new story";
     }
 
     # unless hero? redirect_to character/new
