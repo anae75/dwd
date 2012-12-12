@@ -164,6 +164,11 @@ class stories_controller extends base_controller {
 
   public function p_new_character()
   {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
     # TODO error checking!
 
     # retrieve the currently playing story or create a new one
@@ -190,6 +195,25 @@ class stories_controller extends base_controller {
     $story->set_hero($char_id);
 
     Router::redirect("/stories/next_scene");
+  }
+
+  # XXX AJAX
+  public function add_dialog()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # retrieve the currently playing story or error out
+    $story = Story::current_story_for($this->user);
+    if(!$story) {
+      Helper::send_error();
+    }
+
+    #$story->add_response($_POST["shot_id"], $_POST["prompt_text"], $_POST["prompt_imagedata"]);
+    echo "success";
   }
 
 } # end class

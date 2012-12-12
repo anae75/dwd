@@ -16,7 +16,7 @@
     <button type=button id="clear_button" onclick="drawing.reset_canvas();">Clear</button>
     </div>
     
-    <form id=dialog_form data-remote=true action="add_dialog" method="post">
+    <form id=dialog_form data-remote=true action="add_dialog" method="post" >
       <input type="hidden" id="shot_id" name="shot_id">
       <input type="hidden" id="character_id" name="character_id">
       <input type="hidden" id="prompt_imagedata" name="prompt_imagedata">
@@ -74,7 +74,18 @@ The story has <?= $story->n_scenes() ?> scenes. <br>
       $("#prompt_imagedata").val(null);
     }
     $("#prompt_text").val($("#dialog_text").val());
-    $("#dialog_form").submit();
+
+    $.ajax({
+      type: "POST",
+      url: "/stories/add_dialog",
+      data: { shot_id: $("#shot_id").val(), 
+              prompt_text: $("#prompt_text").val(),
+              prompt_imagedata: $("#prompt_imagedata").val()
+              }
+    }).success(function( msg ) {
+      next_shot();
+    });
+
   }
 
 </script>

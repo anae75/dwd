@@ -47,6 +47,7 @@ class Scene {
       $responses = $this->get_responses($shot);
       foreach($responses as $r) {
         $data[] = $this->export_shot($shot, $r);
+        # TODO need a transition shot like "that didn't work", "no sorry", "try again!", etc.
       }
       $data[] = $this->export_shot($shot, null);
     }
