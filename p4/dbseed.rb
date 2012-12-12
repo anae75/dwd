@@ -190,7 +190,8 @@ def create_transit_police_scene
                      :dialog => "Bag check!"
 
   # prompt for input
-  shot_id = create_shot :scene_id => scene_id, :caption => "Do you have anything in your bag to distract the police?"
+  shot_id = create_shot :scene_id => scene_id, :text => "Do you have anything in your bag to distract the police?"
+  shot_id = create_shot :scene_id => scene_id
   line = create_position :shot_id => shot_id, :type => :hero, 
                      :posx => 200, :posy => 100, :scale => 1,
                      :prompt_dialog => true, :prompt_drawing => true

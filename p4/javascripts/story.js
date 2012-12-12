@@ -101,7 +101,7 @@ function show_internal(shot, callback)
   var canvas = $("#hero_canvas")[0];
   var context = canvas.getContext("2d");
 
-  var images = shot["images"]
+  var images = shot["images"];
   for(key in images) {
     var image = images[key]["image"];
     var id = images[key]["relative_to"];
@@ -116,6 +116,10 @@ function show_internal(shot, callback)
   }
 
   $("#caption").text(shot["caption"]);
+
+  if(shot["text"]) {
+    show_text(shot["text"]);
+  }
 
   var dialogs = shot["dialogs"];
   if(dialogs) {
@@ -160,6 +164,19 @@ function show_dialog(image, text)
   var canvas_pos = $(".canvas_holder").position();
   var left = canvas_pos.left + image["posx"] + image["image"].width*2/3;
   var top = canvas_pos.top + image["posy"];
+  dialog.css("display", "block");
+  dialog.css("position", "absolute");
+  dialog.css("left", left+"px");
+  dialog.css("top", top+"px");
+}
+
+// display dialog text
+function show_text(text)
+{
+  dialog = $("<div class='textblock cleanup'><h1>"+text+"</h1></div>").appendTo($("body"));
+  var canvas_pos = $(".canvas_holder").position();
+  var left = canvas_pos.left;
+  var top = canvas_pos.top;
   dialog.css("display", "block");
   dialog.css("position", "absolute");
   dialog.css("left", left+"px");

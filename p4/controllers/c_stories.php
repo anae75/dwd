@@ -67,10 +67,6 @@ class stories_controller extends base_controller {
       Router::redirect("/stories/choose_companions");
     }
 
-    # if(scenes.blank?) {
-    #   session[:scenes] = story.select_scenes()        # story model takes care of current_scene
-    # }
-
     if($story->finished()) {
       $story->finish();  # mark the story as completed
       Router::redirect("/stories/done");

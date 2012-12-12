@@ -1,4 +1,10 @@
 
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
 #container {
  width:  900px;
  margin: 0px auto;
@@ -32,6 +38,13 @@ canvas {
   height: 400px;
 }
 
+.textblock {
+  width: 600px;
+  height: 400px;
+  padding: 100px 50px;
+  text-align: center;
+}
+
 #caption {
   font-weight: bold;
   margin-bottom: 10px;
@@ -57,8 +70,8 @@ div.bubble {
   background-repeat: no-repeat;
   background-size: 240px auto;
   padding: 40px;
-  height: 100px;
-  width: 200px;
+  height: 180px;
+  width: 280px;
 }
 
 #dialog_prompt {
@@ -67,6 +80,7 @@ div.bubble {
   background-repeat: no-repeat;
   background-size: 240px auto;
   padding: 40px;
+  z-index: 100;
 }
 
 .dialog textarea {
@@ -83,6 +97,7 @@ div.bubble {
   background-image: url("/images/cloud.png");
   background-repeat: no-repeat;
   background-size: 300px auto;
+  z-index: 100;
 }
 
 .prompt canvas {

@@ -48,6 +48,7 @@ class Scene {
       foreach($responses as $r) {
         $data[] = $this->export_shot($shot, $r);
         # TODO need a transition shot like "that didn't work", "no sorry", "try again!", etc.
+        $data[] = $this->text_frame("That didn't work.");
       }
       $data[] = $this->export_shot($shot, null);
     }
@@ -61,16 +62,28 @@ class Scene {
     return $responses;
   }
 
+  public function text_frame($text)
+  {
+    $data = Array();
+    $data["text"] = $text;
+    return $data;
+  }
+
   public function export_shot($shot, $response)
   {
     $hero_id = $this->_story->hero_id();
     $hero_image = $this->_story->hero_image();
-   
+
     $data = Array();
     $data["shot_id"] = $shot->id;
     $data["caption"] = $shot->caption;
-    $data["images"] = Array();
-    $data["dialogs"] = Array();
+    $data["text"] = $shot->text;
+
+    # avoid emitting empty arrays because the scene playing machinery gets confused
+    if($shot->positions) {
+      $data["images"] = Array();
+      $data["dialogs"] = Array();
+    }
 
     foreach($shot->positions as $pos) {
 

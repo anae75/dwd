@@ -25,6 +25,7 @@ class AddCharacter < ActiveRecord::Migration
       t.references :scene
       t.integer :seq
       t.string :caption
+      t.string :text
       t.timestamps
     end
 
