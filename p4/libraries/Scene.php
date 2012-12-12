@@ -40,6 +40,12 @@ class Scene {
     return $this->_shots;
   }
 
+  protected $_sayings = Array("Nice Try.", "That didn't work.", "Sorry, no.", "Nope.", "Better luck next time.", "Ummmm... no.");
+  public function random_saying() 
+  {
+    return $this->_sayings[rand(0, count($this->_sayings)-1)];
+  }
+
   public function export()
   {
     $data = Array();
@@ -47,8 +53,7 @@ class Scene {
       $responses = $this->get_responses($shot);
       foreach($responses as $r) {
         $data[] = $this->export_shot($shot, $r);
-        # TODO need a transition shot like "that didn't work", "no sorry", "try again!", etc.
-        $data[] = $this->text_frame("That didn't work.");
+        $data[] = $this->text_frame($this->random_saying());
       }
       $data[] = $this->export_shot($shot, null);
     }
