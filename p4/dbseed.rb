@@ -291,6 +291,108 @@ def create_penelope_scene
   scene_id
 end
 
+def create_track_fire_scene
+  scene_id = create_scene :user_id => @user_id, :title => "Track Fire"
+
+  # create the main character
+  npc_id = create_npc :name => "Track Fire", :user_id => @user_id
+  track_fire_01 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("track_fire_01.png")
+  track_fire_02 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("track_fire_02.png")
+
+  shot_id = create_shot :scene_id => scene_id, :text => "What''s that smell?"
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => track_fire_02, :posx => 0, :posy => 0, :scale => 1
+
+  # hero
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => track_fire_01, :posx => 0, :posy => 0, :scale => 1
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 300, :posy => 100, :scale => 1,
+                     :dialog => "It''s a track fire!" 
+
+  shot_id = create_shot :scene_id => scene_id, :text => "How can we get across this fire?"
+
+  shot_id = create_shot :scene_id => scene_id, :caption => "Draw something to help you cross the fire."
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => track_fire_01, :posx => 0, :posy => 0, :scale => 1
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 300, :posy => 100, :scale => 1,
+                     :prompt_dialog => true, :prompt_drawing => true
+
+  # responses
+  # sob story guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @sob_story_guy,
+                                :text => "I can cry a lot!  I can cry a river!"
+
+  # headphones guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @headphones_guy,
+                                :text => "I can play soothing music..." 
+
+  # backpack guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @backpack_guy,
+                                :text => "I''ve got a water bottle in here somewhere..."
+
+  shot_id = create_shot :scene_id => scene_id, :text => "That''s better!"
+
+
+  scene_id
+end
+
+def create_locked_door_scene
+  scene_id = create_scene :user_id => @user_id, :title => "Locked Door"
+
+  # create the main character
+  npc_id = create_npc :name => "A Locked Door", :user_id => @user_id
+  locked_door_01 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("locked_door_01.png")
+  locked_door_02 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("locked_door_02.png")
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => locked_door_01, :posx => 0, :posy => 0, :scale => 1
+
+  # hero
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => locked_door_01, :posx => 0, :posy => 0, :scale => 1
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 300, :posy => 100, :scale => 1,
+                     :dialog => "Hmm, it''s a locked door..." 
+
+  shot_id = create_shot :scene_id => scene_id, :text => "How can we open the door?"
+
+  shot_id = create_shot :scene_id => scene_id, :caption => "Draw something to open the door."
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :image_id => locked_door_01, :posx => 0, :posy => 0, :scale => 1
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 300, :posy => 100, :scale => 1,
+                     :prompt_dialog => true, :prompt_drawing => true
+  # responses
+  # sob story guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @sob_story_guy,
+                                :text => "I can look really sad."
+
+  # headphones guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @headphones_guy,
+                                :text => "Guitar pick?" 
+
+  # backpack guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @backpack_guy,
+                                :text => "That door is too small for my backpack."
+
+
+  shot_id = create_shot :scene_id => scene_id, :text => "We''re in!  I wonder what''s on the other side?"
+  scene_id
+end
+
 def create_story
   sql = sql_for_insert("stories", :user_id => @user_id, 
                                   :hero_id => @susie,
@@ -303,9 +405,13 @@ def create_story
   nrows = @connection.insert sql
   story_id = last_row("stories") 
 
-  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @transit_police_scene, :seq => 0)
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @transit_police_scene, :seq => 1)
   nrows = @connection.insert sql
-  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @penelope_scene, :seq => 1)
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @penelope_scene, :seq => 2)
+  nrows = @connection.insert sql
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @track_fire_scene, :seq => 3)
+  nrows = @connection.insert sql
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @locked_door_scene, :seq => 0)
   nrows = @connection.insert sql
 
   story_id
@@ -321,5 +427,7 @@ reset_db
 create_default_characters
 @transit_police_scene = create_transit_police_scene
 @penelope_scene = create_penelope_scene
+@track_fire_scene = create_track_fire_scene
+@locked_door_scene = create_locked_door_scene
 story_id = create_story
 
