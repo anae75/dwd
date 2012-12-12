@@ -212,7 +212,8 @@ class stories_controller extends base_controller {
       Helper::send_error();
     }
 
-    #$story->add_response($_POST["shot_id"], $_POST["prompt_text"], $_POST["prompt_imagedata"]);
+    $story->add_response($_POST["shot_id"], $_POST["prompt_text"], $_POST["prompt_imagedata"]);
+
     echo "success";
   }
 

@@ -180,7 +180,7 @@ def create_transit_police_scene
   # hero:  It's the transit police!
   shot_id = create_shot :scene_id => scene_id
   line = create_position :shot_id => shot_id, :type => :hero, 
-                     :posx => 0, :posy => 0, :scale => 1,
+                     :posx => 200, :posy => 100, :scale => 1,
                      :dialog => "It''s the transit police!"
 
   # police:  Bag check!
@@ -192,12 +192,13 @@ def create_transit_police_scene
   # prompt for input
   shot_id = create_shot :scene_id => scene_id, :caption => "Do you have anything in your bag to distract the police?"
   line = create_position :shot_id => shot_id, :type => :hero, 
-                     :posx => 0, :posy => 0, :scale => 1,
+                     :posx => 200, :posy => 100, :scale => 1,
                      :prompt_dialog => true, :prompt_drawing => true
 
   # create a response from sob story guy
   response_id = create_response :user_id => user_id,
                                 :shot_id => shot_id, :character_id => @sob_story_guy,
+                                :image_filename => "images/money_01.png",
                                 :text => "I have some money from people who felt sorry for me." 
 
   # create a response from headphones guy

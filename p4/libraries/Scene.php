@@ -99,6 +99,16 @@ class Scene {
       $img["image_url"] = $img_url;
       $data["images"][$character_id] = $img;
 
+      # add response image
+      if($pos->type == "hero" && $response && $response->image_filename) {
+        $img = Array();
+        $img["posx"] = (int) $pos->posx - 150;
+        $img["posy"] = (int) $pos->posy;
+        $img["scale"] = (int) 1;
+        $img["image_url"] = "/" . $response->image_filename;
+        $data["images"]["response"] = $img;
+      }
+
       if($pos->dialog) {
         $data["dialogs"][$character_id] = $pos->dialog;
       }
@@ -116,8 +126,6 @@ class Scene {
       }
 
     }
-
-    # XXX response image
 
     return $data;
   }

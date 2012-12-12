@@ -146,6 +146,23 @@ class Story {
     return $this->_story->hero_image;
   }
 
+  public function add_response($shot_id, $text, $img)
+  {
+    # save image
+    $opts = Array();
+    $opts["user_id"] = $this->_story->user_id;
+    $img_id = UploadedImage::create($img, $opts);
+
+    # save response
+    $opts = Array();
+    $opts["user_id"] = $this->_story->user_id;
+    $opts["shot_id"] = $shot_id;
+    $opts["character_id"] = $this->_story->hero_id;
+    $opts["text"] = $text;
+    $opts["image_filename"] = sprintf("images/uu_%d.png", $img_id);
+    $response_id = DB::instance(DB_NAME)->insert("responses", $opts);
+  }
+
   ############################################################
   # Statics
   ############################################################
