@@ -131,7 +131,7 @@ class Scene {
       if($pos->dialog) {
         $data["dialogs"][$character_id] = $pos->dialog;
       }
-      if($response) {
+      if($pos->type == "hero" && $response) {
         $data["dialogs"][$character_id] = $response->text;
       }
 
