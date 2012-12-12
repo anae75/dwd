@@ -40,7 +40,8 @@ class Scene {
     return $this->_shots;
   }
 
-  protected $_sayings = Array("Nice Try.", "That didn't work.", "Sorry, no.", "Nope.", "Better luck next time.", "Ummmm... no.");
+  protected $_sayings = Array("Nice Try.", "That didn't work.", "Sorry, no.", "Nope.", "Better luck next time.",
+                              "Ummmm... no.", "Meh.", "Try again.");
   public function random_saying() 
   {
     return $this->_sayings[rand(0, count($this->_sayings)-1)];

@@ -13,6 +13,7 @@ function reset_canvas(id)
 
 function clear_prompts()
 {
+  $("#dialog_form").hide();
   $("#dialog_prompt").hide();
   $("#dialog_text").val("");
   $("#drawing_prompt").hide();
@@ -54,6 +55,22 @@ function add_drawing_prompt(shot)
   prompt.css("left", left+"px");
   prompt.css("top", top+"px");
   drawing.enable(); // XXX global
+}
+
+function add_dialog_form(shot, char_id)
+{
+  var canvas_pos = $(".canvas_holder").position();
+  var dialog_form = $("#dialog_form");
+  var char_id = shot["prompt_drawing"];
+  if(!char_id) { 
+    char_id = shot["prompt_dialog"]; 
+  }
+  var left = canvas_pos.left + shot["images"][char_id]["posx"] + shot["images"][char_id]["image"].width - 75; 
+  var top = canvas_pos.top + shot["images"][char_id]["posy"] + shot["images"][char_id]["image"].height - 100 ; 
+  dialog_form.css("position", "absolute");
+  dialog_form.css("left", left+"px");
+  dialog_form.css("top", top+"px");
+  dialog_form.show();
 }
 
 // make-believe semaphore
@@ -136,6 +153,9 @@ function show_internal(shot, callback)
   if(shot["prompt_drawing"]) {
     wait_for_prompt = true;
     add_drawing_prompt(shot);
+  }
+  if(wait_for_prompt) {
+    add_dialog_form(shot);
   }
   if(callback && !wait_for_prompt) {
     setTimeout(callback, 2000);

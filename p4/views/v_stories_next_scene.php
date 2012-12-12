@@ -21,7 +21,7 @@
       <input type="hidden" id="character_id" name="character_id">
       <input type="hidden" id="prompt_imagedata" name="prompt_imagedata">
       <input type="hidden" id="prompt_text" name="prompt_text">
-      <button type="button" onclick="submit_dialog_form()">submit this puppy</button>
+      <button type="button" onclick="submit_dialog_form()">Save your response.</button>
     </form>
 
   </div>

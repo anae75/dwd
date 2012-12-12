@@ -74,7 +74,7 @@ class stories_controller extends base_controller {
     # display the next scene and advance the scene pointer
     # render :play_scene
     $opts = Array();
-    #$opts["dont_advance"] = true;  # TODO remove this in final version
+    $opts["dont_advance"] = true;  # TODO remove this in final version
     $scene = $story->pop($opts);
 
     # Setup view

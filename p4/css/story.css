@@ -74,6 +74,11 @@ div.bubble {
   width: 280px;
 }
 
+#dialog_form button {
+  font-size: 1em;
+  height: 2.5em;
+}
+
 #dialog_prompt {
   display: none;
   background-image: url("/images/dialog_bubble.png");

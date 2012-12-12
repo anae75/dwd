@@ -228,10 +228,65 @@ def create_penelope_scene
   # penelope
   npc_id = create_npc :name => "Penelope", :user_id => @user_id
   penelope_01 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("penelope_01.png")
+  penelope_02 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("penelope_02.png")
 
   shot_id = create_shot :scene_id => scene_id
   line = create_position :shot_id => shot_id, :type => :npc, 
+                     :dialog => "Hisssssss!",
                      :image_id => penelope_01, :posx => 0, :posy => 0, :scale => 1
+
+  # hero:  It's penelope!
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 200, :posy => 100, :scale => 1,
+                     :dialog => "It''s Penelope!" 
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 200, :posy => 100, :scale => 1,
+                     :dialog => "The lost Red Line snake!" 
+
+  shot_id = create_shot :scene_id => scene_id, :text => "She''s grown pretty big."
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 200, :posy => 100, :scale => 1,
+                     :dialog => "...and hungry." 
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :dialog => "You look delicious.",
+                     :image_id => penelope_02, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id, :text => "Do you have any food to distract her?"
+
+  shot_id = create_shot :scene_id => scene_id, :caption => "Draw something for Penelope to eat."
+  line = create_position :shot_id => shot_id, :type => :hero, 
+                     :posx => 200, :posy => 100, :scale => 1,
+                     :prompt_dialog => true, :prompt_drawing => true
+
+  # responses for stock characters
+  # sob story guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @sob_story_guy,
+                                :text => "My parole office won''t let me talk to snakes."
+
+  # headphones guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @headphones_guy,
+                                :text => "You can have the foam from my headphones.  Yum!" 
+
+  # backpack guy
+  response_id = create_response :user_id => @user_id,
+                                :shot_id => shot_id, :character_id => @backpack_guy,
+                                :text => "I always carry a spare backpack."
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, 
+                     :dialog => "Chomp chomp chomp",
+                     :image_id => penelope_01, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id, :text => "Let''s get away while we can."
 
   scene_id
 end
