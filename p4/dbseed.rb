@@ -217,6 +217,7 @@ def create_transit_police_scene
   line = create_position :shot_id => shot_id, :type => :npc, 
                      :image_id => transit_police_01, :posx => 0, :posy => 0, :scale => 1,
                      :dialog => "Carry on."
+  shot_id = create_shot :scene_id => scene_id, :text => "Whew!!"
 
   scene_id
 end # create_transit_police_scene

@@ -26,16 +26,6 @@
 
   </div>
 
-The story has <?= $story->n_scenes() ?> scenes. <br>
-
-<h2> Current Scene: <?= $scene->title() ?> </h2>
-<?= var_dump($scene); ?> <br>
-<h3> shots </h3>
-<?= print_r($scene->export() ); ?> <br>
-
-<h2> Current Story </h2>
-<?= var_dump($story); ?> <br>
-
 <a href="/stories/next_scene">Move to the next scene</a>
 
 <div id=context_help class=help>
