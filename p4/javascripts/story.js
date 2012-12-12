@@ -134,7 +134,7 @@ function show_internal(shot, callback)
     add_drawing_prompt(shot);
   }
   if(callback && !wait_for_prompt) {
-    setTimeout(callback, 1000);
+    setTimeout(callback, 2000);
   }
 }
 

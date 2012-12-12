@@ -13,6 +13,7 @@ class Story {
     if($this->_story->id) {
       $this->load_scenes();
       $this->load_hero();
+      $this->load_companions();
     }
   } 
 
@@ -46,6 +47,30 @@ class Story {
   {
     $sql = sprintf("select * from images where character_id=%d", $this->_story->hero_id);
     $this->_story->hero_image = DB::instance(DB_NAME)->select_row($sql, "object");
+  }
+
+  public function load_companions()
+  {
+    $ids = Array();
+    $ids[] = $this->_story->companion_1_id;
+    $ids[] = $this->_story->companion_2_id;
+    $ids[] = $this->_story->companion_3_id;
+    $this->_story->companion_ids = $ids;
+    $this->_story->companions = Array();
+    foreach($ids as $id) {
+      $sql = sprintf("select * from images where character_id=%d", $id);
+      $this->_story->companions[$id] = DB::instance(DB_NAME)->select_row($sql, "object");
+    }
+  }
+
+  public function companion_ids()
+  {
+    return $this->_story->companion_ids;
+  }
+
+  public function companion($id)
+  {
+    return $this->_story->companions[$id];
   }
 
   public function load_scenes()

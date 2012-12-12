@@ -44,12 +44,23 @@ class Scene {
   {
     $data = Array();
     foreach($this->_shots as $shot) {
-      $data[] = $this->export_shot($shot);
+      $responses = $this->get_responses($shot);
+      foreach($responses as $r) {
+        $data[] = $this->export_shot($shot, $r);
+      }
+      $data[] = $this->export_shot($shot, null);
     }
     return $data; 
   }
 
-  public function export_shot($shot)
+  public function get_responses($shot) {
+    $companion_ids = join(",", $this->_story->companion_ids());
+    $sql = sprintf("select * from responses where shot_id=%d and character_id in (%s)", $shot->id, $companion_ids);
+    $responses = DB::instance(DB_NAME)->select_rows($sql, "object");
+    return $responses;
+  }
+
+  public function export_shot($shot, $response)
   {
     $hero_id = $this->_story->hero_id();
     $hero_image = $this->_story->hero_image();
@@ -62,14 +73,21 @@ class Scene {
 
     foreach($shot->positions as $pos) {
 
+      # if this position contains the hero, substitute in the hero of the current story
+      # if this is a response, substitute in the companion character
       switch($pos->type) { 
         case "npc":
           $img_url = "/".$pos->filename;
           $character_id = $pos->character_id;
           break;
         case "hero":
-          $img_url = "/".$hero_image->filename;
-          $character_id = $hero_id;
+          if($response) {
+            $character_id = (int) $response->character_id;
+            $img_url = "/".$this->_story->companion($character_id)->filename; # XXX
+          } else {
+            $img_url = "/".$hero_image->filename;
+            $character_id = $hero_id;
+          }
           break;
       }
 
@@ -83,15 +101,23 @@ class Scene {
       if($pos->dialog) {
         $data["dialogs"][$character_id] = $pos->dialog;
       }
-
-      if($pos->prompt_dialog == 1) {
-        $data["prompt_dialog"] = $character_id; 
+      if($response) {
+        $data["dialogs"][$character_id] = $response->text;
       }
-      if($pos->prompt_drawing == 1) {
-        $data["prompt_drawing"] = $character_id; 
+
+      if(!$response) {
+        if($pos->prompt_dialog == 1) {
+          $data["prompt_dialog"] = $character_id; 
+        }
+        if($pos->prompt_drawing == 1) {
+          $data["prompt_drawing"] = $character_id; 
+        }
       }
 
     }
+
+    # XXX response image
+
     return $data;
   }
 
