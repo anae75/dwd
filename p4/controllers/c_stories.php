@@ -74,7 +74,7 @@ class stories_controller extends base_controller {
     # display the next scene and advance the scene pointer
     # render :play_scene
     $opts = Array();
-    $opts["dont_advance"] = true;  # TODO remove this in final version
+    #$opts["dont_advance"] = true;  # TODO remove this in final version
     $scene = $story->pop($opts);
 
     # Setup view
@@ -100,7 +100,6 @@ class stories_controller extends base_controller {
     # retrieve the currently playing story or create a new one
     $story = Story::current_story_for($this->user);
     if(!$story) {
-      echo "creating new story";
       $story = Story::create_for($this->user->user_id);
     }
 

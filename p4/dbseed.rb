@@ -345,7 +345,7 @@ def create_track_fire_scene
 end
 
 def create_locked_door_scene
-  scene_id = create_scene :user_id => @user_id, :title => "Locked Door"
+  scene_id = create_scene :user_id => @user_id, :title => "Locked Door", :type => "end"
 
   # create the main character
   npc_id = create_npc :name => "A Locked Door", :user_id => @user_id
@@ -386,7 +386,7 @@ def create_locked_door_scene
   # backpack guy
   response_id = create_response :user_id => @user_id,
                                 :shot_id => shot_id, :character_id => @backpack_guy,
-                                :text => "That door is too small for my backpack."
+                                :text => "I''ll hit it really hard with my backpack!"
 
 
   shot_id = create_shot :scene_id => scene_id, :text => "We''re in!  I wonder what''s on the other side?"
@@ -411,7 +411,7 @@ def create_story
   nrows = @connection.insert sql
   sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @track_fire_scene, :seq => 3)
   nrows = @connection.insert sql
-  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @locked_door_scene, :seq => 0)
+  sql = sql_for_insert("story_scenes", :story_id => story_id, :scene_id => @locked_door_scene, :seq => 4)
   nrows = @connection.insert sql
 
   story_id

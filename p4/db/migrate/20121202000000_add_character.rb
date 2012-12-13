@@ -18,6 +18,7 @@ class AddCharacter < ActiveRecord::Migration
     create_table :scenes do |t|
       t.references :user
       t.string :title, :null => false, :default => "untitled"
+      t.string :type, :null => false, :default => "ordinary"
       t.timestamps
     end
 

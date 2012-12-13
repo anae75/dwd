@@ -217,17 +217,25 @@ class Story {
   # max
   public static function get_scenes($opts)
   {
-    $sql = sprintf("select scenes.* from scenes inner join users on scenes.user_id=users.user_id ");
-    $sql .= sprintf(" where users.publish_content=1 ");
+    $select_sql = sprintf("select scenes.* from scenes inner join users on scenes.user_id=users.user_id ");
+    $where_sql = sprintf(" where users.publish_content=1 ");
     if(!$opts["use_external_content"]) {
       # use only default content or the user's own content
-      $sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
+      $where_sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
     }
     if(!isset($opts["max"])) {
       $opts["max"] = 3;
     }
-    $sql .= sprintf(" order by rand() limit %d ", $opts["max"]); 
+    $order_sql = sprintf(" order by rand() limit %d ", $opts["max"]-1); 
+
+    # select ordinary scenes
+    $sql = $select_sql . $where_sql . " and not scenes.type='end' " . $order_sql;
     $data = DB::instance(DB_NAME)->select_rows($sql, "object");
+
+    # select one end scene
+    $sql = $select_sql . $where_sql . " and scenes.type='end' " . " order by rand()";
+    $data[] = DB::instance(DB_NAME)->select_row($sql, "object");
+
     return $data;
   }
 
