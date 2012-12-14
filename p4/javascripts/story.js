@@ -91,7 +91,7 @@ function simple_sem(n, c)
 
 function show(shot, callback)
 {
-  // load all images
+  // load all images first, then display the shot
   var images = shot["images"]
   if(images) {
     var nimages = Object.keys(images).length;
@@ -168,6 +168,15 @@ function next_shot()
   if( cur_shot < shots.length ) {
     show(shots[cur_shot], next_shot);  
     cur_shot += 1;
+  } else {
+    // the final shot has completed
+    // display the end menu
+    $("#scene_end_menu").dialog({
+      modal: true,
+      resizable: false,
+      dialogClass: "miniprofile",
+      width: 400
+    });
   }
 }
 

@@ -37,6 +37,14 @@
   Remember, you can always click "Need Help?" to get help on whatever page you're on.
 </div>
 
+<div id=scene_end_menu class=help>
+  <? if($is_final_scene) { ?>
+    Congratulations!  Click to <a href="/stories/welcome">Return Home</a>.
+  <? } else { ?>
+    Click to <a href="/stories/next_scene">Continue Your Adventure</a>.
+  <? } ?>
+</div>
+
 <script>
   var shots = <?= json_encode($scene->export()) ?>;
   var drawing;

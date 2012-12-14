@@ -64,6 +64,7 @@ class stories_controller extends base_controller {
     $this->template->title   = "The End";
 
     $this->template->set_global('scene', $scene);
+    $this->template->content->is_final_scene = true;
             
     # Render template
     echo $this->template;
