@@ -38,7 +38,7 @@
 </div>
 
 <div id=scene_end_menu class=help>
-  <? if($is_final_scene) { ?>
+  <? if(isset($is_final_scene) && $is_final_scene) { ?>
     Congratulations!  Click to <a href="/stories/welcome">Return Home</a>.
   <? } else { ?>
     Click to <a href="/stories/next_scene">Continue Your Adventure</a>.
