@@ -1,19 +1,13 @@
-<? if($viewing_self) { ?>
-<div class=submenubar>
-  <ul>
-    <li> <a href="/users/edit">Edit Your Settings</a> </li> 
-  </ul>
-</div>
-<? } ?>
 
 <h1>This is the profile of <?= MyUser::full_name($profiled_user) ?>
 <? if($viewing_self) { ?> <span class="notice">(That's you!)</span> <? } ?>
 </h1>
 
 <? if($viewing_self) { ?>
-  <h3>Your story settings</h3>
+  <h3>These are your current settings</h3>
   Share your content with other users: <?= $user->publish_content ? "yes" : "no" ?><br>
   Incorporate content from other users: <?= $user->use_external_content ? "yes" : "no"  ?><br>
+  <h3><a href="/users/edit">Edit Your Settings</a></h3>
 <? } ?> 
 
 <br>

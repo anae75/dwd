@@ -29,6 +29,26 @@ class stories_controller extends base_controller {
 
   }
 
+  public function welcome()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    # Setup view
+    $this->template->content = View::instance('v_stories_welcome');
+    $this->template->title   = "Your Mission";
+
+    $story = Story::current_story_for($this->user);
+    $this->template->set_global('story', $story);
+            
+    # Render template
+    echo $this->template;
+
+  }
+
   public function done()
   {
     if(!$this->user) {
@@ -105,6 +125,7 @@ class stories_controller extends base_controller {
       return;
     }
 
+    Story::kill_unfinished_stories($this->user);
     $story = Story::create_for($this->user->user_id);
     $scene = Story::get_intro_scene();
 

@@ -11,6 +11,21 @@
  text-align: center;
 }
 
+#introduction {
+  margin: 0 auto;
+  text-align: left;
+  width: 600px;
+}
+
+#introduction p {
+  margin-bottom: 15px;
+  font-size: 1.25em;
+}
+
+#introduction a {
+  font-size: 1.25em;
+}
+
 #main_content {
   width: 100%;
   text-align: left;

@@ -16,9 +16,9 @@ class index_controller extends base_controller {
   # side effects: none
   #
   public function index() {
-    # logged in users go directly to their streams
+    # logged in users go to the welcome page
     if($this->user) {
-      Router::redirect("/users");
+      Router::redirect("/stories/welcome");
       return;
     }
 

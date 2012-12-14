@@ -211,6 +211,13 @@ class Story {
     return $story;
   }
 
+  public static function kill_unfinished_stories($user)
+  {
+    $data = Array();
+    $data["completed"] = 1;
+    DB::instance(DB_NAME)->update("stories", $data, "WHERE user_id = " . $user->user_id);
+  }
+
   # get scenes based on options
   # user_id
   # use_external_content
