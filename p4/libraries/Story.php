@@ -229,7 +229,7 @@ class Story {
     $order_sql = sprintf(" order by rand() limit %d ", $opts["max"]-1); 
 
     # select ordinary scenes
-    $sql = $select_sql . $where_sql . " and not scenes.type='end' " . $order_sql;
+    $sql = $select_sql . $where_sql . " and scenes.type='ordinary' " . $order_sql;
     $data = DB::instance(DB_NAME)->select_rows($sql, "object");
 
     # select one end scene
@@ -237,6 +237,13 @@ class Story {
     $data[] = DB::instance(DB_NAME)->select_row($sql, "object");
 
     return $data;
+  }
+
+  public static function get_intro_scene()
+  {
+    $sql = "select * from scenes where type='intro'";
+    $row= DB::instance(DB_NAME)->select_row($sql, "object");
+    return new Scene($row, null);
   }
 
   public static function possible_companions($opts) 

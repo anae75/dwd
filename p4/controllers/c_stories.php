@@ -89,6 +89,28 @@ class stories_controller extends base_controller {
 
   }
 
+  # create a new story and play the introduction
+  public function new_story()
+  {
+    if(!$this->user) {
+      Flash::set("Please log in.");
+      Router::redirect("/users/login");
+      return;
+    }
+
+    $story = Story::create_for($this->user->user_id);
+    $scene = Story::get_intro_scene();
+
+    # Setup view
+    $this->template->content = View::instance('v_stories_next_scene');
+    $this->template->title   = "The Story Continues";
+
+    $this->template->set_global('scene', $scene);
+            
+    # Render template
+    echo $this->template;
+  }
+
   public function choose_companions() 
   {
     if(!$this->user) {

@@ -62,6 +62,9 @@ class Scene {
   }
 
   public function get_responses($shot) {
+    if(!$this->_story) {
+      return Array();
+    }
     $companion_ids = join(",", $this->_story->companion_ids());
     $sql = sprintf("select * from responses where shot_id=%d and character_id in (%s)", $shot->id, $companion_ids);
     $responses = DB::instance(DB_NAME)->select_rows($sql, "object");
@@ -77,8 +80,12 @@ class Scene {
 
   public function export_shot($shot, $response)
   {
-    $hero_id = $this->_story->hero_id();
-    $hero_image = $this->_story->hero_image();
+    $hero_id = null;
+    $hero_image = null;
+    if($this->_story) {
+      $hero_id = $this->_story->hero_id();
+      $hero_image = $this->_story->hero_image();
+    }
 
     $data = Array();
     $data["shot_id"] = $shot->id;

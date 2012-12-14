@@ -286,6 +286,7 @@ def create_penelope_scene
                      :dialog => "Chomp chomp chomp",
                      :image_id => penelope_01, :posx => 0, :posy => 0, :scale => 1
 
+  shot_id = create_shot :scene_id => scene_id, :text => "That did the trick!"
   shot_id = create_shot :scene_id => scene_id, :text => "Let''s get away while we can."
 
   scene_id
@@ -393,6 +394,70 @@ def create_locked_door_scene
   scene_id
 end
 
+
+def create_intro
+  scene_id = create_scene :user_id => @user_id, :title => "Intro", :type => "intro"
+
+  # create the main character
+  npc_id = create_npc :name => "Introduction", :user_id => @user_id
+  intro_01 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_01.png")
+  intro_02 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_02.png")
+  intro_03a = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_03a.png")
+  intro_03b = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_03b.png")
+  intro_04 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_04.png")
+  intro_05a = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_05a.png")
+  intro_05b = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_05b.png")
+  intro_05c = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_05c.png")
+  intro_05d = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("intro_05d.png")
+
+  shot_id = create_shot :scene_id => scene_id, :text => "One morning in Boston..."
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_01, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_02, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_03a, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_03b, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_04, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05a, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05b, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05b, :posx => 0, :posy => 0, :scale => 1,
+                        :dialog => "??!"
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05c, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05d, :posx => 0, :posy => 0, :scale => 1
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05d, :posx => 0, :posy => 0, :scale => 1,
+                         :dialog => "We''ve been here a long time."
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05d, :posx => 0, :posy => 0, :scale => 1,
+                         :dialog => "Someone needs to go for help."
+
+  shot_id = create_shot :scene_id => scene_id, :text => "Can you make your way through the tunnels and back to civilization?"
+
+  shot_id = create_shot :scene_id => scene_id, :text => "Or are you doomed to wander forever?"
+
+  scene_id
+end
+
 def create_story
   sql = sql_for_insert("stories", :user_id => @user_id, 
                                   :hero_id => @susie,
@@ -425,6 +490,7 @@ end.parse!
 reset_db
 @user_id = create_superuser
 create_default_characters
+@intro = create_intro
 @transit_police_scene = create_transit_police_scene
 @penelope_scene = create_penelope_scene
 @track_fire_scene = create_track_fire_scene
