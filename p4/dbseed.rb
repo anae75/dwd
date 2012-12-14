@@ -217,7 +217,7 @@ def create_transit_police_scene
   line = create_position :shot_id => shot_id, :type => :npc, 
                      :image_id => transit_police_01, :posx => 0, :posy => 0, :scale => 1,
                      :dialog => "Carry on."
-  shot_id = create_shot :scene_id => scene_id, :text => "Whew!!"
+  shot_id = create_shot :scene_id => scene_id, :text => "Whew!!<br>Let''s go!"
 
   scene_id
 end # create_transit_police_scene
@@ -443,6 +443,11 @@ def create_intro
   shot_id = create_shot :scene_id => scene_id
   line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05d, :posx => 0, :posy => 0, :scale => 1
 
+  shot_id = create_shot :scene_id => scene_id, :text => "Uh-oh.  The T is stuck again."
+
+  shot_id = create_shot :scene_id => scene_id
+  line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05c, :posx => 0, :posy => 0, :scale => 1
+
   shot_id = create_shot :scene_id => scene_id
   line = create_position :shot_id => shot_id, :type => :npc, :image_id => intro_05d, :posx => 0, :posy => 0, :scale => 1,
                          :dialog => "We''ve been here a long time."
@@ -454,6 +459,27 @@ def create_intro
   shot_id = create_shot :scene_id => scene_id, :text => "Can you make your way through the tunnels and back to civilization?"
 
   shot_id = create_shot :scene_id => scene_id, :text => "Or are you doomed to wander forever?"
+
+  scene_id
+end
+
+
+def create_epilogue
+  scene_id = create_scene :user_id => @user_id, :title => "City", :type => "epilogue"
+
+  npc_id = create_npc :name => "City", :user_id => @user_id
+  black = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("black.png")
+  city_02 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("city_02.png")
+  city_03 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("city_03.png")
+  city_04 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("city_04.png")
+  city_05 = create_image :character_id => npc_id, :user_id => @user_id, :filename => filename("city_05.png")
+
+  [black, city_02, city_03, city_04, city_05].each do |img|
+    shot_id = create_shot :scene_id => scene_id
+    line = create_position :shot_id => shot_id, :type => :npc, :image_id => img, :posx => 0, :posy => 0, :scale => 1
+  end
+
+  shot_id = create_shot :scene_id => scene_id, :text => "Congratulations!  You have survived to ride the T another day.  Thanks for playing."
 
   scene_id
 end
@@ -495,5 +521,6 @@ create_default_characters
 @penelope_scene = create_penelope_scene
 @track_fire_scene = create_track_fire_scene
 @locked_door_scene = create_locked_door_scene
+@epilogue = create_epilogue
 story_id = create_story
 

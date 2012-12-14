@@ -36,10 +36,17 @@ class stories_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
-    $this->template->content = View::instance('v_stories_test');
-    $this->template->title   = "Test";
+
+    $scene = Story::get_epilogue_scene();
+
+    # Setup view
+    $this->template->content = View::instance('v_stories_next_scene');
+    $this->template->title   = "The End";
+
+    $this->template->set_global('scene', $scene);
+            
+    # Render template
     echo $this->template;
-    echo "You're done!";
   }
 
   public function next_scene()
@@ -103,7 +110,7 @@ class stories_controller extends base_controller {
 
     # Setup view
     $this->template->content = View::instance('v_stories_next_scene');
-    $this->template->title   = "The Story Continues";
+    $this->template->title   = "The Story Begins";
 
     $this->template->set_global('scene', $scene);
             

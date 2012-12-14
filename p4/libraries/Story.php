@@ -246,6 +246,13 @@ class Story {
     return new Scene($row, null);
   }
 
+  public static function get_epilogue_scene()
+  {
+    $sql = "select * from scenes where type='epilogue'";
+    $row= DB::instance(DB_NAME)->select_row($sql, "object");
+    return new Scene($row, null);
+  }
+
   public static function possible_companions($opts) 
   {
     $sql = sprintf("select characters.*, images.filename from characters inner join users on characters.user_id=users.user_id and npc=0 inner join images on images.character_id=characters.id");
