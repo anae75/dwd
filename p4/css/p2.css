@@ -131,6 +131,7 @@ dt .user {
   float: left;
   width: 500px;
 }
+.character img,
 .template img {
   width: 200px;
 }

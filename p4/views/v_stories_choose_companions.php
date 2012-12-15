@@ -1,4 +1,6 @@
-<h1> You can't go into the tunnels alone!  Choose three companions to help you out. </h1>
+<h2> You can't go into the tunnels alone!  Choose three companions to help you out. </h2>
+When you're done click <button onclick="set_companions()">Continue the Story</button> to
+be on your way.
 
 <div>
 <ul class="imagelist">
@@ -18,7 +20,6 @@
     <input type="hidden" id=companion_1_id name=companion_1_id />
     <input type="hidden" id=companion_2_id name=companion_2_id />
     <input type="hidden" id=companion_3_id name=companion_3_id />
-    <button onclick="set_companions()">Continue the story.</button>
   </form>
 
 
@@ -63,6 +64,7 @@
     $("#companion_1_id").val( chosen.eq(0).attr("data-id") );
     $("#companion_2_id").val( chosen.eq(1).attr("data-id") );
     $("#companion_3_id").val( chosen.eq(2).attr("data-id") );
+    $("#companion_form").submit();
   }
 </script>
 
