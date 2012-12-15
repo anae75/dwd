@@ -13,7 +13,7 @@
       <li><label>Name:</label> <input type=text name=name></li>
       <li><label>Description:</label><input type=text name=description></li>
       </ul>
-      <button type=button id="clear_button" onclick="reset_canvas('drawing_canvas');">Clear</button>
+      <button type=button id="clear_button" onclick="drawing.reset_canvas();">Clear</button>
       <button type=button onclick="submit_form();">Create My Character</button>
     </form>
   </div>
@@ -42,6 +42,10 @@
 
   function submit_form()
   {
+    if(drawing.is_empty()) {
+      alert("You have to draw something.");
+      return;
+    }
     $("#form_imagedata").val($("#drawing_canvas")[0].toDataURL());
     $("#character_form").submit();
   }
