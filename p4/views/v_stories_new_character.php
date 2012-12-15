@@ -1,26 +1,30 @@
-<h1> Draw your character </h1>
-Here are a couple of templates to help you out
 
-<div id = "#content_container">
+<div id="content_container" class="centering">
 
-    <div class=canvas_holder width="300px" height="300px">
-      <canvas id="drawing_canvas" width="300px" height="300px"></canvas>
+  <div id="left_sidebar">
+
+    <div class=canvas_holder style="width:300px; height:300px">
+        <canvas id="drawing_canvas" width="300px" height="300px"></canvas>
     </div>
 
-  <form id=character_form method=post action="/stories/p_new_character">
-    <input type=hidden id=form_imagedata name=form_imagedata>
-    <ul>
-    <li><label>Name:</label> <input type=text name=name></li>
-    <li><label>Description:</label><input type=text name=description></li>
-    </ul>
-    <button type=button id="clear_button" onclick="reset_canvas('drawing_canvas');">Clear</button>
-    <button type=button onclick="submit_form();">Submit </button>
-  </form>
+    <form id=character_form method=post action="/stories/p_new_character">
+      <input type=hidden id=form_imagedata name=form_imagedata>
+      <ul>
+      <li><label>Name:</label> <input type=text name=name></li>
+      <li><label>Description:</label><input type=text name=description></li>
+      </ul>
+      <button type=button id="clear_button" onclick="reset_canvas('drawing_canvas');">Clear</button>
+      <button type=button onclick="submit_form();">Create My Character</button>
+    </form>
+  </div>
 
-  <div id="templates">
-  <h2> Choose A Template </h2>
-    <ul class="imagelist">
-    </ul>
+  <div id="right_sidebar">
+    <h1> Draw your character </h1>
+    <div id="templates">
+      Here are a couple of templates to help you out:
+      <ul class="imagelist">
+      </ul>
+    </div>
   </div>
 
 </div>
