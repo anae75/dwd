@@ -14,7 +14,7 @@ class users_controller extends base_controller {
   {
     if($this->user) {
       Flash::set("You are already logged in.");
-      Router::redirect("/streams");
+      Router::redirect("/stories/welcome");
       return;
     }
     # Setup view
@@ -31,7 +31,7 @@ class users_controller extends base_controller {
   public function p_signup() {
     if($this->user) {
       Flash::set("You are already logged in.");
-      Router::redirect("/streams");
+      Router::redirect("/stories/welcome");
       return;
     }
     $newuser = new MyUser();
@@ -103,7 +103,7 @@ class users_controller extends base_controller {
   public function login() {
     if($this->user) {
       Flash::set("You are already logged in.");
-      Router::redirect("/streams");
+      Router::redirect("/stories/welcome");
       return;
     }
     # Setup view
@@ -120,7 +120,7 @@ class users_controller extends base_controller {
   public function p_login() {
     if($this->user) {
       Flash::set("You are already logged in.");
-      Router::redirect("/streams");
+      Router::redirect("/stories/welcome");
       return;
     }
 

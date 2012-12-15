@@ -14,8 +14,10 @@
 @blue:          #0a85ff;
 @bright_blue:   #0F7FF2;
 @steel:         #47516f;
+@blue_grey:     #B5BFC7;
+@brighter_blue_grey:     #CEE2EB;
 
-@body_bg:               @light_green;
+@body_bg:               @brighter_blue_grey;
 
 @menubar_bg:            @forest;
 @menubar_font:          @light_green;
@@ -26,18 +28,8 @@
 
 @notice_font:           @dk_orange;
 
-@stream_border:         #888;
-@stream_bg:             @dark_green;
-@stream_border:         @dark_green;
-@stream_title_bg:       @dark_green;
-@stream_title_font:     @forest;
-
-
-@post_title_bg:         @dk_yellow;
-@post_bg:               @cream;
-
 @dialog_title_bg:       @dk_orange; 
-@dialog_bg:             @light_green;
+@dialog_bg:             @body_bg;
 @dialog_link_font:      @steel;
 
 /* reset ****************************************************/
@@ -57,7 +49,6 @@ body {
 #outer_container {
   min-width: 950px;
   margin: 0 auto;
-  background-color: @body_bg;
 }
 
 /* menu bar *************************************************/
@@ -178,73 +169,10 @@ div.form_content {
   min-height: 270px;
 }
 
-#recent_posts {
-  width: 300px;
-  float: right;
-}
-
-
-/* stream **************************************************/
-#streams_container {
-  white-space: nowrap;
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid @stream_border;
-}
-
-div.stream {
-  width: 300px;
-  text-align: left;
-  white-space: normal;
-  display: inline-block;
-  vertical-align: top;
-  border: 1px solid @stream_border;
-  background-color: @stream_bg;
-}
-
-.stream_content {
-  margin-top: 2px;
-  height: 550px;
-  overflow-y: auto;
-}
-
-.stream dt {
-  background-color: @post_title_bg;
-  margin: 0 2px;
-  font-size: smaller;
-}
-
-.stream dd {
-  background-color: @post_bg; 
-  margin: 0 2px;
-  padding: 0 2px 5px 2px;
-}
-
-.stream .title {
-  background-color: @stream_title_bg;
-  color: @stream_title_font;
-  font-size: 1.25em;
-  font-weight: bold;
-  height: 50px;
-}
-
-.stream .description{
-  font-size: .9em;
-}
 
 dt .user {
   font-size: 1.25em;
   font-weight: bold;
-}
-
-.stream li {
-  background-color: @post_bg;
-  padding: 5px;  
-  margin: 2px 0;
-}
-
-.stream button {
-  float: right;
 }
 
 .ifempty {

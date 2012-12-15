@@ -7,12 +7,11 @@ ul {
   list-style: none;
 }
 body {
-  background-color: #c1c451;
+  background-color: #cee2eb;
 }
 #outer_container {
   min-width: 950px;
   margin: 0 auto;
-  background-color: #c1c451;
 }
 /* menu bar *************************************************/
 .menubar {
@@ -105,62 +104,9 @@ div.form_content {
 .logo {
   min-height: 270px;
 }
-#recent_posts {
-  width: 300px;
-  float: right;
-}
-/* stream **************************************************/
-#streams_container {
-  white-space: nowrap;
-  width: 100%;
-  overflow-x: auto;
-  border: 1px solid #82964e;
-}
-div.stream {
-  width: 300px;
-  text-align: left;
-  white-space: normal;
-  display: inline-block;
-  vertical-align: top;
-  border: 1px solid #82964e;
-  background-color: #82964e;
-}
-.stream_content {
-  margin-top: 2px;
-  height: 550px;
-  overflow-y: auto;
-}
-.stream dt {
-  background-color: #f0be45;
-  margin: 0 2px;
-  font-size: smaller;
-}
-.stream dd {
-  background-color: #f5f4d9;
-  margin: 0 2px;
-  padding: 0 2px 5px 2px;
-}
-.stream .title {
-  background-color: #82964e;
-  color: #2a3119;
-  font-size: 1.25em;
-  font-weight: bold;
-  height: 50px;
-}
-.stream .description {
-  font-size: .9em;
-}
 dt .user {
   font-size: 1.25em;
   font-weight: bold;
-}
-.stream li {
-  background-color: #f5f4d9;
-  padding: 5px;
-  margin: 2px 0;
-}
-.stream button {
-  float: right;
 }
 .ifempty {
   text-align: center;
@@ -190,7 +136,7 @@ canvas {
 }
 /* jquery-ui ***********************************************/
 .miniprofile {
-  background: #c1c451;
+  background: #cee2eb;
   font-size: .9em;
 }
 .miniprofile .ui-dialog-titlebar {

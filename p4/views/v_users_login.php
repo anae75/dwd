@@ -21,7 +21,7 @@
 <div id=context_help class=help>
   <span class="title">This is where you log in</span>
   <dl>
-  <dd>Enter your email and password to log in and see your streams.</dd>
+  <dd>Enter your email and password to log in to start your adventure.</dd>
   <dt>Don't have an account?</dt>
   <dd>Click "Sign Up" on the top menu bar to create an account now.</dd>
   </dl>

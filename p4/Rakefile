@@ -29,8 +29,5 @@ end
 task :clear_db do
   ActiveRecord::Base.establish_connection(YAML.load(File.read(File.join('.','database.yml')))[ENV['ENV'] ? ENV['ENV'] : 'development'])
   conn = ActiveRecord::Base.connection
-  conn.execute "delete from posts"
-  conn.execute "delete from streams"
-  conn.execute "delete from users_followers"
   conn.execute "delete from users"
 end
