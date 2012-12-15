@@ -16,19 +16,19 @@ body {
 /* menu bar *************************************************/
 .menubar {
   padding: 5px 10px 0;
-  background-color: #2a3119;
-  color: #c1c451;
+  background-color: #14004a;
+  color: #b5bfc7;
   text-align: center;
   height: 50px;
 }
 .menubar a {
   font-size: 1.1em;
   text-decoration: none;
-  color: #e2e3ac;
+  color: #cee2eb;
 }
 .menubar a:link,
 .menubar a:visited {
-  color: #e2e3ac;
+  color: #cee2eb;
 }
 .leftmenu {
   padding-top: 20px;
@@ -50,7 +50,7 @@ body {
 .submenubar a {
   font-size: 1.1em;
   text-decoration: none;
-  color: #c1c451;
+  color: #b5bfc7;
 }
 a:link,
 a:visited,
@@ -140,7 +140,7 @@ canvas {
   font-size: .9em;
 }
 .miniprofile .ui-dialog-titlebar {
-  background: #f53d00;
+  background: #0f7ff2;
 }
 .miniprofile .title {
   font-weight: bold;
@@ -148,7 +148,7 @@ canvas {
 }
 .miniprofile a:link,
 .miniprofile a:visited {
-  color: #47516f;
+  color: #0f7ff2;
   text-decoration: none;
 }
 .miniprofile a:hover {
@@ -160,7 +160,11 @@ canvas {
 /* help ****************************************************/
 div.help {
   display: none;
-  font-size: .9em;
+  font-size: 1em;
+}
+div.help a {
+  font-size: 1.25em;
+  font-weight: bold;
 }
 .help .title {
   font-weight: bold;

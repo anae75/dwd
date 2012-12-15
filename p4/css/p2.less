@@ -16,21 +16,22 @@
 @steel:         #47516f;
 @blue_grey:     #B5BFC7;
 @brighter_blue_grey:     #CEE2EB;
+@dark_blue:     #14004A;
 
 @body_bg:               @brighter_blue_grey;
 
-@menubar_bg:            @forest;
-@menubar_font:          @light_green;
-@menubar_link_font:     @v_light_green;
+@menubar_bg:            @dark_blue;
+@menubar_font:          @blue_grey;
+@menubar_link_font:     @brighter_blue_grey;
 
 @link_font:             @bright_blue;
 @hover_color:           @dk_orange;
 
 @notice_font:           @dk_orange;
 
-@dialog_title_bg:       @dk_orange; 
+@dialog_title_bg:       @bright_blue; 
 @dialog_bg:             @body_bg;
-@dialog_link_font:      @steel;
+@dialog_link_font:      @bright_blue;
 
 /* reset ****************************************************/
 * {
@@ -245,7 +246,12 @@ canvas {
 /* help ****************************************************/
 div.help {
   display: none;
-  font-size: .9em;
+  font-size: 1em;
+}
+
+div.help a {
+  font-size: 1.25em;
+  font-weight: bold;
 }
 
 .help .title {
