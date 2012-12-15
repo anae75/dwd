@@ -117,6 +117,8 @@ dt .user {
   float: left;
   margin: 2px;
   list-style: none;
+  height: 250px;
+  text-align: center;
 }
 .selected {
   background-color: yellow;
