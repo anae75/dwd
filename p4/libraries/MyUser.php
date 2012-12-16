@@ -87,10 +87,7 @@ class MyUser extends User {
     # convert checkboxes from "on" to 0 or 1
     $attrs = Array("publish_content", "use_external_content");
     foreach($attrs as $attr) {
-      if(!isset($data[$attr])) {
-        continue;
-      }
-      if($data[$attr] == "on") {
+      if(isset($data[$attr]) && $data[$attr] == "on") {
         $data[$attr] = 1; 
       } else {
         $data[$attr] = 0; 
