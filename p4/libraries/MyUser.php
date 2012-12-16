@@ -87,6 +87,9 @@ class MyUser extends User {
     # convert checkboxes from "on" to 0 or 1
     $attrs = Array("publish_content", "use_external_content");
     foreach($attrs as $attr) {
+      if(!isset($data[$attr])) {
+        continue;
+      }
       if($data[$attr] == "on") {
         $data[$attr] = 1; 
       } else {
@@ -100,7 +103,7 @@ class MyUser extends User {
     }
     $attrs = Array("first_name", "last_name", "email", "publish_content", "use_external_content");
     foreach($attrs as $attr) {
-      if($data[$attr] == $this->_user->$attr) {
+      if(isset($data[$attr]) && $data[$attr] == $this->_user->$attr) {
         unset($data[$attr]);
       }
     }

@@ -132,7 +132,7 @@ function show_internal(shot, callback)
     context.drawImage(image, image.myleft, image.mytop);
   }
 
-  $("#caption").text(shot["caption"]);
+  $("#caption").text(shot["caption"] || "");
 
   if(shot["text"]) {
     show_text(shot["text"]);
@@ -288,7 +288,7 @@ function drawing_canvas(canvas_id)
   }
 
   this.draw_image =
-  function(image, left=0, top=0)
+  function(image, left, top)
   {
     context.drawImage(image, left, top);
   }

@@ -225,7 +225,7 @@ class Story {
   public static function get_scenes($opts)
   {
     $select_sql = sprintf("select scenes.* from scenes inner join users on scenes.user_id=users.user_id ");
-    $where_sql = sprintf(" where users.publish_content=1 ");
+    $where_sql = sprintf(" where (users.publish_content=1 or users.user_id=%d)", $opts["user_id"]);
     if(!$opts["use_external_content"]) {
       # use only default content or the user's own content
       $where_sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
@@ -267,7 +267,7 @@ class Story {
       # use only default content or the user's own content
       $sql .= sprintf(" and (users.user_id=%d or users.superuser=1) ", $opts["user_id"]);
     }
-    $sql .= sprintf(" and users.publish_content=1 ");
+    $sql .= sprintf(" and (users.publish_content=1 or users.user_id=%d) ", $opts["user_id"]);
     if($opts["hero_id"]) {
       $sql .= sprintf(" and not characters.id=%d ", $opts["hero_id"]);
     }
