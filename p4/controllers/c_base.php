@@ -30,10 +30,8 @@ class base_controller {
     # default client files
     $this->client_files = Array(
       "/css/story.css",
-      "/css/p2.css",
       "/javascripts/jquery.validate.min.js",
-      "/javascripts/story.js",
-      "/javascripts/p2.js"
+      "/javascripts/story.js"
     );
     $this->template->client_files = Utils::load_client_files($this->client_files); 
 

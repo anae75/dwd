@@ -1,4 +1,40 @@
 
+  // csrf_token set in template
+  $(document).ready(function() {
+    $("body").bind("ajaxSend", function(elm, xhr, s){
+      xhr.setRequestHeader('X-CSRF-Token', csrf_token);
+    });
+  });
+
+  // show mini profile for user
+  function show_user_profile(user_id) {
+    $.ajax({
+      type: "get",
+      url: "/users/mini_profile/"+user_id, 
+      success: function(resp) {
+        $(resp).dialog({
+          modal: true,
+          resizable: false,
+          width: 400,
+          dialogClass: "miniprofile",
+          close: function() {
+            $("#mymodal").remove();
+          }
+        });
+      }
+    });
+  }
+
+  // display page-specific help
+  function show_help() {
+    $("#context_help").dialog({
+        modal: true,
+        dialogClass: "miniprofile",
+        width: 600
+    });
+  }
+
+
 function reset_canvas(id)
 {
   var canvas = $("#"+id)[0];
@@ -28,7 +64,7 @@ function close_dialog_prompt()
 
 function add_dialog_prompt(shot)
 {
-  var canvas_pos = $(".canvas_holder").position()
+  var canvas_pos = $(".canvas_holder").position();
   var prompt = $("#dialog_prompt");
   var char_id = shot["prompt_dialog"];
   var left = canvas_pos.left + shot["images"][char_id]["posx"] + shot["images"][char_id]["image"].width*2/3;
