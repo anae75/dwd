@@ -16,6 +16,25 @@
   <? $puid = $profiled_user->user_id ?>
 <? } ?>
 
+<? if($user->superuser == 1) { ?>
+  <h3> User Images </h3>
+  <ul class=imagelist>
+  <? foreach(MyUser::images_for($profiled_user->user_id) as $img) { ?>
+    <li class=character > <img src="<?= "/".$img->filename ?>"> </li>   
+  <? } ?>
+  </ul>
+
+  <br>
+
+  <h3> Responses</h3>
+  <ul class=imagelist>
+  <? foreach(MyUser::responses_for($profiled_user->user_id) as $resp) { ?>
+    <li class=character > <div><img src="<?= "/".$resp->image_filename?>"> <?= $resp->text ?> </div></li>   
+  <? } ?>
+  </ul>
+
+<? } ?>
+
 <div id=context_help class=help>
   <span class="title">This is where you can get more information on a user</span>
   <dl>

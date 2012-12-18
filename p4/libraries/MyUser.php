@@ -148,4 +148,16 @@ class MyUser extends User {
     return($result);
   }
 
+  public static function images_for($user_id)
+  {
+    $sql = sprintf("select * from images where user_id=%d", $user_id);
+    return DB::instance(DB_NAME)->select_rows($sql, "object");
+  }
+
+  public static function responses_for($user_id)
+  {
+    $sql = sprintf("select * from responses where user_id=%d", $user_id);
+    return DB::instance(DB_NAME)->select_rows($sql, "object");
+  }
+
 }
