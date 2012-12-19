@@ -1,0 +1,300 @@
+/* reset ****************************************************/
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+/************************************************************/
+ul {
+  list-style: none;
+}
+body {
+  background-color: #cee2eb;
+}
+#outer_container {
+  min-width: 950px;
+  margin: 0 auto;
+}
+/* menu bar *************************************************/
+.menubar {
+  padding: 5px 10px 0;
+  background-color: #14004a;
+  color: #b5bfc7;
+  text-align: center;
+  height: 50px;
+}
+.menubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #cee2eb;
+}
+.menubar a:link,
+.menubar a:visited {
+  color: #cee2eb;
+}
+.leftmenu {
+  padding-top: 20px;
+  float: left;
+}
+.rightmenu {
+  padding-top: 20px;
+  float: right;
+}
+.menubar ul,
+.submenubar ul {
+  list-style: none;
+}
+.menubar li,
+.submenubar li {
+  display: inline ;
+}
+/* submenu */
+.submenubar a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #b5bfc7;
+}
+a:link,
+a:visited,
+.submenubar a:link,
+.submenubar a:visited,
+.user a:link,
+.user a:visited {
+  color: #0f7ff2;
+  text-decoration: none;
+}
+a:hover,
+.menubar a:hover,
+.submenubar a:hover,
+.user a:hover {
+  color: #f53d00;
+}
+/* main content ********************************************/
+.maincontent {
+  clear: both;
+  padding: 20px;
+}
+textarea {
+  resize: none;
+}
+.notice {
+  color: #f53d00;
+  text-align: center;
+  padding: 20px;
+}
+/* welcome *************************************************/
+div.centering {
+  width: 900px;
+  margin: 0px auto;
+  text-align: center;
+}
+div.form_content {
+  margin: 0px auto;
+  text-align: left;
+}
+.form_content input.text {
+  width: 95%;
+}
+#welcome {
+  width: 550px;
+  height: 300px;
+  margin: 0px auto;
+}
+#welcome .name {
+  font-size: 3.5em;
+}
+.logo {
+  min-height: 270px;
+}
+dt .user {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.ifempty {
+  text-align: center;
+  padding: 10px;
+}
+/* characters **********************************************/
+.imagelist li {
+  float: left;
+  margin: 2px;
+  list-style: none;
+  height: 250px;
+  text-align: center;
+}
+.selected {
+  background-color: yellow;
+}
+/* create new character ************************************/
+#left_sidebar {
+  float: left;
+  width: 400px;
+  text-align: left;
+}
+#right_sidebar {
+  float: left;
+  width: 500px;
+}
+.character div,
+.character img,
+.template img {
+  width: 200px;
+}
+/* jquery-ui ***********************************************/
+.miniprofile {
+  background: #cee2eb;
+  font-size: .9em;
+}
+.miniprofile .ui-dialog-titlebar {
+  background: #0f7ff2;
+}
+.miniprofile .title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.miniprofile a:link,
+.miniprofile a:visited {
+  color: #0f7ff2;
+  text-decoration: none;
+}
+.miniprofile a:hover {
+  color: #f53d00;
+}
+.ui-widget-overlay {
+  background: #000;
+}
+/* help ****************************************************/
+div.help {
+  display: none;
+  font-size: 1em;
+}
+div.help a {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.help .title {
+  font-weight: bold;
+  font-size: 1em;
+}
+.help dl {
+  margin: 15px 0;
+}
+.help dt {
+  font-weight: bold;
+  margin-top: 5px;
+}
+/***********************************************************/
+#container {
+  width: 900px;
+  margin: 0px auto;
+  text-align: center;
+}
+#introduction {
+  margin: 0 auto;
+  text-align: left;
+  width: 600px;
+}
+#introduction p {
+  margin-bottom: 15px;
+  font-size: 1.25em;
+}
+#introduction a {
+  font-size: 1.25em;
+}
+#main_content {
+  width: 100%;
+  text-align: left;
+}
+canvas {
+  border: 1px solid black;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.stage {
+  text-align: center;
+  margin: 0 auto;
+  width: 600px;
+  margin-top: 100px;
+}
+.canvas_holder {
+  margin: 0;
+  margin-bottom: 30px;
+  position: relative;
+  width: 600px;
+  height: 400px;
+}
+.textblock {
+  width: 600px;
+  height: 400px;
+  padding: 100px 50px;
+  text-align: center;
+}
+#caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.25em;
+}
+ul {
+  list-style: none;
+}
+form input {
+  border: 0;
+  border-bottom: 1px solid black;
+}
+div.field_with_errors {
+  border: 1px solid red;
+  display: inline;
+  padding: 2px;
+}
+div.bubble {
+  background-image: url("/images/dialog_bubble.png");
+  background-repeat: no-repeat;
+  background-size: 240px auto;
+  padding: 35px;
+  height: 170px;
+  width: 240px;
+}
+#dialog_form button {
+  font-size: 1em;
+  height: 2.5em;
+}
+#dialog_prompt {
+  display: none;
+  background-image: url("/images/dialog_bubble.png");
+  background-repeat: no-repeat;
+  background-size: 240px auto;
+  padding: 40px;
+  z-index: 100;
+}
+.dialog textarea {
+  resize: none;
+  border: 0;
+  background-color: transparent;
+  margin-bottom: 25px;
+}
+#drawing_prompt {
+  display: none;
+  background-image: url("/images/cloud.png");
+  background-repeat: no-repeat;
+  background-size: 300px auto;
+  z-index: 100;
+}
+.prompt canvas {
+  border: 0;
+  position: relative;
+  z-index: 100;
+}
+ul.character_list {
+  list-style: none;
+}
+ul.character_list li {
+  float: left;
+  width: 300px;
+  text-align: center;
+}
+li.selected {
+  background: yellow;
+}
