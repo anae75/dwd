@@ -29,6 +29,16 @@
 
 </div>
 
+<div id=context_help class=help>
+  <span class="title">Creating Your Hero</span>
+  <dl>
+  <dt> </dt>
+  <dd> This is where you create your hero.  Draw in the canvas to customize your character.  Two templates are supplied to help you along (click to switch between them), or you can draw freehand by
+  clicking the "clear" button.  </dd>
+  </dl>
+  Remember, you can always click "Need Help?" to get help on whatever page you're on.
+</div>
+
 <script>
   var templates = ["/images/ctemplate_01.png", "/images/ctemplate_02.png"];
   var template_images = Array();

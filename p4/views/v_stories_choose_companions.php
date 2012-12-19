@@ -26,7 +26,8 @@ be on your way.
 <div id=context_help class=help>
   <span class="title">Choose your companions</span>
   <dl>
-  <dt> The Story </dt>
+  <dt> Choose three companions by clicking them (your selected companions will be highlighted) and then click "continue
+  the story". </dt>
   <dd> </dd>
   </dl>
   Remember, you can always click "Need Help?" to get help on whatever page you're on.

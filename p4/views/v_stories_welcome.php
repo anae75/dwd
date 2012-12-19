@@ -31,6 +31,10 @@
     <dl>
     <dt>Why?</dt>
     <dd>Because if you don't laugh on the T, you'll cry.</dd>
+    <dt>How it works</dt>
+    <dd>Click "Begin a new Story".  You will view a short introduction and then be asked to create your hero character
+    and choose some companions.  View the story.  At various times you may be asked to contribute drawings or text
+    --these will be seen by other users as they go on <i>their</i> journeys.  </dd>
     </dl>
     Remember, you can always click "Need Help?" to get help on whatever page you're on.
   </div>

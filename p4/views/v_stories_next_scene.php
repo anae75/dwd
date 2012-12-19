@@ -31,10 +31,12 @@
 <? } ?>
 
 <div id=context_help class=help>
-  <span class="title">The Story Continues</span>
+  <span class="title">Viewing The Story</span>
   <dl>
-  <dt> The Story </dt>
-  <dd> </dd>
+  <dt> </dt>
+  <dd> View the story as it unfolds.  From time to time you may be asked to contribute drawings or dialog using the
+  canvas and the dialog bubble.  When you're done click the "Save your response" button.  When the scene is done you
+  will be prompted to click a button to continue to the next scene.  </dd>
   </dl>
   Remember, you can always click "Need Help?" to get help on whatever page you're on.
 </div>

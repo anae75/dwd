@@ -36,12 +36,13 @@
 <? } ?>
 
 <div id=context_help class=help>
-  <span class="title">This is where you can get more information on a user</span>
+  <span class="title">This is where you can view user information.</span>
   <dl>
   <dt> Profile </dt>
   <dd>  </dd>
   <dt> Viewing your own profile? Need to change some settings?</dt>
-  <dd> Click "Edit Your Settings" to change your own settings such as your email or password. </dd>
+  <dd> Click "Edit Your Settings" to change your own settings such as your email or password, or to adjust your story
+  settings. </dd>
   </dl>
   Remember, you can always click "Need Help?" to get help on whatever page you're on.
 </div>
