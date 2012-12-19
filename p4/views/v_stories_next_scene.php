@@ -26,7 +26,9 @@
 
   </div>
 
+<? if(!isset($is_final_scene) || !$is_final_scene) { ?>
 <a href="/stories/next_scene">Move to the next scene</a>
+<? } ?>
 
 <div id=context_help class=help>
   <span class="title">The Story Continues</span>
