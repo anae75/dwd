@@ -6,29 +6,6 @@ class stories_controller extends base_controller {
     parent::__construct();
   } 
 
-  public function test()
-  {
-
-    $this->template->content = View::instance('v_stories_test');
-    $this->template->title   = "Test";
-    echo $this->template;
-
-    #var_dump($this->user);
-
-    #$story = Story::current_story_for($this->user);
-    #var_dump($story);
-    $story = Story::create_for($this->user->user_id);
-    var_dump($story);
-
-    #$opts = Array();
-    #$opts["user_id"] = $this->user->user_id;
-    #$opts["use_external_content"] = true;
-    #$scenes = Story::get_scenes($opts);
-    #var_dump($scenes);
-
-
-  }
-
   public function welcome()
   {
     if(!$this->user) {
@@ -214,7 +191,6 @@ class stories_controller extends base_controller {
       Router::redirect("/users/login");
       return;
     }
-    # TODO error checking!
 
     # retrieve the currently playing story or create a new one
     $story = Story::current_story_for($this->user);
